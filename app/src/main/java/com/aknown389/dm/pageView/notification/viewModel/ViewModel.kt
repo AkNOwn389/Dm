@@ -47,9 +47,11 @@ class ViewModel @Inject constructor(
                     response.value = res.body()!!.data as ArrayList<NotificationDataClass>
                 }
                 this@ViewModel.hasMorePage = res.body()!!.hasMorePage
-                deleteOnDb()
-                saveOnDb(res.body()!!.data)
-                Log.d(TAG, "Saved ${res.body()!!.data.size} items to database")
+                if (res.body()!!.data.isNotEmpty()){
+                    deleteOnDb()
+                    saveOnDb(res.body()!!.data)
+                    Log.d(TAG, "Saved ${res.body()!!.data.size} items to database")
+                }
             }catch (e:Exception){
                 try {
                     val items = getOnDb() as ArrayList<NotificationDataClass>
