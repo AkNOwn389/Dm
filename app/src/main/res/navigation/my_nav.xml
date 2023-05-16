@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/homefeed">
+
+    <fragment
+        android:id="@+id/homefeed"
+        android:name="com.aknown389.dm.fragments.Homefeed"
+        android:label="fragment_homefeed"
+        tools:layout="@layout/fragment_homefeed" >
+        <action
+            android:id="@+id/action_homefeed_to_showfriend"
+            app:destination="@id/showfriend"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/showfriend"
+        android:name="com.aknown389.dm.fragments.SuggestedUser"
+        android:label="fragment_showfriend"
+        tools:layout="@layout/activity_showfriend" >
+        <action
+            android:id="@+id/action_showfriend_to_watchsvideo"
+            app:destination="@id/watchsvideo"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/watchsvideo"
+        android:name="com.aknown389.dm.fragments.WatchVideo"
+        android:label="fragment_watchsvideo"
+        tools:layout="@layout/fragment_watchsvideo" >
+        <action
+            android:id="@+id/action_watchsvideo_to_profilepage"
+            app:destination="@id/profilePage"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <activity
+        android:id="@+id/profilePage"
+        android:name="com.aknown389.dm.activities.ProfilepageAtivity"
+        android:label="activity_profilepage"
+        tools:layout="@layout/activity_profilepage" />
+</navigation>

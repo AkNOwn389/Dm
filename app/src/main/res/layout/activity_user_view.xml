@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragmentUserviewRoot"
+    tools:context=".activities.UserViewActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/userviewbackbtn"
+                    android:layout_width="50dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/chat_item_ripple"
+                    android:src="@drawable/arroleft"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/blackOnDay" />
+
+                <ImageButton
+                    android:id="@+id/userviewmenubtn"
+                    android:layout_width="50dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/chat_item_ripple"
+                    android:src="@drawable/baseline_menu_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:tint="@color/blackOnDay"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/userviewswiper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout3">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/userviewbackgroundPictureImageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CardViewUserProfileBg"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="150dp"
+                    android:backgroundTint="#753281"
+                    app:cardCornerRadius="100dp"
+                    app:layout_constraintEnd_toEndOf="@+id/userviewbackgroundPictureImageview"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/userviewbackgroundPictureImageview"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/CardViewUserProfileView"
+                    android:layout_width="190dp"
+                    android:layout_height="190dp"
+                    android:layout_marginTop="155dp"
+                    app:cardCornerRadius="95dp"
+                    app:layout_constraintEnd_toEndOf="@+id/userviewbackgroundPictureImageview"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/userviewbackgroundPictureImageview"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/userviewprofileimageImageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"/>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/userviewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/blackOnDay"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/CardViewUserProfileBg"
+                    app:layout_constraintStart_toStartOf="@+id/CardViewUserProfileBg"
+                    app:layout_constraintTop_toBottomOf="@+id/CardViewUserProfileBg" />
+
+                <TextView
+                    android:id="@+id/userviewUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@+id/userviewName"
+                    app:layout_constraintStart_toStartOf="@+id/userviewName"
+                    app:layout_constraintTop_toBottomOf="@+id/userviewName" />
+
+                <TextView
+                    android:id="@+id/userviewBio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="150dp"
+                    android:maxLength="300"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/userviewName"
+                    app:layout_constraintStart_toStartOf="@+id/userviewName"
+                    app:layout_constraintTop_toBottomOf="@+id/userviewUsername" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout9"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="20dp"
+                    android:background="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/userviewBio" />
+
+                <TextView
+                    android:id="@+id/userviewuserpostslenght"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blackOnDay"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toStartOf="@+id/userviewfollowing"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/userviewfollowing" />
+
+                <TextView
+                    android:id="@+id/userviewfollowing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/blackOnDay"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout9" />
+
+                <TextView
+                    android:id="@+id/userviewfollowers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blackOnDay"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/userviewfollowing"
+                    app:layout_constraintTop_toTopOf="@+id/userviewfollowing" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="post"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/userviewuserpostslenght"
+                    app:layout_constraintStart_toStartOf="@+id/userviewuserpostslenght"
+                    app:layout_constraintTop_toBottomOf="@+id/userviewuserpostslenght" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="followers"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/userviewfollowers"
+                    app:layout_constraintStart_toStartOf="@+id/userviewfollowers"
+                    app:layout_constraintTop_toBottomOf="@+id/userviewfollowers" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="following"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/userviewfollowing"
+                    app:layout_constraintStart_toStartOf="@+id/userviewfollowing"
+                    app:layout_constraintTop_toBottomOf="@+id/userviewfollowing" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout10"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="20dp"
+                    android:background="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/relativeLayout10">
+
+
+                    <Button
+                        android:id="@+id/userviewmessagebtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="2dp"
+                        android:backgroundTint="@color/LightBiolet"
+                        android:elevation="10dp"
+                        android:text="message"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+                    <Button
+                        android:id="@+id/userviewfollowbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="2dp"
+                        android:backgroundTint="#49ACA9"
+                        android:elevation="10dp"
+                        android:text="follow"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayout11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout10">
+                    <Button
+                        android:id="@+id/userviewseefollowerbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#AC4949"
+                        android:elevation="10dp"
+                        android:text="see followers"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+                    <Button
+                        android:id="@+id/userviewfollowingbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#4965AC"
+                        android:elevation="10dp"
+                        android:text="see following"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/userviewvideobtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#97933E"
+                        android:elevation="10dp"
+                        android:text="videos"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayout12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout11">
+                    <Button
+                        android:id="@+id/userviewaboutbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#AC9449"
+                        android:elevation="10dp"
+                        android:text="About"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+                    <Button
+                        android:id="@+id/userviewphotosbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#49ACA9"
+                        android:elevation="10dp"
+                        android:text="photos"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/userviewcallbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#3E9766"
+                        android:elevation="10dp"
+                        android:text="call"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center"
+                        android:text="POST"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/userviewshimmering"
+                    android:visibility="invisible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout11">
+                    <include layout="@layout/home_feed_placeholder"/>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <com.aknown389.dm.pageView.homeFeed.utility.HomeFeedRecyclerview
+                    android:id="@+id/recyClerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout11"
+                    android:layout_marginBottom="60dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

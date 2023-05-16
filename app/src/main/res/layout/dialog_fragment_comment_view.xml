@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_dialog_background">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/topMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0000"
+        android:gravity="center"
+        app:drawableStartCompat="@drawable/ic_menu"
+        app:drawableTint="@color/blackOnDay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/unreact"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:padding="3dp"
+                android:src="@drawable/remove_reaction"
+                app:tint="@color/blackOnDay" />
+            <ImageView
+                android:id="@+id/like"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/like"/>
+
+            <ImageView
+                android:id="@+id/love"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/love" />
+
+            <ImageView
+                android:id="@+id/haha"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/haha" />
+
+            <ImageView
+                android:id="@+id/wow"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/wow" />
+
+            <ImageView
+                android:id="@+id/sad"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/sad" />
+
+            <ImageView
+                android:id="@+id/angry"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/angry" />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/commentviewdialogdelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chat_item_ripple"
+                android:drawableStart="@drawable/baseline_delete_24"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/blackOnDay"
+                android:padding="10dp"
+                android:text="@string/delete"
+                android:textColor="@color/blackOnDay"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/commentviewdialogarchive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chat_item_ripple"
+                android:drawableStart="@drawable/baseline_folder_delete_24"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/blackOnDay"
+                android:padding="10dp"
+                android:text="@string/archive"
+                android:textColor="@color/blackOnDay"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

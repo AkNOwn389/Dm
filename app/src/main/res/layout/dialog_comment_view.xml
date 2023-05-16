@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/design_bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_dialog_background"
+    tools:context=".dialogs.CommentDialog">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/white"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/menutop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableStartCompat="@drawable/ic_menu"
+            app:drawableTint="@color/blackOnDay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appBarLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menutop">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ic_angry"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="1dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_angry"
+                app:layout_constraintTop_toTopOf="@id/ic_sad"
+                app:layout_constraintEnd_toStartOf="@+id/ic_sad"
+                app:layout_constraintBottom_toBottomOf="@id/ic_sad"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ic_sad"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="1dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_sad"
+                app:layout_constraintTop_toTopOf="@id/ic_wow"
+                app:layout_constraintEnd_toStartOf="@+id/ic_wow"
+                app:layout_constraintBottom_toBottomOf="@id/ic_wow"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ic_wow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="1dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_surprise"
+                app:layout_constraintTop_toTopOf="@id/ic_happy"
+                app:layout_constraintEnd_toStartOf="@+id/ic_happy"
+                app:layout_constraintBottom_toBottomOf="@id/ic_happy"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ic_happy"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="1dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_happy"
+                app:layout_constraintTop_toTopOf="@id/ic_love"
+                app:layout_constraintEnd_toStartOf="@+id/ic_love"
+                app:layout_constraintBottom_toBottomOf="@id/ic_love"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ic_love"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="1dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_heart"
+                app:layout_constraintTop_toTopOf="@id/ic_like"
+                app:layout_constraintEnd_toStartOf="@+id/ic_like"
+                app:layout_constraintBottom_toBottomOf="@id/ic_like"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ic_like"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="3dp"
+                android:src="@drawable/ic_like"
+                app:layout_constraintTop_toTopOf="@+id/appCompatImageButton"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageButton"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatImageButton"/>
+
+            <TextView
+                android:id="@+id/commentviewLikeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/blackOnDay"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ic_angry"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/appCompatImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="#0000"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/arrow_forward_ios"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blackOnDay" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/commentviewSwiper"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/inputCommentContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout4">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/commentViewRecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/commenviewShimmerFrame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/inputCommentContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout4">
+
+            <include layout="@layout/shimmer_commentview_placeholder" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <com.udevel.widgetlab.TypingIndicatorView
+            android:id="@+id/commentTyping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:visibility="gone"
+            app:animateFrequency="700"
+            app:animationOrder="lastOneFirst"
+            app:backgroundColor="#0000"
+            app:backgroundType="rounded"
+            app:dotAnimationDuration="600"
+            app:dotAnimationType="Sliding"
+            app:dotColor="@color/blackOnDay"
+            app:dotCount="6"
+            app:dotHorizontalSpacing="7dp"
+            app:dotMaxCompressRatio="70%"
+            app:dotSecondColor="#3F51B5"
+            app:dotSize="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/inputCommentContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:showBackground="true" />
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/popUpMessageCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp"
+            app:layout_constraintBottom_toTopOf="@+id/inputCommentContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/popUpMessage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/chat_item_ripple"
+                android:backgroundTint="#03A9F4"
+                android:padding="8dp"
+                android:text="@string/new_chat"
+                android:textColor="#3D3E3E"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/commentviewSwiper"
+            app:layout_constraintEnd_toEndOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxWidth="200dp"
+                android:maxHeight="300dp">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="200dp"
+                    android:maxHeight="300dp"
+                    android:visibility="gone"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/removeFile"
+                    android:layout_width="20dp"
+                    android:visibility="gone"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="#0000"
+                    android:src="@drawable/remove_image_flat_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+            android:id="@+id/inputCommentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="5dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/white"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/addFileBtn"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:background="@drawable/chat_item_ripple"
+                    android:backgroundTint="#0000"
+                    android:tint="@color/blackOnDay"
+                    android:src="@drawable/arrow_forward_ios"
+                    app:layout_constraintVertical_bias="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                    android:id="@+id/capturePictureOnChat"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="10dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/addFileBtn">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/chatCapturePicture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/chat_item_ripple"
+                        android:src="@drawable/ic_camera"
+                        app:tint="@color/blackOnDay" />
+                </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                    android:id="@+id/cardViewSendImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="10dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/capturePictureOnChat">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/ImageviewAddPhotosUserChat"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/chat_item_ripple"
+                        android:src="@drawable/ic_add_picture_on_chat"
+                        app:tint="@color/blackOnDay" />
+                </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/commentViewEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/comment_view_edit_text_background"
+                    android:hint="@string/say_something"
+                    android:paddingStart="15dp"
+                    android:paddingTop="10dp"
+                    android:inputType="textEnableTextConversionSuggestions"
+                    app:layout_constraintWidth_max="wrap"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/blackOnDay"
+                    android:textColorHint="@color/blackOnDay"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

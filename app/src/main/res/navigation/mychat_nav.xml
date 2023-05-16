@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mychat_nav"
+    app:startDestination="@id/chat_home_nav">
+
+    <fragment
+        android:id="@+id/chat_home_nav"
+        android:name="com.aknown389.dm.fragments.ChatHomeNav"
+        android:label="fragment_chat_home_nav"
+        tools:layout="@layout/fragment_chat_home_nav" >
+        <action
+            android:id="@+id/action_chat_home_nav_to_chat_calls_nav"
+            app:destination="@id/chat_calls_nav"
+            app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_chat_home_nav_to_chat_stories_nav"
+            app:destination="@id/chat_stories_nav"
+            app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_chat_home_nav_to_chat_people_nav"
+            app:destination="@id/chat_people_nav"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/chat_calls_nav"
+        android:name="com.aknown389.dm.fragments.ChatCallsNav"
+        android:label="fragment_chat_calls_nav"
+        tools:layout="@layout/fragment_chat_calls_nav" >
+        <action
+            android:id="@+id/action_chat_calls_nav_to_chat_people_nav"
+            app:destination="@id/chat_people_nav"
+            app:enterAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_chat_calls_nav_to_chat_home_nav"
+            app:destination="@id/chat_home_nav"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/chat_people_nav"
+        android:name="com.aknown389.dm.fragments.ChatPeopleNav"
+        android:label="fragment_chat_people_nav"
+        tools:layout="@layout/fragment_chat_people_nav" >
+        <action
+            android:id="@+id/action_chat_people_nav_to_chat_stories_nav"
+            app:destination="@id/chat_stories_nav"
+            app:enterAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/chat_stories_nav"
+        android:name="com.aknown389.dm.fragments.ChatStoriesNav"
+        android:label="fragment_chat_stories_nav"
+        tools:layout="@layout/fragment_chat_stories_nav" />
+</navigation>

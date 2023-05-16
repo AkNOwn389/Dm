@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profilePage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:context=".activities.ProfilepageAtivity">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/profilepagenestedswiper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ImageProfileCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/profileBackgroundCover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@color/grey2" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/editTextProfileSearch"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_margin="9dp"
+                            android:background="@drawable/ripple_homefeed_create_post"
+                            android:drawableStart="@drawable/searchicon"
+                            android:hint="@string/search"
+                            android:drawableTint="@color/blackOnDay"
+                            android:inputType="text"
+                            android:paddingStart="10dp"
+                            android:textColor="@color/blackOnDay"
+                            android:textColorHint="@color/blackOnDay"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/profileMenuButton"
+                            app:layout_constraintStart_toEndOf="@+id/ProfileBackButton"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/profileMenuButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="10dp"
+                            app:tint="@color/blackOnDay"
+                            android:background="@drawable/floating_buttom_profile_bg"
+                            android:src="@drawable/menu_box_alt_flat_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/ProfileBackButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="3dp"
+                            app:tint="@color/blackOnDay"
+                            android:background="@drawable/floating_buttom_profile_bg"
+                            android:src="@drawable/baseline_arrow_back_24"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginEnd="20dp"
+                    app:cardCornerRadius="75dp"
+                    android:backgroundTint="@color/LightBiolet"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginEnd="25dp"
+                    app:cardCornerRadius="70dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ImageProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/greybg" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/txtProfileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/cardView"
+                    app:layout_constraintStart_toStartOf="@+id/cardView"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+                <RelativeLayout
+                    android:id="@+id/layoutline1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profilefollowing" />
+
+                <RelativeLayout
+                    android:id="@+id/layoutline2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/layoutline1"
+                    app:layout_constraintStart_toStartOf="@+id/layoutline1"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutline1" />
+
+                <TextView
+                    android:id="@+id/profilefollowers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:textSize="30sp"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtProfileName" />
+
+                <TextView
+                    android:id="@+id/profilepostcount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintBottom_toBottomOf="@+id/profilefollowers"
+                    app:layout_constraintEnd_toStartOf="@+id/profilefollowers"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/profilefollowers" />
+
+                <TextView
+                    android:id="@+id/profilefollowing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintBottom_toBottomOf="@+id/profilefollowers"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/profilefollowers"
+                    app:layout_constraintTop_toTopOf="@+id/profilefollowers" />
+
+                <TextView
+                    android:id="@+id/txtpost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="post"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/profilepostcount"
+                    app:layout_constraintStart_toStartOf="@+id/profilepostcount"
+                    app:layout_constraintTop_toBottomOf="@+id/profilepostcount" />
+
+                <TextView
+                    android:id="@+id/txtfollowing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="followers"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/profilefollowers"
+                    app:layout_constraintStart_toStartOf="@+id/profilefollowers"
+                    app:layout_constraintTop_toBottomOf="@+id/profilefollowers" />
+
+                <TextView
+                    android:id="@+id/txtfollower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="following"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/profilefollowing"
+                    app:layout_constraintStart_toStartOf="@+id/profilefollowing"
+                    app:layout_constraintTop_toBottomOf="@+id/profilefollowing" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/layoutline2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutline1">
+
+                    <TextView
+                        android:id="@+id/txtPostTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/profile_nav_bg"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="@string/images"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/txtActivityTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/profile_nav_bg"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="@string/activity"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:focusable="true" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ImageProfileCover" />
+
+                <TextView
+                    android:id="@+id/profileBio"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:maxLength="600"
+                    android:padding="5dp"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintBottom_toTopOf="@+id/profilefollowers"
+                    app:layout_constraintEnd_toStartOf="@+id/cardView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layoutline2">
+
+                    <FrameLayout
+                        android:id="@+id/flFragmentProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_active="true">
+        <ripple android:color="@color/white" android:effectColor="@color/grey" android:radius="20dp"/>
+        <shape>
+            <corners android:bottomLeftRadius="20dp" android:topLeftRadius="20dp" android:topRightRadius="20dp"/>
+        </shape>
+        <color android:color="@color/white"/>
+    </item>
+</selector>

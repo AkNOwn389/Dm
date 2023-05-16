@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homefeed"
+        android:title="@string/homeMenu"
+        android:icon="@drawable/home_alt_flat_icon"/>
+    <item
+        android:id="@+id/showfriend"
+        android:title="@string/friendsMenu"
+        android:icon="@drawable/friends_alt_flat_icon"/>
+    <item
+        android:id="@+id/watchsvideo"
+        android:title="@string/videosMenu"
+        android:icon="@drawable/video_alt_flat_icon"/>
+
+    <item android:id="@+id/news"
+        android:title="@string/news"
+        android:icon="@drawable/news_alt_flat_icon"/>
+
+    <item
+        android:id="@+id/profilePage"
+        android:title="@string/profile"
+        android:icon="@drawable/profile_alt_flat_icon"/>
+</menu>

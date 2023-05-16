@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_dialog_background">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:drawableStart="@drawable/ic_menu"
+        android:drawableTint="@color/blackOnDay"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView2">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="5dp"
+            android:layout_weight="1"
+            app:cardElevation="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/changePrivacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chat_item_ripple"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/blackOnDay"
+                android:padding="10dp"
+                android:text="@string/change_privacy"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="5dp"
+            android:layout_weight="1"
+            app:cardElevation="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/editPosts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_pen"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/blackOnDay"
+                android:padding="10dp"
+                android:background="@drawable/chat_item_ripple"
+                android:text="@string/edit_posts"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="5dp"
+            android:layout_weight="1"
+            app:cardElevation="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/deletePosts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_delete_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/blackOnDay"
+                android:padding="10dp"
+                android:background="@drawable/chat_item_ripple"
+                android:text="@string/delete_posts"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_weight="1"
+            app:cardElevation="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ArchivePosts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_folder_delete_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/blackOnDay"
+                android:padding="10dp"
+                android:background="@drawable/chat_item_ripple"
+                android:text="@string/archive"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

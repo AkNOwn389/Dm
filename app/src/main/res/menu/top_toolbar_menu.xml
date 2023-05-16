@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ImageBtnSearch"
+        android:icon="@drawable/searchicon"
+        android:title="Search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.widget.SearchView" />
+    <item android:title="Chat"
+        android:id="@+id/Chat"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/baseline_chat_bubble_24"/>
+</menu>

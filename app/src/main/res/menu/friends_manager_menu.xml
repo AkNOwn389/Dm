@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Suggested"
+        android:id="@+id/suggestedfriends"
+        android:icon="@drawable/ic_people_add"/>
+    <item android:title="Followers"
+        android:id="@+id/friend_requests"
+        android:icon="@drawable/ic_people_pin"/>
+    <item android:title="Friends"
+        android:id="@+id/friends_all"
+        android:icon="@drawable/account_ic"/>
+</menu>

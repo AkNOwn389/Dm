@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myfriends_manager_nav"
+    app:startDestination="@id/friend_requests">
+
+    <fragment
+        android:id="@+id/friend_requests"
+        android:name="com.aknown389.dm.activities.FriendRequests"
+        android:label="fragment_friend_requests"
+        tools:layout="@layout/activity_friend_requests" >
+        <action
+            android:id="@+id/action_friend_requests_to_friends_all"
+            app:destination="@id/friends_all" />
+        <action
+            android:id="@+id/action_friend_requests_to_suggestedfriends"
+            app:destination="@id/suggestedfriends" />
+    </fragment>
+    <fragment
+        android:id="@+id/friends_all"
+        android:name="com.aknown389.dm.activities.FriendsAllActivity"
+        android:label="fragment_friends_all"
+        tools:layout="@layout/activity_friends_all" />
+    <fragment
+        android:id="@+id/suggestedfriends"
+        android:name="com.aknown389.dm.fragments.Suggestedfriends"
+        android:label="fragment_suggestedfriends"
+        tools:layout="@layout/fragment_suggestedfriends" >
+        <action
+            android:id="@+id/action_suggestedfriends_to_friends_all"
+            app:destination="@id/friends_all" />
+    </fragment>
+</navigation>

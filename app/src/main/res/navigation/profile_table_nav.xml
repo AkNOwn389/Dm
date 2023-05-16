@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_table_nav"
+    app:startDestination="@id/profileGalleryPost">
+
+    <fragment
+        android:id="@+id/profileGalleryPost"
+        android:name="com.aknown389.dm.fragments.ProfileGalleryPost"
+        android:label="fragment_profile_gallery_adapter"
+        tools:layout="@layout/fragment_profile_gallery_adapter" >
+        <action
+            android:id="@+id/action_profileGalleryPost_to_profileFragmentTagged"
+            app:destination="@id/profileFragmentTagged" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragmentTagged"
+        android:name="com.aknown389.dm.ProfileFragmentTagged"
+        android:label="fragment_profile_tagged"
+        tools:layout="@layout/fragment_profile_tagged" >
+        <action
+            android:id="@+id/action_profileFragmentTagged_to_myActivityProfileView"
+            app:destination="@id/myActivityProfileView" />
+    </fragment>
+    <fragment
+        android:id="@+id/myActivityProfileView"
+        android:name="com.aknown389.dm.fragments.MyActivityProfileView"
+        android:label="fragment_my_activity_profile_view"
+        tools:layout="@layout/fragment_my_activity_profile_view" />
+</navigation>

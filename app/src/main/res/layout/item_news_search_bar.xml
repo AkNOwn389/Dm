@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/outline_edittextbg"
+        android:drawableStart="@drawable/search_flat_icon"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/blackOnDay"
+        android:hint="@string/type_something"
+        android:padding="6dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cardView51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView51"
+        android:layout_width="70dp"
+        android:layout_height="36dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/inputSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/inputSearch">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/buttonSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/send_button_flat_icon"
+            android:tint="@color/blackOnDay"
+            android:background="@drawable/chat_item_ripple"/>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
