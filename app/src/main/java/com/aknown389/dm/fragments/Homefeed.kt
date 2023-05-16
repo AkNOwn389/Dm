@@ -29,6 +29,8 @@ import com.aknown389.dm.pageView.homeFeed.utility.SpeedLinearLayoutManager
 
 import com.aknown389.dm.models.homepostmodels.PostDataModel
 import com.aknown389.dm.pageView.homeFeed.remote.repository.Repository
+import com.aknown389.dm.pageView.homeFeed.utility.GridDividerItemDecoration
+import com.aknown389.dm.pageView.homeFeed.utility.LinearDividerItemDecoration
 
 import com.aknown389.dm.utils.Constants
 import com.aknown389.dm.utils.DataManager
@@ -95,6 +97,8 @@ class Homefeed : Fragment() {
         binding?.recyclerviewhomefeed?.setMediaObjects(adapter.postListdata)
         binding?.recyclerviewhomefeed!!.adapter = adapter
         binding?.recyclerviewhomefeed?.layoutManager = layoutmanager
+        val itemDecoration = LinearDividerItemDecoration(SPACING)
+        binding?.recyclerviewhomefeed?.addItemDecoration(itemDecoration)
         this.client = OkHttpClient.Builder()
             .addInterceptor(NetInterceptor())
             .readTimeout(0, TimeUnit.SECONDS)
@@ -365,5 +369,6 @@ class Homefeed : Fragment() {
     }
     companion object{
         const val NOTIFICATION_BADGE_LISTENER_URL = "/notificationBadge"
+        const val SPACING = 10
     }
 }
