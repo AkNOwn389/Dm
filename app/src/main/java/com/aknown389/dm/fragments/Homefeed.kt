@@ -28,6 +28,7 @@ import com.aknown389.dm.pageView.homeFeed.utility.HomeFeedCardViewAdapter
 import com.aknown389.dm.pageView.homeFeed.utility.SpeedLinearLayoutManager
 
 import com.aknown389.dm.models.homepostmodels.PostDataModel
+import com.aknown389.dm.pageView.homeFeed.dataClass.SocketInterfier
 import com.aknown389.dm.pageView.homeFeed.remote.repository.Repository
 import com.aknown389.dm.pageView.homeFeed.utility.GridDividerItemDecoration
 import com.aknown389.dm.pageView.homeFeed.utility.LinearDividerItemDecoration
@@ -56,6 +57,7 @@ import java.util.concurrent.TimeUnit
 //animator.duration = 1000
 class Homefeed : Fragment() {
 
+    private var isDestroy: Boolean = false
     private var isShimmering: Boolean = false
     private var progressRunning: Boolean = false
     private var binding: FragmentHomefeedBinding? = null
@@ -66,6 +68,7 @@ class Homefeed : Fragment() {
     private lateinit var token: String
     private lateinit var client: OkHttpClient
     private lateinit var ws:WebSocket
+    private lateinit var gson: Gson
 
     private var isClose = true
     var isLoading = false
@@ -88,6 +91,7 @@ class Homefeed : Fragment() {
     private fun setVal() {
         manager = DataManager(requireContext())
         token = manager.getAccessToken().toString()
+        gson = Gson()
         val repository = Repository()
         val dataBase = AppDataBase
         val viewModelFactory = HomeFeedViewModelFactory(repository, dataBase.getDatabase(requireContext()))
@@ -98,13 +102,7 @@ class Homefeed : Fragment() {
         binding?.recyclerviewhomefeed!!.adapter = adapter
         binding?.recyclerviewhomefeed?.layoutManager = layoutmanager
         val itemDecoration = LinearDividerItemDecoration(SPACING, requireContext().applicationContext)
-        binding?.recyclerviewhomefeed?.addItemDecoration(
-            K=LinearDividerItemDecoration(
-                resources.getDimensionPixelSize(
-                    R.dimen.spacing_small
-                ), requireContext().applicationContext
-            )
-        )
+        binding?.recyclerviewhomefeed?.addItemDecoration(LinearDividerItemDecoration(resources.getDimensionPixelSize(R.dimen.spacing_small), requireContext().applicationContext))
         binding?.recyclerviewhomefeed?.addItemDecoration(itemDecoration)
         this.client = OkHttpClient.Builder()
             .addInterceptor(NetInterceptor())
@@ -145,27 +143,7 @@ class Homefeed : Fragment() {
         setVal()
         refreshFeed()
         setListener()
-        socketListener()
-    }
-
-
-    private fun socketListener(){
-        lifecycleScope.launch {
-            delay(3000)
-            while (true){
-                if (isActive){
-                    if (this@Homefeed.isClose){
-                        connectToSocket()
-                        delay(4000)
-                    }else{
-                        delay(4000)
-                        ws.send("{\"message\": \"notificationBadgeNumber\"}")
-                    }
-                }else{
-                    return@launch
-                }
-            }
-        }
+        connectToSocket()
     }
     private fun connectToSocket(){
         val request: Request = Request.Builder()
@@ -282,50 +260,67 @@ class Homefeed : Fragment() {
     inner class Listener(): WebSocketListener(){
         override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
             this@Homefeed.isClose = true
+            if (!isDestroy){
+                connectToSocket()
+            }
             super.onClosed(webSocket, code, reason)
         }
-
-        override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
-            super.onClosing(webSocket, code, reason)
-        }
-
         override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
             this@Homefeed.isClose = true
+            if (!isDestroy){
+                connectToSocket()
+            }
             super.onFailure(webSocket, t, response)
         }
 
         override fun onMessage(webSocket: WebSocket, text: String) {
             lifecycleScope.launch {
-                val gson = Gson()
-                val data = gson.fromJson(text, NotificationBadge::class.java)
-                if (data.status){
-                    try {
-                        if (data.notification != 0){
-                            this@Homefeed.binding?.NotificationBtnBadgCardView?.isVisible = true
-                            this@Homefeed.binding?.notificationBadgeTextView?.text = data.notification.toString()
-                        }else{
-                            this@Homefeed.binding?.NotificationBtnBadgCardView?.isVisible = false
-                        }
-                        if (data.chat != 0){
-                            this@Homefeed.binding?.chatBtnBadgeCardView?.isVisible = true
-                            this@Homefeed.binding?.ChatMessageBtnBadgeTextView?.text = data.chat.toString()
-                        }else{
-                            this@Homefeed.binding?.chatBtnBadgeCardView?.isVisible = false
-                        }
-                    }catch (e:Exception){
-                        e.printStackTrace()
+                val data = gson.fromJson(text, SocketInterfier::class.java)
+                if (data.type != null){
+                    when(data.type){
+                        "new_notification" -> {newNotification(text)}
+                        "new_chat" -> {newChat(text)}
+                        "new_notification_badge" -> {newNotificationBadge(text)}
                     }
                 }
             }
             super.onMessage(webSocket, text)
         }
-
-        override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
-            super.onMessage(webSocket, bytes)
-        }
-
         override fun onOpen(webSocket: WebSocket, response: Response) {
+            isClose = false
             super.onOpen(webSocket, response)
+        }
+    }
+
+    private fun newNotification(text: String) {
+        TODO("Not yet implemented")
+    }
+
+    private fun newChat(text: String) {
+        TODO("Not yet implemented")
+    }
+
+    private fun newNotificationBadge(text: String) {
+        lifecycleScope.launch {
+            val data = gson.fromJson(text, NotificationBadge::class.java)
+            if (data.status){
+                try {
+                    if (data.notification != 0){
+                        this@Homefeed.binding?.NotificationBtnBadgCardView?.isVisible = true
+                        this@Homefeed.binding?.notificationBadgeTextView?.text = data.notification.toString()
+                    }else{
+                        this@Homefeed.binding?.NotificationBtnBadgCardView?.isVisible = false
+                    }
+                    if (data.chat != 0){
+                        this@Homefeed.binding?.chatBtnBadgeCardView?.isVisible = true
+                        this@Homefeed.binding?.ChatMessageBtnBadgeTextView?.text = data.chat.toString()
+                    }else{
+                        this@Homefeed.binding?.chatBtnBadgeCardView?.isVisible = false
+                    }
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }
         }
     }
 
@@ -360,6 +355,15 @@ class Homefeed : Fragment() {
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
+    }
+
+    override fun onStart() {
+        this.isDestroy = false
+        super.onStart()
+    }
+    override fun onDetach() {
+        this.isDestroy = true
+        super.onDetach()
     }
 
     override fun onResume() {

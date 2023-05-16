@@ -14,4 +14,5 @@
     <color name="blue2">#1C68C5</color>
     <color name="grey">#696660</color>
     <color name="grey2">#8E9292</color>
+    <color name="recyclerviewSpacing">#363A3A</color>
 </resources>

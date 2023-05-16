@@ -1,6 +1,6 @@
 package com.aknown389.dm.api.retrofitapi
 
-import com.aknown389.dm.models.mainSearchActivityModels.SearchResponse
+import com.aknown389.dm.pageView.mainSearch.dataClass.SearchResponse
 import com.aknown389.dm.models.searchActivityModels.searchItemsModels
 import com.aknown389.dm.models.userviewModels.UserViewModel
 import retrofit2.Response

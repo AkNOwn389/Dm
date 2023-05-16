@@ -2,12 +2,12 @@ package com.aknown389.dm.pageView.mainSearch.utility
 
 import android.annotation.SuppressLint
 import android.view.View
-import com.aknown389.dm.models.mainSearchActivityModels.Data
+import com.aknown389.dm.pageView.mainSearch.dataClass.MainSearchItemData
 import com.aknown389.dm.models.postmodel.LikesPostResponseModel
 import com.aknown389.dm.utils.ReactionTypes
 
 object MainSearchGlobalSetter {
-    fun setDeafaultReaction(holder: MainSearchViewHolder, currentItem: Data){
+    fun setDeafaultReaction(holder: MainSearchViewHolder, currentItem: MainSearchItemData){
         when(currentItem.reactionType){
             ReactionTypes.LIKE -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[0])
             ReactionTypes.LOVE -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[1])
@@ -17,7 +17,7 @@ object MainSearchGlobalSetter {
             ReactionTypes.ANGRY -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[5])
         }
     }
-    fun afterReactionReasponse(holder: MainSearchViewHolder, currentItem: LikesPostResponseModel, dataModel:Data){
+    fun afterReactionReasponse(holder: MainSearchViewHolder, currentItem: LikesPostResponseModel, dataModel: MainSearchItemData){
         dataModel.NoOflike = currentItem.postLikes
         if (dataModel.is_like == true) {
             when (dataModel.reactionType) {
@@ -68,7 +68,7 @@ object MainSearchGlobalSetter {
     fun afterUnReactResponse(
         holder: MainSearchViewHolder,
         currentItem: LikesPostResponseModel,
-        dataModel: Data
+        dataModel: MainSearchItemData
     ) {
         dataModel.NoOflike = currentItem.postLikes
         when (dataModel.reactionType) {
@@ -84,7 +84,7 @@ object MainSearchGlobalSetter {
         iconSetterBaseOnLike(holder = holder, currentItem = dataModel)
     }
     @SuppressLint("SetTextI18n")
-    fun iconSetterBaseOnLike(holder: MainSearchViewHolder, currentItem: Data) {
+    fun iconSetterBaseOnLike(holder: MainSearchViewHolder, currentItem: MainSearchItemData) {
         if (currentItem.reactions?.Like == 0) {
             holder.icLike?.visibility = View.GONE
         } else {

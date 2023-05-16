@@ -1,7 +1,7 @@
 package com.aknown389.dm.pageView.mainSearch.remote.repository
 
 import android.content.Context
-import com.aknown389.dm.models.mainSearchActivityModels.SearchResponse
+import com.aknown389.dm.pageView.mainSearch.dataClass.SearchResponse
 import com.aknown389.dm.models.postmodel.NormalResponseModel
 import com.aknown389.dm.models.searchActivityModels.searchItemsModels
 import com.aknown389.dm.pageView.mainSearch.remote.instance.Instance

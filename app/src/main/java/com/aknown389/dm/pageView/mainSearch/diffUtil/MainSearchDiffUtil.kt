@@ -1,9 +1,9 @@
 package com.aknown389.dm.pageView.mainSearch.diffUtil
 
 import androidx.recyclerview.widget.DiffUtil
-import com.aknown389.dm.models.mainSearchActivityModels.Data
+import com.aknown389.dm.pageView.mainSearch.dataClass.MainSearchItemData
 
-class MainSearchDiffUtil(val old:ArrayList<Data>, val new:ArrayList<Data>):DiffUtil.Callback() {
+class MainSearchDiffUtil(val old:ArrayList<MainSearchItemData>, val new:ArrayList<MainSearchItemData>):DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return old.size
     }

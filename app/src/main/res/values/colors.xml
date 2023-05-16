@@ -21,5 +21,6 @@
     <color name="lightyellow">#AC9449</color>
     <color name="lightgreen">#3E9766</color>
     <color name="transparent">#0000</color>
+    <color name="recyclerviewSpacing">#323333</color>
 
 </resources>

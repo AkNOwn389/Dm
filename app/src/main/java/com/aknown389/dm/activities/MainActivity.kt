@@ -16,6 +16,7 @@ import com.aknown389.dm.db.AppDataBase
 import com.aknown389.dm.pageView.main.viewModel.MainViewModel
 import com.aknown389.dm.pageView.main.viewModel.MainViewModelFactory
 import com.aknown389.dm.repository.Repository
+import com.aknown389.dm.utils.Constants.Companion.APP_VERSION
 import com.aknown389.dm.utils.Constants.Companion.CHANNEL_ID
 import com.aknown389.dm.utils.DataManager
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         bahavior()
         //checkUserData()
         binding.louncherProgressBar.isVisible = true
+        binding.appVersion.text = APP_VERSION
     }
 
     fun bahavior(){

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.res.Configuration
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.aknown389.dm.api.retroInstance.RetrofitInstance
 import com.aknown389.dm.db.AppDataBase
 import com.aknown389.dm.db.local.NewsDataEntities
@@ -12,6 +14,9 @@ import com.aknown389.dm.models.postmodel.LikesPostResponseModel
 import com.aknown389.dm.pageView.newsView.NewsGlobalSetter.afterReactionReasponse
 import com.aknown389.dm.pageView.newsView.NewsGlobalSetter.afterUnReactResponse
 import com.aknown389.dm.pageView.newsView.NewsViewHolder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,9 +31,9 @@ class LikeNews(
     private val reactType:String,
 ) {
 
-    private lateinit var dataBase: AppDataBase
+    private var dataBase: AppDataBase = AppDataBase.getDatabase(context)
+
     init {
-        dataBase = AppDataBase.getDatabase(context)
         val body = LikesPostBodyModel(currentItem.id!!, postType = postType, reactionType, type = reactType)
         val request = RetrofitInstance.retrofitBuilder.likepostC(token = token, body)
         request.enqueue(object : Callback<LikesPostResponseModel?> {
@@ -74,15 +79,19 @@ class LikeNews(
     }
 
     private fun reportLike(id:String){
-        val result = dataBase.newDao().reportLike(id)
-        if (!result){
-            Toast.makeText(context, "Error updating in db", Toast.LENGTH_SHORT).show()
+        (context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.IO){
+            val result = dataBase.newDao().reportLike(id)
+            if (!result){
+                Toast.makeText(context, "Error updating in db", Toast.LENGTH_SHORT).show()
+            }
         }
     }
     private fun reportUnLike(id:String){
-        val result = dataBase.newDao().reportUnLike(id)
-        if (!result){
-            Toast.makeText(context, "Error updating in db", Toast.LENGTH_SHORT).show()
+        (context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.IO){
+            val result = dataBase.newDao().reportUnLike(id)
+            if (!result){
+                Toast.makeText(context, "Error updating in db", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -3,20 +3,18 @@ package com.aknown389.dm.pageView.mainSearch.viewModel
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import com.aknown389.dm.models.mainSearchActivityModels.Data
+import com.aknown389.dm.pageView.mainSearch.dataClass.MainSearchItemData
 import com.aknown389.dm.pageView.mainSearch.remote.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class SearchViewModel():ViewModel() {
     private var repository = Repository()
-    val responseData:MutableLiveData<ArrayList<Data>> = MutableLiveData()
-    val responseUpdate:MutableLiveData<ArrayList<Data>> = MutableLiveData()
-    val recentData:MutableLiveData<ArrayList<Data>> = MutableLiveData()
+    val responseData:MutableLiveData<ArrayList<MainSearchItemData>> = MutableLiveData()
+    val responseUpdate:MutableLiveData<ArrayList<MainSearchItemData>> = MutableLiveData()
+    val recentData:MutableLiveData<ArrayList<MainSearchItemData>> = MutableLiveData()
     var hasMorePage = true
     var isLoading = false
     var page = 1
@@ -27,7 +25,7 @@ class SearchViewModel():ViewModel() {
             isLoading = true
            try {
                val response = repository.mainSearch(context = context, user = text, type = type, page = page)
-               responseData.value = response.body()!!.data as ArrayList<Data>
+               responseData.value = response.body()!!.data as ArrayList<MainSearchItemData>
                isLoading = false
            }catch (e:Exception){
                isLoading = false
@@ -42,7 +40,7 @@ class SearchViewModel():ViewModel() {
             isLoading = true
             try {
                 val response = repository.mainSearch(context, user = text, type = searchtype, page = page)
-                responseUpdate.value = response.body()!!.data as ArrayList<Data>
+                responseUpdate.value = response.body()!!.data as ArrayList<MainSearchItemData>
                 this@SearchViewModel.hasMorePage = response.body()!!.hasMorePage
                 isLoading = false
             }catch (e:Exception){
@@ -55,8 +53,8 @@ class SearchViewModel():ViewModel() {
         viewModelScope.launch {
             try {
                 val response = repository.loadSearchRecent(context)
-                val items = response.body()!!.data as ArrayList<Data>
-                val top = Data(searchType = 99)
+                val items = response.body()!!.data as ArrayList<MainSearchItemData>
+                val top = MainSearchItemData(searchType = 99)
                 items.add(0, top)
                 recentData.value = items
             } catch (e: Exception) {

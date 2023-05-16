@@ -21,7 +21,7 @@ import com.aknown389.dm.activities.ProfilepageAtivity
 import com.aknown389.dm.activities.UserViewActivity
 import com.aknown389.dm.dialogs.CommentDialog
 import com.aknown389.dm.models.global.ImageUrl
-import com.aknown389.dm.models.mainSearchActivityModels.Data
+import com.aknown389.dm.pageView.mainSearch.dataClass.MainSearchItemData
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.PicturePostView
 import com.bumptech.glide.Glide
 import com.aknown389.dm.pageView.mainSearch.utility.MainSearchGlobalSetter.setDeafaultReaction
@@ -40,8 +40,8 @@ class PostSearchView(
     private val parent: ViewGroup,
     private val holder: MainSearchViewHolder,
     private val token:String,
-    private val searchItem: ArrayList<Data>,
-    private val data: Data
+    private val searchItem: ArrayList<MainSearchItemData>,
+    private val data: MainSearchItemData
 ) {
 
     init {
@@ -60,7 +60,7 @@ class PostSearchView(
             type = type
         )
     }
-    private fun setListenerType2(data: Data, holder: MainSearchViewHolder) {
+    private fun setListenerType2(data: MainSearchItemData, holder: MainSearchViewHolder) {
         holder.likePost?.setReactions(*com.aknown389.dm.reactionTesting.FbReactions.reactionsGift)
         holder.likePost?.setDisplayReactions(*com.aknown389.dm.reactionTesting.FbReactions.reactions)
         holder.likePost?.setEnableReactionTooltip(true)

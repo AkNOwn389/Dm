@@ -6,14 +6,14 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.aknown389.dm.api.retroInstance.PostInstance
-import com.aknown389.dm.models.mainSearchActivityModels.Data
+import com.aknown389.dm.pageView.mainSearch.dataClass.MainSearchItemData
 import com.aknown389.dm.models.postmodel.LikesPostBodyModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LikePost(
     private val token:String,
-    private val data:Data,
+    private val data: MainSearchItemData,
     private val holder: MainSearchViewHolder,
     private val context: Context,
     private val adapter: Adapter,

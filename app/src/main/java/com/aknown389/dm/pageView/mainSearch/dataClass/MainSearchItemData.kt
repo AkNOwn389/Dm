@@ -1,11 +1,11 @@
-package com.aknown389.dm.models.mainSearchActivityModels
+package com.aknown389.dm.pageView.mainSearch.dataClass
 
 import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.models.global.PostReactions
 import com.aknown389.dm.models.global.VideoUrl
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class MainSearchItemData(
     @SerializedName("id")                               val id: String? = null,
     @SerializedName("bgimg")                            val bgimg: String?=null,
     @SerializedName("bio")                              val bio: String? = null,
@@ -28,7 +28,7 @@ data class Data(
     //for recent
     @SerializedName("date_search")                      val date: String? = null,
     //for posts
-    @SerializedName("NoOfcomment")                      val NoOfcomment: Int? = null,
+    @SerializedName("NoOfComment")                      val NoOfcomment: Int? = null,
     @SerializedName("NoOflike")                         var NoOflike: Int? = null,
     @SerializedName("created_at")                       val created_at: String? = null,
     @SerializedName("creator")                          val creator: String? = null,

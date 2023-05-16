@@ -1,6 +1,6 @@
 package com.aknown389.dm.pageView.mainSearch.remote.api
 
-import com.aknown389.dm.models.mainSearchActivityModels.SearchResponse
+import com.aknown389.dm.pageView.mainSearch.dataClass.SearchResponse
 import com.aknown389.dm.models.postmodel.NormalResponseModel
 import com.aknown389.dm.models.searchActivityModels.searchItemsModels
 import retrofit2.Response

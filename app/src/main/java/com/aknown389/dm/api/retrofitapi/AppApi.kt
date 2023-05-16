@@ -17,6 +17,7 @@ import com.aknown389.dm.models.profileModel.MeModel
 import com.aknown389.dm.models.profileModel.UpdateDetailsBodyModel
 import com.aknown389.dm.models.showFriendModels.UserCardViewResponseModel
 import com.aknown389.dm.models.userviewModels.FollowUserResponseModel
+import com.aknown389.dm.utils.dataClass.GetHostDataClass
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -24,6 +25,7 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface AppApi {
+
     // call method
     @POST("/user/signup")
     fun register(

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aknown389.dm.R
-import com.aknown389.dm.models.mainSearchActivityModels.Data
+import com.aknown389.dm.pageView.mainSearch.dataClass.MainSearchItemData
 import com.aknown389.dm.pageView.mainSearch.diffUtil.MainSearchDiffUtil
 import com.aknown389.dm.pageView.mainSearch.recyclerviewItem.PostSearchView
 import com.aknown389.dm.pageView.mainSearch.recyclerviewItem.RecentView
@@ -18,7 +18,7 @@ class Adapter():RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var manager:DataManager
     private lateinit var context:Context
     private lateinit var parent: ViewGroup
-    var searchItem = ArrayList<Data>()
+    var searchItem = ArrayList<MainSearchItemData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainSearchViewHolder {
         this.context = parent.context
@@ -77,12 +77,12 @@ class Adapter():RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             )
         }
     }
-    fun setData(new:ArrayList<Data>){
+    fun setData(new:ArrayList<MainSearchItemData>){
         val diffresult = DiffUtil.calculateDiff(MainSearchDiffUtil(this.searchItem, new))
         this.searchItem = new
         diffresult.dispatchUpdatesTo(this)
     }
-    fun updateData(new:ArrayList<Data>){
+    fun updateData(new:ArrayList<MainSearchItemData>){
         val diffresult = DiffUtil.calculateDiff(MainSearchDiffUtil(this.searchItem, new))
         this.searchItem.addAll(new)
         diffresult.dispatchUpdatesTo(this)

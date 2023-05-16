@@ -19,7 +19,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,8 +33,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/circularRevealCardView"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -78,7 +78,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -93,8 +93,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/c"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -135,7 +135,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -150,8 +150,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/cc"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -193,7 +193,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -208,8 +208,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/ccc"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -249,7 +249,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -264,8 +264,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/cccc"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -310,7 +310,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -325,8 +325,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/ccccc"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -369,7 +369,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -384,8 +384,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/a"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -427,7 +427,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -442,8 +442,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/a1"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -485,7 +485,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -500,8 +500,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/a2"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -544,7 +544,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -559,8 +559,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/a3"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"
@@ -603,7 +603,7 @@
 
         <com.google.android.material.circularreveal.cardview.CircularRevealCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/grey3"
             app:cardCornerRadius="10dp"
             android:layout_marginTop="10dp"
@@ -618,8 +618,8 @@
 
                 <com.google.android.material.circularreveal.cardview.CircularRevealCardView
                     android:id="@+id/a4"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="5dp"
                     android:backgroundTint="@color/grey2"
                     app:cardCornerRadius="30dp"

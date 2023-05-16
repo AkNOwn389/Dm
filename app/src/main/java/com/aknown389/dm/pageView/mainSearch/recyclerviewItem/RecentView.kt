@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.aknown389.dm.R
 import com.aknown389.dm.activities.UserViewActivity
-import com.aknown389.dm.models.mainSearchActivityModels.Data
+import com.aknown389.dm.pageView.mainSearch.dataClass.MainSearchItemData
 import com.bumptech.glide.Glide
 import com.aknown389.dm.pageView.mainSearch.utility.Adapter
 import com.aknown389.dm.pageView.mainSearch.utility.MainSearchViewHolder
@@ -18,8 +18,8 @@ class RecentView(
     private val parent: ViewGroup,
     private val holder: MainSearchViewHolder,
     private val token:String,
-    private val searchItem: ArrayList<Data>,
-    private val data: Data
+    private val searchItem: ArrayList<MainSearchItemData>,
+    private val data: MainSearchItemData
 
 
 

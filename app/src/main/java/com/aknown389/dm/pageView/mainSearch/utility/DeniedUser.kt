@@ -6,14 +6,14 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.aknown389.dm.R
 import com.aknown389.dm.api.retroInstance.UsersInstance
-import com.aknown389.dm.models.mainSearchActivityModels.Data
+import com.aknown389.dm.pageView.mainSearch.dataClass.MainSearchItemData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class DeniedUser(
     private val token:String,
-    private val data: Data,
+    private val data: MainSearchItemData,
     private val holder: MainSearchViewHolder,
     private val context: Context,
     private val adapter: Adapter
