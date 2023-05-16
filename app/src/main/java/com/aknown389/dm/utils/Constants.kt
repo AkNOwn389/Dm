@@ -10,32 +10,10 @@ import retrofit2.Response
 
 
 class Constants {
-    private var host:String? = null
-    init {
-        getHost()
-    }
-    private fun getHost(){
-        val response = try {
-            UtilsInstance.api.getHomeName()
-        }catch (e:Exception){
-            return
-        }
-        response.enqueue(object : Callback<GetHostDataClass?> {
-            override fun onResponse(
-                call: Call<GetHostDataClass?>,
-                response: Response<GetHostDataClass?>
-            ) {
-                this@Constants.host = response.body()!!.name
-            }
-            override fun onFailure(call: Call<GetHostDataClass?>, t: Throwable) {
-                Log.d( "Constance","Constance Error $t")
-            }
-        })
-    }
     companion object{
         private const val debug = false
         private const val DEBUGHOST = "192.168.0.115:8000"
-        private const val HOST = "e0d1-124-105-235-119.ngrok-free.app"
+        private val HOST = "bb8a-124-105-235-119.ngrok-free.app"
         val BASE_URL = if (!debug){"https://$HOST"}else{"http://$DEBUGHOST"}
         val WEBSOCKET_ACTIVE_URL =if (!debug){"wss://$HOST/user/connect"}else{"ws://$DEBUGHOST/user/connect"}
         val WEBSOCKET_BASE_URL =if (!debug){"wss://$HOST"}else{"ws://$DEBUGHOST"}
