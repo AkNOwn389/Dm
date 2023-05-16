@@ -97,7 +97,14 @@ class Homefeed : Fragment() {
         binding?.recyclerviewhomefeed?.setMediaObjects(adapter.postListdata)
         binding?.recyclerviewhomefeed!!.adapter = adapter
         binding?.recyclerviewhomefeed?.layoutManager = layoutmanager
-        val itemDecoration = LinearDividerItemDecoration(SPACING)
+        val itemDecoration = LinearDividerItemDecoration(SPACING, requireContext().applicationContext)
+        binding?.recyclerviewhomefeed?.addItemDecoration(
+            K=LinearDividerItemDecoration(
+                resources.getDimensionPixelSize(
+                    R.dimen.spacing_small
+                ), requireContext().applicationContext
+            )
+        )
         binding?.recyclerviewhomefeed?.addItemDecoration(itemDecoration)
         this.client = OkHttpClient.Builder()
             .addInterceptor(NetInterceptor())
