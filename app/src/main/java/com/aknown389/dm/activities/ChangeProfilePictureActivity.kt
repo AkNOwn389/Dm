@@ -67,7 +67,7 @@ class ChangeProfilePictureActivity : AppCompatActivity(), ProgressRequestBody.Up
                 Toast.makeText(this, "Uploading", Toast.LENGTH_SHORT).show()
             }
         }
-        binding?.changeprofilepicturebackbtn?.setOnClickListener {
+        binding?.backbtn?.setOnClickListener {
             finish()
         }
         pickPhotoListener()

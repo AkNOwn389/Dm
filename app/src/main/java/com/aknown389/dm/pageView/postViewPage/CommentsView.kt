@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.aknown389.dm.R
 import com.aknown389.dm.activities.UserViewActivity
-import com.aknown389.dm.pageView.postViewPage.Models.ToDisplayDataModel
+import com.aknown389.dm.pageView.postViewPage.models.ToDisplayDataModel
 import com.aknown389.dm.api.retroInstance.CommentInstance
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.Dispatchers
@@ -77,7 +77,7 @@ class CommentsView @Inject constructor(
                         val response = try {
                             CommentInstance(context.applicationContext).api.deletecomment(
                                 id = item.commentId.toString(),
-                                postId = item.post_id!!
+                                postId = item.parentPostId!!
                             )
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -118,7 +118,7 @@ class CommentsView @Inject constructor(
                 token = token,
                 data = item) }
         }
-        if (item.is_like==true){
+        if (item.isLike==true){
             holder.commentLikeBtn?.text = context.getString(R.string.liked)
         }
         if (item.me == true){

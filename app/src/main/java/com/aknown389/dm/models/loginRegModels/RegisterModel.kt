@@ -1,7 +1,7 @@
 package com.aknown389.dm.models.loginRegModels
 
 data class RegisterModel(
-    val code: Int,
+    val code: String,
     val cridential: String,
     val username: String,
     val email: String,

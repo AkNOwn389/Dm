@@ -195,7 +195,7 @@ class HomeFeedRecyclerview : RecyclerView {
                 try{
                     val multiVideos: ArrayList<VideoUrl>? = mediaObjects[targetPosition].videos_url as ArrayList<VideoUrl>
                     val firstInMultiVideo = multiVideos?.get(0)!!
-                    if (firstInMultiVideo.videos != null){
+                    if (firstInMultiVideo.original != null){
                         if (this.videoPlayer!!.currentMediaItem == null){
                             val url = getMediaUrlInVideoUrl(firstInMultiVideo)
                             val mediaItem = MediaItem.Builder()
@@ -224,7 +224,7 @@ class HomeFeedRecyclerview : RecyclerView {
             return when {
                 !isConnected -> data.w250 // No internet connection
                 isWiFi -> data.w1000 // WiFi connection, use high resolution
-                else -> data.videos// Mobile data connection, use lower resolution
+                else -> data.original// Mobile data connection, use lower resolution
             }
         }catch (e:Exception){
             return null

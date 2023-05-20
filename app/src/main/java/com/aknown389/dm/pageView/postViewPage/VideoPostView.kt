@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.aknown389.dm.R
-import com.aknown389.dm.pageView.postViewPage.Models.ToDisplayDataModel
+import com.aknown389.dm.pageView.postViewPage.models.ToDisplayDataModel
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -31,7 +31,7 @@ class VideoPostView @Inject constructor(
     }
     private fun loadUI() {
         Glide.with(context)
-            .load(item.videos_url)
+            .load(item.videoUrl1000)
             .placeholder(R.drawable.progress_animation)
             .error(R.mipmap.greybg)
             .into(holder.thumbnailUtils!!)
@@ -56,9 +56,9 @@ class VideoPostView @Inject constructor(
         holder.progressBar1!!.visibility = View.VISIBLE
         holder.progressBar2!!.visibility = View.VISIBLE
         holder.player!!.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-        if (data.videos_url != null){
+        if (data.videoUrl1000 != null){
             val media = MediaItem.Builder()
-                .setUri(data.videos_url)
+                .setUri(data.videoUrl1000)
                 .setMimeType(MimeTypes.APPLICATION_MP4)
                 .build()
             exoPlayer.setMediaItem(media)

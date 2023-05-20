@@ -104,12 +104,12 @@ class PicturePostView @Inject constructor(
         //val h = displayMetrics.heightPixels
         if (img.width!! > width) {
             val num: Double = (img.width / width).toDouble()
-            val height: Int? = img.heigth?.div(num)?.toInt()
+            val height: Int? = img.height?.div(num)?.toInt()
             Log.d(TAG, height.toString())
             return height!!
         }else{
             val num = width-img.width
-            val num2 = img.heigth?.plus(num)
+            val num2 = img.height?.plus(num)
             Log.d(TAG, num2.toString())
             return num2!!
         }
@@ -318,7 +318,7 @@ class PicturePostView @Inject constructor(
                         .into(holder.postImage!!)
                 } else {
                     Glide.with(context)
-                        .load(img.image)
+                        .load(img.original)
                         .error(R.mipmap.greybg)
                         .into(holder.postImage!!)
                 }

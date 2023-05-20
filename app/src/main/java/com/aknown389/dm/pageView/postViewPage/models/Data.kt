@@ -1,5 +1,6 @@
-package com.aknown389.dm.pageView.postViewPage.Models
+package com.aknown389.dm.pageView.postViewPage.models
 
+import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.models.global.PostReactions
 import com.aknown389.dm.models.global.VideoUrl
 

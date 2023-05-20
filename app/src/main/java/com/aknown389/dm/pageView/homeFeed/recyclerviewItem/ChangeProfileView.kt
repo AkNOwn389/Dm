@@ -279,7 +279,7 @@ class ChangeProfileView @Inject constructor(
                     .into(holder.postImage!!)
             } else {
                 Glide.with(context)
-                    .load(img.image)
+                    .load(img.original)
                     .error(R.mipmap.greybg)
                     .into(holder.postImage!!)
             }

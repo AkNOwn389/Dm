@@ -1,6 +1,6 @@
 package com.aknown389.dm.pageView.postViewPage.remote.api
 
-import com.aknown389.dm.pageView.postViewPage.Models.NetworkResponse
+import com.aknown389.dm.pageView.postViewPage.models.NetworkResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

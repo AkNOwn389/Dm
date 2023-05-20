@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/verify_otp_dialog_background"
+    android:padding="20dp"
+    tools:context=".dialogs.DialogVerifyOtp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/verify_otp"
+            android:textColor="#FFFFFF"
+            android:textSize="60sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_verify_your_email_naccount"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+            app:layout_constraintEnd_toEndOf="@+id/title"
+            app:layout_constraintHorizontal_bias=".05"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintVertical_bias=".2" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintVertical_bias=".3"
+            tools:layout_editor_absoluteX="20dp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="22sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="22sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code3"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="22sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code4"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="22sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code5"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="22sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code6"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/resendOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/text_input_bg"
+            android:backgroundTint="@color/transparent"
+            android:text="@string/din_t_receive_code"
+            android:textColor="#F8F8F8"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
+            app:layout_constraintHorizontal_bias=".9"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout8"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/verifyCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/verify_otp_button_background"
+            android:backgroundTint="@color/blue"
+            android:text="@string/verify"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resendOtp"
+            app:layout_constraintVertical_bias=".2" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:indeterminateTint="@color/white2"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/verifyCode" />
+
+        <com.udevel.widgetlab.TypingIndicatorView
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:backgroundColor="@color/transparent"
+            app:dotAnimationDuration="100"
+            app:dotAnimationType="BouncingSliding"
+            app:dotCount="3"
+            app:dotSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/verifyCode" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

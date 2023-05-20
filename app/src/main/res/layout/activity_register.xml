@@ -13,9 +13,10 @@
         android:id="@+id/registerLogo"
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
+        app:layout_constraintVertical_bias="0"
         android:src="@mipmap/highresulutiontransparent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +29,7 @@
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/account_ic"
         android:drawablePadding="8dp"
-        android:hint="username"
+        android:hint="@string/username"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -45,7 +46,7 @@
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="8dp"
-        android:hint="email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -63,7 +64,7 @@
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/name_ic"
         android:drawablePadding="8dp"
-        android:hint="name"
+        android:hint="@string/name"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -81,7 +82,7 @@
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/security_ic"
         android:drawablePadding="8dp"
-        android:hint="password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -98,7 +99,7 @@
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/security_ic"
         android:drawablePadding="8dp"
-        android:hint="comfirm"
+        android:hint="@string/comfirm"
         android:inputType="textPassword"
         android:padding="10dp"
         android:textColor="#FFFFFF"
@@ -107,35 +108,37 @@
         app:layout_constraintStart_toStartOf="@+id/registerPassword"
         app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registerBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
         android:backgroundTint="@color/blue"
-        android:text="register"
+        android:text="@string/register"
         android:textColor="#FFFFFF"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/verify_otp_button_background"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
+        android:textSize="16sp"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="@+id/registerRequestCodebtn"
-        app:layout_constraintStart_toStartOf="@+id/registerCodeeditText"
-        app:layout_constraintTop_toBottomOf="@+id/registerCodeeditText" />
+        app:layout_constraintEnd_toEndOf="@+id/registerComfimPassword"
+        app:layout_constraintStart_toStartOf="@+id/registerComfimPassword"
+        app:layout_constraintTop_toBottomOf="@+id/registerComfimPassword" />
 
     <TextView
         android:id="@+id/alreadyhaveaccountTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
         android:background="@drawable/text_input_bg"
         android:gravity="center"
         android:onClick="goBack"
-        android:text="already have an account?"
+        android:text="@string/already_have_an_account"
         android:textColor="#FFFFFF"
         android:paddingStart="5dp"
-        android:paddingRight="5dp"
+        android:paddingEnd="5dp"
         app:layout_constraintEnd_toEndOf="@+id/registerBtn"
-        app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="@+id/registerBtn"
         app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
 
@@ -148,34 +151,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
-
-    <EditText
-        android:id="@+id/registerCodeeditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_hashtag"
-        android:drawablePadding="8dp"
-        android:drawableTint="#FFFFFF"
-        android:ems="10"
-        android:hint="Get code"
-        android:inputType="numberDecimal"
-        android:padding="10dp"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/registerComfimPassword"
-        app:layout_constraintStart_toStartOf="@+id/registerComfimPassword"
-        app:layout_constraintTop_toBottomOf="@+id/registerComfimPassword" />
-
-    <ImageButton
-        android:id="@+id/registerRequestCodebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/floating_buttom_profile_bg"
-        android:src="@drawable/send_button_flat_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/registerCodeeditText"
-        app:layout_constraintEnd_toEndOf="@+id/registerCodeeditText"
-        app:layout_constraintTop_toTopOf="@+id/registerCodeeditText"
-        app:tint="#FFFFFF" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

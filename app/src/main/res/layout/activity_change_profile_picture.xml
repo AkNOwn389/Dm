@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/changeprofilepicturebackbtn"
+                android:id="@+id/backbtn"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
                 android:background="@drawable/chat_item_ripple"
@@ -47,7 +47,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/changeprofilepicturebackbtn"
+                app:layout_constraintStart_toEndOf="@+id/backbtn"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton

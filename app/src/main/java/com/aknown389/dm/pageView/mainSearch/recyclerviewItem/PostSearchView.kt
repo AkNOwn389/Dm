@@ -232,9 +232,9 @@ class PostSearchView(
         }
 
         if (data.image_url != null){
-            if (data.image_url[0].image != null){
+            if (data.image_url[0].original != null){
                 Glide.with(context)
-                    .load(data.image_url[0].image)
+                    .load(data.image_url[0].original)
                     .placeholder(R.mipmap.greybg)
                     .error(R.mipmap.greybg)
                     .into(holder.postImage!!)
@@ -293,12 +293,12 @@ class PostSearchView(
         //val h = displayMetrics.heightPixels
         if (img.width!! > width) {
             val num: Double = (img.width / width).toDouble()
-            val height: Int? = img.heigth?.div(num)?.toInt()
+            val height: Int? = img.height?.div(num)?.toInt()
             Log.d(PicturePostView.TAG, height.toString())
             return height!!
         }else{
             val num = width-img.width
-            val num2 = img.heigth?.plus(num)
+            val num2 = img.height?.plus(num)
             Log.d(PicturePostView.TAG, num2.toString())
             return num2!!
         }

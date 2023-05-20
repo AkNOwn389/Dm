@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aknown389.dm.R
 import com.aknown389.dm.databinding.ActivityPostViewBinding
 import com.bumptech.glide.Glide
-import com.aknown389.dm.pageView.postViewPage.Models.Data
+import com.aknown389.dm.pageView.postViewPage.models.Data
 import com.aknown389.dm.pageView.postViewPage.PostViewAdapter
 import com.aknown389.dm.pageView.postViewPage.remote.instance.Instance
 import com.aknown389.dm.api.retroInstance.CommentInstance
-import com.aknown389.dm.pageView.postViewPage.Models.ToDisplayDataModel
+import com.aknown389.dm.pageView.postViewPage.models.ToDisplayDataModel
 import com.aknown389.dm.utils.DataManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -75,20 +75,24 @@ class PostViewActivity : AppCompatActivity() {
                     visible()
                     val body = response.body()!!.data
                     setData(body)
-                    for (i in body.image_url!!) {
+                    for (i in body.image_url) {
                         val image = ToDisplayDataModel(
-                            NoOfcomment = i.NoOfcomment,
-                            NoOflike = i.NoOflike,
-                            media_type = 1,
-                            image_url = i.url_w1000,
-                            id = i.id,
                             creator = body.creator,
                             creator_avatar = body.creator_avatar,
                             creator_full_name = body.creator_full_name,
-                            is_like = i.is_like,
+                            NoOfcomment = i.noOfComment,
+                            NoOflike = i.noOfLike,
+                            media_type = 1,
+                            imageUrl1000 = i.imgW1000,
+                            imageUrl500 = i.imgW500,
+                            imageUrl250 = i.imgW250,
+                            imageUrlOriginal = i.original,
+                            ImageOrVideoId = i.id,
+                            isLike = i.isLike,
                             reactions = i.reactions,
-                            reactionType = i.reactionType
-
+                            reactionType = i.reactionType,
+                            heigth = i.height,
+                            width = i.width,
                         )
                         if (image !in postDataList) {
                             this@PostViewActivity.postDataList.add(image)
@@ -103,13 +107,17 @@ class PostViewActivity : AppCompatActivity() {
                             NoOfcomment = body.NoOfcomment,
                             NoOflike = body.NoOflike,
                             media_type = 2,
-                            id = body.id.toString(),
-                            videos_url = i.w1000,
+                            ImageOrVideoId = body.id,
+                            videoUrlOriginal = i.original,
+                            videoUrl1000 = i.w1000,
+                            videoUrl500 = i.w500,
+                            videoUrl250 = i.w250,
+                            playbackUrl = i.playbackUrl,
+                            heigth = i.height,
+                            width = i.width,
                             creator = body.creator,
                             creator_avatar = body.creator_avatar,
                             creator_full_name = body.creator_full_name,
-                            is_like = body.is_like,
-                            reactions = body.reactions
                         )
                         if (image !in postDataList) {
                             this@PostViewActivity.postDataList.add(image)
@@ -122,11 +130,11 @@ class PostViewActivity : AppCompatActivity() {
                         NoOfcomment = body.NoOfcomment,
                         NoOflike = body.NoOflike,
                         media_type = 3,
-                        id = body.id,
+                        ImageOrVideoId = body.id,
                         creator = body.creator,
                         creator_avatar = body.creator_avatar,
                         creator_full_name = body.creator_full_name,
-                        is_like = body.is_like,
+                        isLike = body.is_like,
                         caption = body.description,
                         title = body.title,
                         reactions = body.reactions,
@@ -166,7 +174,7 @@ class PostViewActivity : AppCompatActivity() {
                                 avatar= i.avatar,
                                 created = i.created,
                                 commentId = i.id.toString(),
-                                post_id = i.postId,
+                                parentPostId = i.postId,
                                 user = i.user,
                                 type = i.type,
                                 me = i.me,
@@ -220,7 +228,7 @@ class PostViewActivity : AppCompatActivity() {
                         avatar= i.avatar,
                         created = i.created,
                         commentId = i.id.toString(),
-                        post_id = i.postId,
+                        parentPostId = i.postId,
                         user = i.user,
                         type = i.type,
                         me = i.me,

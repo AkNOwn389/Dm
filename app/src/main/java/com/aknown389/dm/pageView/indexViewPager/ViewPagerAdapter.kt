@@ -12,12 +12,6 @@ class ViewPagerAdapter(private val listFragment: ArrayList<Fragment>,
     override fun getItemCount(): Int {
         return listFragment.size
     }
-
-    override fun containsItem(itemId: Long): Boolean {
-        return super.containsItem(itemId)
-    }
-
-
     override fun createFragment(position: Int): Fragment {
         return listFragment[position]
     }

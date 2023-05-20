@@ -1,4 +1,4 @@
-package com.aknown389.dm.pageView.postViewPage.Models
+package com.aknown389.dm.pageView.postViewPage.models
 
 data class NetworkResponse(
     val `data`: Data,

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.aknown389.dm.R
 import com.aknown389.dm.api.retroInstance.UsersInstance
-import com.aknown389.dm.pageView.postViewPage.Models.ToDisplayDataModel
+import com.aknown389.dm.pageView.postViewPage.models.ToDisplayDataModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class VideoUrl(
     @SerializedName("id")           val id:String?=null,
-    @SerializedName("original")     val videos: String?=null,
+    @SerializedName("original")     val original: String?=null,
     @SerializedName("url_w1000")    val w1000: String?=null,
     @SerializedName("url_w500")     val w500: String?=null,
     @SerializedName("url_w250")     val w250: String?=null,

@@ -120,9 +120,9 @@ class MultiVideoPostView @Inject constructor(
         val videos:ArrayList<VideoUrl> = currentItem.videos_url as ArrayList<VideoUrl>
         if (videos.isNotEmpty()){
             val firstVideo = videos[0]
-            if (firstVideo.videos!!.isNotEmpty()){
+            if (firstVideo.original!!.isNotEmpty()){
                 val mediaItem = MediaItem.Builder()
-                    .setUri(firstVideo.videos)
+                    .setUri(firstVideo.original)
                     .build()
                 exoPlayer.setMediaItem(mediaItem)
                 exoPlayer.seekTo(0)
@@ -292,7 +292,7 @@ class MultiVideoPostView @Inject constructor(
             val video:ArrayList<VideoUrl> = currentItem.videos_url as ArrayList<VideoUrl>
             if (video.isNotEmpty()){
                 val firstVideo = video[0]
-                if (firstVideo.videos != null){
+                if (firstVideo.original != null){
                     val url = getMediaUrl(firstVideo)
                     requestManager.load(url)
                         .override(700, 300)
@@ -326,7 +326,7 @@ class MultiVideoPostView @Inject constructor(
             return when {
                 !isConnected -> data.w250 // No internet connection
                 isWiFi -> data.w1000 // WiFi connection, use high resolution
-                else -> data.videos // Mobile data connection, use lower resolution
+                else -> data.original // Mobile data connection, use lower resolution
             }
         }catch (e:Exception){
             return null

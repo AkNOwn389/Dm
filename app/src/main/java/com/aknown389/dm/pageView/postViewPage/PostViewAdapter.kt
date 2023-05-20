@@ -14,7 +14,7 @@ import com.aknown389.dm.R
 import com.aknown389.dm.dialogs.CommentDialog
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.PicturePostView
 import com.aknown389.dm.pageView.postViewPage.PostViewGlobalSetter.defaultReaction
-import com.aknown389.dm.pageView.postViewPage.Models.ToDisplayDataModel
+import com.aknown389.dm.pageView.postViewPage.models.ToDisplayDataModel
 import com.aknown389.dm.reactionTesting.ReactImageButton
 import com.aknown389.dm.reactionTesting.Reaction
 import com.aknown389.dm.utils.DataManager
@@ -131,7 +131,7 @@ class PostViewAdapter(private val postDataList:ArrayList<ToDisplayDataModel>):Re
         when (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_NO -> {
                 // Night mode is not active on device
-                if (item.is_like!!) {
+                if (item.isLike!!) {
                     holder.likePost?.defaultReaction =  (com.aknown389.dm.reactionTesting.FbReactions.defaultReactDay)
                     defaultReaction(holder, item)
                 } else {
@@ -140,7 +140,7 @@ class PostViewAdapter(private val postDataList:ArrayList<ToDisplayDataModel>):Re
             }
             Configuration.UI_MODE_NIGHT_YES -> {
                 // Night mode is active on device
-                if (item.is_like!!) {
+                if (item.isLike!!) {
                     holder.likePost?.defaultReaction = (com.aknown389.dm.reactionTesting.FbReactions.defaultReactNight)
                     defaultReaction(holder, item)
                 } else {
@@ -173,7 +173,7 @@ class PostViewAdapter(private val postDataList:ArrayList<ToDisplayDataModel>):Re
     }
     private fun goComment(currentItem: ToDisplayDataModel) {
         val bundle: Bundle = Bundle()
-        bundle.putString("postId", currentItem.id)
+        bundle.putString("postId", currentItem.ImageOrVideoId)
         bundle.putString("userAvatar", currentItem.creator_avatar)
         bundle.putString("username", currentItem.creator)
         bundle.putString("user_full_name", currentItem.creator_full_name)

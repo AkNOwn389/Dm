@@ -1,29 +1,46 @@
-package com.aknown389.dm.pageView.postViewPage
+package com.aknown389.dm.pageView.photoView.utilities
 
 import android.annotation.SuppressLint
 import android.view.View
-import com.aknown389.dm.pageView.postViewPage.models.ToDisplayDataModel
+import com.aknown389.dm.databinding.ActivityPhotoViewBinding
+import com.aknown389.dm.db.local.NewsDataEntities
+import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.models.postmodel.LikesPostResponseModel
+import com.aknown389.dm.pageView.newsView.NewsGlobalSetter
+import com.aknown389.dm.pageView.newsView.NewsViewHolder
+import com.aknown389.dm.pageView.photoView.models.Parcel
 import com.aknown389.dm.utils.ReactionTypes
 
-object PostViewGlobalSetter {
-    fun defaultReaction(holder: PostViewHolder, currentItem: ToDisplayDataModel) {
-        when (currentItem.reactionType) {
-            ReactionTypes.LIKE -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[0])
-            ReactionTypes.LOVE -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[1])
-            ReactionTypes.HAPPY -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[2])
-            ReactionTypes.AMAZE -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[3])
-            ReactionTypes.SAD -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[4])
-            ReactionTypes.ANGRY -> holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[5])
+object Setter {
+    fun setDefaultReaction(holder: ActivityPhotoViewBinding?, currentItem: ImageUrl){
+        when(currentItem.reactionType){
+            ReactionTypes.LIKE -> if (holder != null) {
+                holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[0])
+            }
+            ReactionTypes.LOVE -> if (holder != null) {
+                holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[1])
+            }
+            ReactionTypes.HAPPY -> if (holder != null) {
+                holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[2])
+            }
+            ReactionTypes.AMAZE -> if (holder != null) {
+                holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[3])
+            }
+            ReactionTypes.SAD -> if (holder != null) {
+                holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[4])
+            }
+            ReactionTypes.ANGRY -> if (holder != null) {
+                holder.likePost?.setCurrentImageResource(com.aknown389.dm.reactionTesting.FbReactions.reactions[5])
+            }
         }
     }
 
-    fun afterReactionResponse(
-        holder: PostViewHolder,
+    fun afterReactionReasponse(
+        holder: ActivityPhotoViewBinding,
         currentItem: LikesPostResponseModel,
-        dataModel: ToDisplayDataModel
+        dataModel: ImageUrl
     ) {
-        dataModel.NoOflike = currentItem.postLikes
+        dataModel.noOfLike = currentItem.postLikes
         if (dataModel.isLike == true) {
             when (dataModel.reactionType) {
                 ReactionTypes.LIKE -> dataModel.reactions?.Like =
@@ -71,12 +88,12 @@ object PostViewGlobalSetter {
         iconSetterBaseOnLike(holder = holder, currentItem = dataModel)
     }
 
-    fun afterUnReactResponse(
-        holder: PostViewHolder,
+    fun afterUnReactResponseOn(
+        holder: ActivityPhotoViewBinding,
         currentItem: LikesPostResponseModel,
-        dataModel: ToDisplayDataModel
+        dataModel: ImageUrl
     ) {
-        dataModel.NoOflike = currentItem.postLikes
+        dataModel.noOfLike = currentItem.postLikes
         when (dataModel.reactionType) {
             ReactionTypes.LIKE -> dataModel.reactions?.Like = dataModel.reactions?.Like?.minus(1)
             ReactionTypes.LOVE -> dataModel.reactions?.Love = dataModel.reactions?.Love?.minus(1)
@@ -91,36 +108,36 @@ object PostViewGlobalSetter {
     }
 
     @SuppressLint("SetTextI18n")
-    fun iconSetterBaseOnLike(holder: PostViewHolder, currentItem: ToDisplayDataModel) {
+    fun iconSetterBaseOnLike(holder: ActivityPhotoViewBinding, currentItem: ImageUrl) {
         if (currentItem.reactions?.Like == 0) {
-            holder.icLike?.visibility = View.GONE
+            holder.icLike.visibility = View.GONE
         } else {
-            holder.icLike?.visibility = View.VISIBLE
+            holder.icLike.visibility = View.VISIBLE
         }
         if (currentItem.reactions?.Love == 0) {
-            holder.icLove?.visibility = View.GONE
+            holder.icLove.visibility = View.GONE
         } else {
-            holder.icLove?.visibility = View.VISIBLE
+            holder.icLove.visibility = View.VISIBLE
         }
         if (currentItem.reactions?.Happy == 0) {
-            holder.icHappy?.visibility = View.GONE
+            holder.icHappy.visibility = View.GONE
         } else {
-            holder.icHappy?.visibility = View.VISIBLE
+            holder.icHappy.visibility = View.VISIBLE
         }
         if (currentItem.reactions?.Wow == 0) {
-            holder.icWow?.visibility = View.GONE
+            holder.icWow.visibility = View.GONE
         } else {
-            holder.icWow?.visibility = View.VISIBLE
+            holder.icWow.visibility = View.VISIBLE
         }
         if (currentItem.reactions?.Sad == 0) {
-            holder.icSad?.visibility = View.GONE
+            holder.icSad.visibility = View.GONE
         } else {
-            holder.icSad?.visibility = View.VISIBLE
+            holder.icSad.visibility = View.VISIBLE
         }
         if (currentItem.reactions?.Angry == 0) {
-            holder.icAngry?.visibility = View.GONE
+            holder.icAngry.visibility = View.GONE
         } else {
-            holder.icAngry?.visibility = View.VISIBLE
+            holder.icAngry.visibility = View.VISIBLE
         }
         if (currentItem.reactions?.Like == 0
             && currentItem.reactions.Happy == 0
@@ -129,9 +146,9 @@ object PostViewGlobalSetter {
             && currentItem.reactions.Sad == 0
             && currentItem.reactions.Angry == 0
         ) {
-            holder.noOfLike?.visibility = View.GONE
+            holder.NoOfLikes.visibility = View.GONE
         } else {
-            holder.noOfLike?.visibility = View.VISIBLE
+            holder.NoOfLikes.visibility = View.VISIBLE
             val num = currentItem.reactions
             val noOfAllLike =
                 num?.Like!! + num.Love!! + num.Happy!! + num.Wow!! + num.Sad!! + num.Angry!!
@@ -140,18 +157,14 @@ object PostViewGlobalSetter {
             } else {
                 noOfAllLike.toString()
             }
-            currentItem.NoOflike = noOfAllLike
-            holder.noOfLike?.text = noToDisplay
+            currentItem.noOfLike = noOfAllLike
+            holder.NoOfLikes.text = noToDisplay
         }
-        if (currentItem.NoOfcomment == 0) {
-            holder.noOfComment?.visibility = View.GONE
-            holder.viewAllComment?.visibility = View.GONE
+        if (currentItem.noOfComment == 0) {
+            holder.NoOfComments.visibility = View.GONE
         } else {
-            holder.noOfComment?.visibility = View.VISIBLE
-            holder.viewAllComment?.visibility = View.VISIBLE
-            holder.noOfComment?.text = currentItem.NoOfcomment.toString() + " comments"
-            holder.viewAllComment?.text =
-                "View all " + currentItem.NoOfcomment.toString() + " comments"
+            holder.NoOfComments.visibility = View.VISIBLE
+            holder.NoOfComments.text = currentItem.noOfComment.toString() + " comments"
         }
     }
 }

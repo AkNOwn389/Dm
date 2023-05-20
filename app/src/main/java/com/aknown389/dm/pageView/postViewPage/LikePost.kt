@@ -8,7 +8,7 @@ import com.aknown389.dm.activities.PostViewActivity
 import com.aknown389.dm.pageView.postViewPage.PostViewGlobalSetter.afterReactionResponse
 import com.aknown389.dm.api.retroInstance.PostInstance
 import com.aknown389.dm.models.postmodel.LikesPostBodyModel
-import com.aknown389.dm.pageView.postViewPage.Models.ToDisplayDataModel
+import com.aknown389.dm.pageView.postViewPage.models.ToDisplayDataModel
 import com.aknown389.dm.pageView.postViewPage.PostViewGlobalSetter.afterUnReactResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +25,7 @@ class LikePost(
 ) {
     init {
         (context as? PostViewActivity)?.lifecycleScope?.launch(Dispatchers.Main) {
-            val body = LikesPostBodyModel(data.id.toString(), postType, reactionType, type = type)
+            val body = LikesPostBodyModel(data.ImageOrVideoId.toString(), postType, reactionType, type = type)
             val response = try {
                 PostInstance.api.likepost(token, body)
             }catch (e:Exception){

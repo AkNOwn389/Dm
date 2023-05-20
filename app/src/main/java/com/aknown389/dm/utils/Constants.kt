@@ -11,7 +11,7 @@ import retrofit2.Response
 
 class Constants {
     companion object{
-        private const val debug = false
+        private const val debug = true
         private const val DEBUGHOST = "192.168.0.115:8000"
         private val HOST = "bb8a-124-105-235-119.ngrok-free.app"
         val BASE_URL = if (!debug){"https://$HOST"}else{"http://$DEBUGHOST"}
