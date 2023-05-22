@@ -98,6 +98,23 @@
     <string name="register">register</string>
     <string name="already_have_an_account">already have an account?</string>
     <string name="please_verify_your_email_naccount">Please verify your email\naccount</string>
-    <string name="din_t_receive_code">Din\'t receive code?</string>
+    <string name="din_t_receive_code">Didn\'t receive code?</string>
+    <string name="verify_email">Verify email</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="don_t_have_an_account">don\'t have an account?</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="settings_and_privacy">Settings and Privacy</string>
+    <string name="password_manager">Password Manager</string>
+    <string name="user_account_info">User Account Info</string>
+    <string name="report_a_problem">Report a problem</string>
+    <string name="language">Language</string>
+    <string name="about">About</string>
+    <string name="clear_space">Clear Space</string>
+    <string name="switch_account">Switch Account</string>
+    <string name="contact_us">Contact us</string>
+    <string name="clear_cache">%1$s Clear cache</string>
+    <string name="remove_account">remove account</string>
+    <string name="cancel">Cancel</string>
+    <string name="log_in">Log-in</string>
 
 </resources>

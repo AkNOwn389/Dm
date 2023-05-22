@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.format.Formatter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import com.aknown389.dm.R
 import com.aknown389.dm.activities.EditProfileActivity
 import com.aknown389.dm.activities.LoginActivity
+import com.aknown389.dm.activities.SwitchAccountActivity
 import com.aknown389.dm.api.retroInstance.RetrofitInstance
 import com.aknown389.dm.databinding.DialogProfileSettingsBinding
 import com.aknown389.dm.db.AppDataBase
@@ -32,6 +34,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
 
 class DialogProfileSettings : BottomSheetDialogFragment() {
     private var binding: DialogProfileSettingsBinding? = null
@@ -71,30 +74,78 @@ class DialogProfileSettings : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setValues()
-        setUI()
         setListener()
-    }
-
-    private fun setListener() {
-        binding?.EditProfileBtn?.setOnClickListener {
-            (requireContext() as? AppCompatActivity)?.let {
-                val intent = Intent(it, EditProfileActivity::class.java)
-                it.startActivity(intent)
-            }
-            dismiss()
-        }
-        binding?.btnLogout?.setOnClickListener {
-            logOut()
-        }
-        binding?.avatarConstrainSettings?.setOnClickListener {
-
-        }
+        setUI()
     }
 
     private fun setUI() {
-        loadAvatar()
+        val cacheSize = getCacheSize()
+        val cacheSizeString = Formatter.formatShortFileSize(requireContext(), cacheSize)
+        binding?.clearSpace?.text = requireContext().getString(R.string.clear_cache, cacheSizeString)
     }
 
+    private fun setListener() {
+        binding?.apply {
+            EditProfileBtn.setOnClickListener {
+                (requireContext() as? AppCompatActivity)?.let {
+                    val intent = Intent(it, EditProfileActivity::class.java)
+                    it.startActivity(intent)
+                }
+                dismiss()
+            }
+            settingAndPrivacy.setOnClickListener {}
+            passwordManager.setOnClickListener {}
+            contactUs.setOnClickListener {}
+            userAccountInfo.setOnClickListener {}
+            Language.setOnClickListener {  }
+            switchAccount.setOnClickListener {
+                (requireContext() as? AppCompatActivity)?.let {
+                    val intent = Intent(it, SwitchAccountActivity::class.java)
+                    it.overridePendingTransition(androidx.appcompat.R.anim.abc_slide_in_bottom, androidx.appcompat.R.anim.abc_slide_out_bottom)
+                    it.startActivity(intent)
+                }
+            }
+            clearSpace.setOnClickListener { deleteCache(requireContext()) }
+            btnLogout.setOnClickListener {
+                logOut()
+            }
+        }
+
+    }
+    private fun getCacheSize(): Long {
+        var size: Long = 0
+        val cacheDir = requireContext().cacheDir
+        val files = cacheDir.listFiles()
+        if (files != null) {
+            for (file in files) {
+                size += file.length()
+            }
+        }
+        return size
+    }
+    private fun deleteCache(context: Context) {
+        try {
+            val dir: File = context.cacheDir
+            deleteDir(dir)
+            Toast.makeText(requireContext(), "cache cleaned", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "something went wrong", Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
+        }
+    }
+
+    private fun deleteDir(dir: File?): Boolean {
+        if (dir != null && dir.isDirectory) {
+            val children: Array<String> = dir.list()
+            for (i in children.indices) {
+                val success = deleteDir(File(dir, children[i]))
+                if (!success) {
+                    return false
+                }
+            }
+        }
+        return dir?.delete() ?: false
+    }
     private fun setValues() {
         manager = DataManager(requireContext())
         token = manager.getAccessToken().toString()
@@ -140,23 +191,8 @@ class DialogProfileSettings : BottomSheetDialogFragment() {
         }
         builder.setNegativeButton("No"){_, _ -> }
         builder.setTitle("Logout?")
-        builder.setMessage("Are you sure you want yo logout?")
+        builder.setMessage("Are you sure you want to logout?")
         builder.create().show()
 
-    }
-
-    private fun loadAvatar() {
-        viewModel.me()
-        viewModel.myDetailsResponse.observe(this) {
-            Glide.with(this)
-                .load(it.profileimg)
-                .override(300, 300)
-                .placeholder(R.mipmap.greybg)
-                .error(R.mipmap.greybg)
-                .into(binding!!.imageAvatarSettings)
-            binding?.NameUserOnSettings!!.text = it.name
-            binding?.usernamesettings!!.text = (it.username)
-
-        }
     }
 }

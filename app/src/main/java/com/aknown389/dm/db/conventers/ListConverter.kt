@@ -4,10 +4,46 @@ import androidx.room.TypeConverter
 import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.models.global.PostReactions
 import com.aknown389.dm.models.global.VideoUrl
+import com.aknown389.dm.models.loginRegModels.Info
+import com.aknown389.dm.models.loginRegModels.Token
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class ListConventer {
+class ListConverter {
+    @TypeConverter
+    fun fromToken(value:Token?):String?{
+        if (value == null){
+            return null
+        }
+        val gson = Gson()
+        return gson.toJson(value)
+    }
+    @TypeConverter
+    fun toToken(value: String?):Token?{
+        if (value == null){
+            return null
+        }
+        val gson = Gson()
+        val type = object : TypeToken<Token>() {}.type
+        return gson.fromJson(value, type)
+    }
+    @TypeConverter
+    fun fromInfo(value:Info?):String?{
+        if (value == null){
+            return null
+        }
+        val gson = Gson()
+        return gson.toJson(value)
+    }
+    @TypeConverter
+    fun toInfo(value:String?):Info?{
+        if (value == null){
+            return null
+        }
+        val gson = Gson()
+        val type = object : TypeToken<Info>() {}.type
+        return gson.fromJson(value, type)
+    }
     @TypeConverter
     fun fromImageUrlList(value: List<ImageUrl?>?): String? {
         if (value.isNullOrEmpty()){

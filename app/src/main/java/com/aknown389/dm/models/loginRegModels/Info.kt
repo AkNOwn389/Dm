@@ -1,15 +1,19 @@
 package com.aknown389.dm.models.loginRegModels
 
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
 data class Info(
-    val bgimg: String,
-    val bio: String,
-    val gender: String,
-    val hobby: List<Any>,
-    val interested: String,
-    val location: String,
-    val name: String,
-    val profileimg: String,
-    val school: String,
-    val user: String,
-    val works: String
+    @PrimaryKey                         val id:String,
+    @SerializedName("bgimg")            val backgroundImage: String? = null,
+    @SerializedName("bio")              val bio: String? = null,
+    @SerializedName("gender")           val gender: String? = null,
+    @SerializedName("hobby")            val hobby: List<Any?>? = null,
+    @SerializedName("interested")       val interested: String? = null,
+    @SerializedName("location")         val location: String? = null,
+    @SerializedName("name")             var name: String? = null,
+    @SerializedName("profileimg")       var profileimg: String? = null,
+    @SerializedName("school")           val school: String? = null,
+    @SerializedName("user")             val user: String,
+    @SerializedName("works")            val works: String? = null
 )

@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         Intent(this@MainActivity, LoginActivity::class.java).also {
             binding.louncherProgressBar.isVisible = false
             startActivity(it)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }
     }
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         Intent(this@MainActivity, MainFragmentContainerActivity::class.java).also {
             binding.louncherProgressBar.isVisible = false
             startActivity(it)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }
     }

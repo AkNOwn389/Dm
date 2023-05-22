@@ -14,7 +14,6 @@ class DataManager(private val context: Context){
     private var gson:Gson = Gson()
     fun saveUserData(data:Info){
         val text = gson.toJson(data)
-        //val text = "{\"user\": \"${data.user}\",\"profileimg\": \"${data.profileimg}\",\"bgimg\": \"${data.bgimg}\",\"bio\": \"${data.bio}\",\"location\": \"${data.location}\",\"name\": \"${data.location}\",\"interested\": \"${data.interested}\",\"gender\": \"${data.gender}\",\"school\": \"${data.school}\",\"works\": \"${data.works}\",\"hobby\": ${data.hobby}}"
         val sharedPreferences = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString(USERINFO_KEY, text)
@@ -50,7 +49,6 @@ class DataManager(private val context: Context){
         val sharedPrefs = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
         val editor = sharedPrefs.edit()
         val text = gson.toJson(value)
-        //val text = "{\"refresh_token\": \"${value.refreshToken}\",\"tokenType\": \"${value.tokenType}\",\"accesstoken\": \"${value.accessToken}\"}"
         editor.putString(ACCESSTOKEN_KEY, text)
         editor.apply()
     }

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.aknown389.dm.db.conventers.ListConventer
+import com.aknown389.dm.db.conventers.ListConverter
 import com.aknown389.dm.db.local.HomeFeedDataEntity
 import com.aknown389.dm.db.local.ImageDataModelEntity
 import com.aknown389.dm.db.local.NewsDataEntities
@@ -24,9 +24,9 @@ import com.aknown389.dm.pageView.notification.models.NotificationDataClass
     NotificationDataClass::class,
     UserAccountDataClass::class,
                      ],
-    version = 6,
+    version = 7,
 )
-@TypeConverters(ListConventer::class)
+@TypeConverters(ListConverter::class)
 abstract class AppDataBase:RoomDatabase() {
 
     abstract fun homeFeedDao(): HomeFeedDao
@@ -44,7 +44,7 @@ abstract class AppDataBase:RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDataBase? = null
         fun getDatabase(context: Context): AppDataBase {
-            //context.getDatabasePath("dm_app_database").delete()
+            context.getDatabasePath("dm_app_database").delete()
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

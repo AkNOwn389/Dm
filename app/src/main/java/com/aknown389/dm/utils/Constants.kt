@@ -17,7 +17,7 @@ class Constants {
         val BASE_URL = if (!debug){"https://$HOST"}else{"http://$DEBUGHOST"}
         val WEBSOCKET_ACTIVE_URL =if (!debug){"wss://$HOST/user/connect"}else{"ws://$DEBUGHOST/user/connect"}
         val WEBSOCKET_BASE_URL =if (!debug){"wss://$HOST"}else{"ws://$DEBUGHOST"}
-        const val APP_VERSION = "1.0.7"
+        const val APP_VERSION = "1.0.10"
         const val APP_BUILD = 1
         const val REQUEST_CODE_IMAGE_PICKER = 12937
         const val REQUEST_IMAGE_CAPTURE = 4374

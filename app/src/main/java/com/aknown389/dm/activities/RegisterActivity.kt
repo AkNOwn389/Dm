@@ -1,8 +1,10 @@
 package com.aknown389.dm.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -12,6 +14,7 @@ import com.aknown389.dm.R
 import com.aknown389.dm.databinding.ActivityRegisterBinding
 import com.aknown389.dm.api.retroInstance.LoginRegisterInstance
 import com.aknown389.dm.db.AppDataBase
+import com.aknown389.dm.db.local.UserAccountDataClass
 import com.aknown389.dm.dialogs.DialogVerifyOtp
 import com.aknown389.dm.models.loginRegModels.RegReqCodeModel
 import com.aknown389.dm.repository.Repository
@@ -20,6 +23,7 @@ import com.aknown389.dm.pageView.main.viewModel.MainViewModel
 import com.aknown389.dm.pageView.main.viewModel.MainViewModelFactory
 import com.aknown389.dm.pageView.registerPage.models.RegisterDataParcel
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -29,6 +33,7 @@ class RegisterActivity : AppCompatActivity() {
     private var registerId: String? = null
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var appDataBase: AppDataBase
     private lateinit var gson: Gson
     private var isRequested = false
 
@@ -69,6 +74,14 @@ class RegisterActivity : AppCompatActivity() {
         if (name.split(" ").size < 2){
             Toast.makeText(this, "Must have an surename", Toast.LENGTH_SHORT).show()
             binding.registerName.error = "must have surename"
+            return false
+        }else if (name.split(" ")[0].length < 3){
+            Toast.makeText(this, "Must have 4 character first name", Toast.LENGTH_SHORT).show()
+            binding.registerName.error = "too short"
+            return false
+        }else if (name.split(" ")[0].length < 3){
+            Toast.makeText(this, "Must have 4 character last name", Toast.LENGTH_SHORT).show()
+            binding.registerName.error = "too short"
             return false
         }
         if (password == "" || password.isEmpty()){
@@ -137,6 +150,7 @@ class RegisterActivity : AppCompatActivity() {
         val db:AppDataBase = AppDataBase.getDatabase(this)
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository = repository, dataBase = db, token = "null")
+        appDataBase = AppDataBase.getDatabase(this)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         gson = Gson()
     }
@@ -154,12 +168,16 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 if (response.isSuccessful && response.body() != null){
                     val resBody = response.body()!!
-                    if (resBody.status){
+                    if (resBody.status) {
                         this@RegisterActivity.registerId = resBody.data.regId
                         this@RegisterActivity.emailToRegister = resBody.data.email
                         this@RegisterActivity.usernameToRegister = resBody.data.username
                         this@RegisterActivity.isRequested = true
                         beginRegister(resBody.data.regId)
+                    }else if (resBody.message == "already requested please wait 5 minutes"){
+                        beginRegister(registerId.toString())
+                        this@RegisterActivity.emailToRegister = body.email
+                        this@RegisterActivity.usernameToRegister = body.username
                     }else{
                         binding.registerActivityRoot.snackbar(resBody.message)
                     }
@@ -168,7 +186,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-    fun goBack(){
+    fun goBack(view:View){
         finish()
     }
 }

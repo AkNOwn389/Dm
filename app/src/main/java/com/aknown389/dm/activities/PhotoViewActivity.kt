@@ -41,9 +41,14 @@ class PhotoViewActivity : AppCompatActivity() {
         setListener()
     }
 
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
     private fun likePost(reactionType:String, reactType:String){
         val item = images[viewPager.currentItem]
-        LikeImagePost(binding, currentItem = item, postType = "posts" , token= token, reactionType = reactionType, context = this.applicationContext, reactType = reactType)
+        LikeImagePost(binding, currentItem = item, postType = "postImage" , token= token, reactionType = reactionType, context = this.applicationContext, reactType = reactType)
     }
 
 

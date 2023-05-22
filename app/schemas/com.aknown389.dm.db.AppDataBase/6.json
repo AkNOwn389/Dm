@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "3aa673e436b0b7f93f9bca2bed2f34f9",
+    "identityHash": "82e37c5b9086f6298ac184e7a7237075",
     "entities": [
       {
         "tableName": "homeFeeds",
@@ -594,13 +594,31 @@
       },
       {
         "tableName": "userAccount",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT NOT NULL, `refreshToken` TEXT NOT NULL, `accessToken` TEXT NOT NULL, `tokenType` TEXT NOT NULL, PRIMARY KEY(`username`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT NOT NULL, `image` TEXT NOT NULL, `name` TEXT NOT NULL, `lastLogin` TEXT, `refreshToken` TEXT NOT NULL, `accessToken` TEXT NOT NULL, `tokenType` TEXT NOT NULL, PRIMARY KEY(`username`))",
         "fields": [
           {
             "fieldPath": "username",
             "columnName": "username",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastLogin",
+            "columnName": "lastLogin",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "refreshToken",
@@ -634,7 +652,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3aa673e436b0b7f93f9bca2bed2f34f9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '82e37c5b9086f6298ac184e7a7237075')"
     ]
   }
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/root"
+    android:background="@drawable/chat_item_ripple"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/card"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/blackOnDay"
+        app:strokeWidth=".8dp"
+        android:layout_margin="5dp">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/profileImage"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_height="match_parent"
+            android:src="@mipmap/defaultprofilepicture"/>
+    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/accountName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/blackOnDay"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/card"
+        app:layout_constraintStart_toEndOf="@id/card"
+        app:layout_constraintTop_toTopOf="@id/card"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blackOnDay"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/accountName"
+        app:layout_constraintTop_toBottomOf="@+id/accountName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lastLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blackOnDay"
+        android:textSize="12sp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintVertical_bias=".1"
+        app:layout_constraintBottom_toBottomOf="@+id/card"
+        app:layout_constraintStart_toEndOf="@+id/card"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/menu"
+        android:layout_width="50dp"
+        android:tint="@color/blackOnDay"
+        android:layout_height="0dp"
+        android:background="@drawable/chat_item_ripple"
+        android:src="@drawable/ic_3dot_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

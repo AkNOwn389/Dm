@@ -33,7 +33,7 @@ class HomeFeedViewModel @Inject constructor(
     var hasMorePage = true
 
     private suspend fun saveInDataBase(response:Response<FeedResponseModelV2>){
-        if (response.body()!!.data.isNotEmpty()){
+        if (response.body()!!.data.size != 0){
             dataBase.homeFeedDao().deleteAllFeed()
             val items = response.body()!!.data.map { it.toHomeFeedDataEntity() }
             dataBase.homeFeedDao().insertFeed(items)
