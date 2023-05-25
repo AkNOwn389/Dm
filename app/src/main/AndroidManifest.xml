@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,6 +18,12 @@
         android:theme="@style/Theme.Dm"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.RecoveryAccountChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RecoverAccountActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.SwitchAccountActivity"
             android:exported="false" />
@@ -84,7 +91,7 @@
             android:name=".activities.HomePostActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ProfilepageAtivity"
+            android:name=".activities.ProfilePageActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ChatActivity"

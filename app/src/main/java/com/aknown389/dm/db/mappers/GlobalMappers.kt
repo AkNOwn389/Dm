@@ -3,6 +3,7 @@ package com.aknown389.dm.db.mappers
 import com.aknown389.dm.db.local.HomeFeedDataEntity
 import com.aknown389.dm.db.local.ImageDataModelEntity
 import com.aknown389.dm.db.local.UserProfileDetailsDataEntities
+import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.models.homepostmodels.PostDataModel
 import com.aknown389.dm.models.profileGalleryModels.ImageDataModel
 import com.aknown389.dm.models.profileModel.UserProfileData
@@ -40,40 +41,44 @@ fun UserProfileData.toUserProfileDetailsDataEntities():UserProfileDetailsDataEnt
         name = name,
         profileImage = profileimg,
         username = username,
-        postLength = post_lenght
+        postLength = post_lenght,
     )
 }
 
-fun mapListImageDataModelToListImageDataModelEntity(input:List<ImageDataModel>): List<ImageDataModelEntity>{
+fun mapListImageDataModelToListImageDataModelEntity(input:List<ImageUrl>): List<ImageDataModelEntity>{
     return input.map { image ->
         ImageDataModelEntity(
             id = image.id!!,
-            noOflike = image.noOflike!!,
-            noOfcomment = image.noOfcomment!!,
-            image = image.image!!,
+            noOfLike = image.noOfLike!!,
+            noOfComment = image.noOfComment!!,
+            image = image.original!!,
             isLike = image.isLike!!,
             width = image.width,
-            heigth = image.heigth,
+            height = image.height,
             imgW500 = image.imgW500,
             imgW1000 = image.imgW1000,
-            imgW250 = image.imgW250
+            imgW250 = image.imgW250,
+            reactionType = image.reactionType,
+            reactions = image.reactions
         )
     }
 }
 
-fun mapListImageDataModelEntityToListImageDataModel(input: List<ImageDataModelEntity>):List<ImageDataModel>{
+fun mapListImageDataModelEntityToListImageDataModel(input: List<ImageDataModelEntity>):List<ImageUrl>{
     return input.map { entity ->
-        ImageDataModel(
+        ImageUrl(
             id = entity.id,
-            noOflike = entity.noOflike,
-            noOfcomment = entity.noOfcomment,
-            image = entity.image,
+            noOfLike = entity.noOfLike,
+            noOfComment = entity.noOfComment,
+            original = entity.image,
             imgW250 = entity.imgW250,
             imgW500 = entity.imgW500,
             imgW1000 = entity.imgW1000,
             isLike = entity.isLike,
             width = entity.width,
-            heigth = entity.heigth
+            height = entity.height,
+            reactionType = entity.reactionType,
+            reactions = entity.reactions
         )
     }
 }

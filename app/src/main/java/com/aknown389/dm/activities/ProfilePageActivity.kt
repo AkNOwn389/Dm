@@ -20,7 +20,7 @@ import com.aknown389.dm.pageView.profile.viewModels.ProfileViewModelFactory
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class ProfilepageAtivity : AppCompatActivity()
+class ProfilePageActivity : AppCompatActivity()
 {
 
     private var binding: ActivityProfilepageBinding? = null
@@ -120,6 +120,40 @@ class ProfilepageAtivity : AppCompatActivity()
             loadGallery()
             binding?.profilepagenestedswiper?.isRefreshing = false
         }
+
+        viewModel.myDetailsResponse.observe(this) {
+            if (it != null){
+                loadProfilePicture(it.profileimg)
+                loadBackgroundImage(it.bgimg)
+                binding?.profilefollowing?.text = it.following.toString()
+                binding?.profilefollowers?.text = it.followers.toString()
+                binding?.profileBio?.text = it.bio
+                binding?.txtProfileName?.text = it.name
+                binding?.profilepostcount?.text = it.post_lenght.toString()
+            }
+        }
+    }
+    private fun loadBackgroundImage(image: String?){
+        try {
+            Glide.with(this@ProfilePageActivity)
+                .load(image)
+                .override(700, 700)
+                .into(binding!!.profileBackgroundCover)
+        }catch (e:java.lang.Exception){
+            return
+        }
+    }
+    private fun loadProfilePicture(image:String?){
+        try {
+            Glide.with(this@ProfilePageActivity)
+                .load(image)
+                .override(300, 300)
+                .error(R.mipmap.greybg)
+                .placeholder(R.mipmap.greybg)
+                .into(binding!!.ImageProfile)
+        }catch (e:Exception){
+            return
+        }
     }
 
     private fun loadGallery() {
@@ -136,23 +170,6 @@ class ProfilepageAtivity : AppCompatActivity()
 
     private fun loadMe() {
         viewModel.me()
-        viewModel.myDetailsResponse.observe(this) {
-            Glide.with(this@ProfilepageAtivity)
-                .load(it.profileimg)
-                .override(300, 300)
-                .error(R.mipmap.greybg)
-                .placeholder(R.mipmap.greybg)
-                .into(binding!!.ImageProfile)
-            Glide.with(this@ProfilepageAtivity)
-                .load(it.bgimg)
-                .override(700, 700)
-                .into(binding!!.profileBackgroundCover)
-            binding?.profilefollowing?.text = it.following.toString()
-            binding?.profilefollowers?.text = it.followers.toString()
-            binding?.profileBio?.text = it.bio
-            binding?.txtProfileName?.text = it.name
-            binding?.profilepostcount?.text = it.post_lenght.toString()
-        }
     }
 
     override fun onDestroy() {

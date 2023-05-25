@@ -99,7 +99,7 @@
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/security_ic"
         android:drawablePadding="8dp"
-        android:hint="@string/comfirm"
+        android:hint="@string/confirm"
         android:inputType="textPassword"
         android:padding="10dp"
         android:textColor="#FFFFFF"

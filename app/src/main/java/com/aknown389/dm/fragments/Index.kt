@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.aknown389.dm.R
-import com.aknown389.dm.activities.ProfilepageAtivity
+import com.aknown389.dm.activities.ProfilePageActivity
 import com.aknown389.dm.databinding.ActivityIndexBinding
 import com.aknown389.dm.pageView.indexViewPager.ViewPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -114,7 +114,7 @@ class Index : Fragment() {
     }
 
     private fun loadProfilePage(): Boolean {
-        Intent(activity, ProfilepageAtivity::class.java).also {
+        Intent(activity, ProfilePageActivity::class.java).also {
             startActivity(it)
         }
         return true

@@ -1,5 +1,6 @@
 package com.aknown389.dm.pageView.profile.viewModels
 
+import android.database.sqlite.SQLiteException
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,7 +24,7 @@ class ProfileViewModel @Inject constructor(
     private val repository: Repository
 ):ViewModel() {
     val TAG = "ProfileActivity"
-    val myDetailsResponse:MutableLiveData<UserProfileData> = MutableLiveData()
+    val myDetailsResponse:MutableLiveData<UserProfileData?> = MutableLiveData()
     var isLoading = false
     var hasMorePage = true
     var page = 1
@@ -33,15 +34,44 @@ class ProfileViewModel @Inject constructor(
         Log.d(TAG, "Save profile data: ${response.body()!!.data}")
     }
     suspend fun deleteProfileData(){
-        db.profileDao().deleteProfileData()
+        try {
+            db.profileDao().deleteProfileData()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
         Log.d(TAG, "Profile details deleted")
     }
 
-    fun getProfileDetails():UserProfileData{
-        return db.profileDao().getMyProfileDetail()
+    private suspend fun getProfileDetails():UserProfileData?{
+        return try {
+            db.profileDao().getMyProfileDetail()
+        }catch (e: SQLiteException){
+            Log.d(TAG, e.stackTraceToString().toString())
+            null
+        }catch (e:IllegalStateException){
+            Log.d(TAG, e.stackTraceToString().toString())
+            null
+        }
+    }
+
+    private fun importProfileDataInDb(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val cache = getProfileDetails()
+                withContext(Dispatchers.Main){
+                    if (cache != null){
+                        myDetailsResponse.value = cache
+                        Log.d(TAG, "cache load")
+                    }
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
     }
 
     fun me() {
+        importProfileDataInDb()
         this.isLoading = true
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -56,15 +86,7 @@ class ProfileViewModel @Inject constructor(
                     }
                 }
             }catch (e:java.lang.Exception){
-                try {
-                    val cache = getProfileDetails()
-                    withContext(Dispatchers.Main){
-                        myDetailsResponse.value = cache
-                        Log.d(TAG, "cache load")
-                    }
-                }catch (e:NullPointerException){
-                    e.printStackTrace()
-                }
+                return@launch
             }
             this@ProfileViewModel.isLoading = false
         }

@@ -24,7 +24,7 @@ import com.aknown389.dm.pageView.notification.models.NotificationDataClass
     NotificationDataClass::class,
     UserAccountDataClass::class,
                      ],
-    version = 7,
+    version = 8,
 )
 @TypeConverters(ListConverter::class)
 abstract class AppDataBase:RoomDatabase() {
@@ -44,7 +44,7 @@ abstract class AppDataBase:RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDataBase? = null
         fun getDatabase(context: Context): AppDataBase {
-            context.getDatabasePath("dm_app_database").delete()
+            //context.getDatabasePath("dm_app_database").delete()
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

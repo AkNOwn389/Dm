@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activities.MainSearchActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout3"
@@ -167,6 +168,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
+        android:background="@color/white"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"

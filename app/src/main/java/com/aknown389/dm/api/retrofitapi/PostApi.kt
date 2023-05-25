@@ -22,7 +22,7 @@ import retrofit2.http.Path
 
 interface PostApi {
     @GET("/post/mygallery/page={page}")
-    suspend fun mygallery(
+    suspend fun myGallery(
         @Path("page") page: Int,
         @Header("Authorization") token: String
     ): Response<MyGalleryResponseModel>

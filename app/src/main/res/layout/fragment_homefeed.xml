@@ -156,7 +156,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar_chat_people">
 
-        <include layout="@layout/home_feed_placeholder" />
+        <include layout="@layout/shimmer_home_feed_placeholder" />
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

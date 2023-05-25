@@ -64,7 +64,7 @@ class DataManager(private val context: Context){
         val data = gson.fromJson(sharedPrefs, Token::class.java)
         return "${data.tokenType} ${data.accessToken}"
     }
-    fun delete(){
+    fun deleteAccessTokenAndUserInfo(){
         try {
             context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)!!.edit().remove(ACCESSTOKEN_KEY).apply()
             context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)!!.edit().remove(USERINFO_KEY).apply()
@@ -74,7 +74,7 @@ class DataManager(private val context: Context){
 
     }
 
-    fun deleteAlldata(){
+    fun deleteAllData(){
         try {
             context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)!!.edit().clear().apply()
         }catch (e:Exception){

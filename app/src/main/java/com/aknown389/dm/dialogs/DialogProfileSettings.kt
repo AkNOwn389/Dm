@@ -22,7 +22,6 @@ import com.aknown389.dm.activities.SwitchAccountActivity
 import com.aknown389.dm.api.retroInstance.RetrofitInstance
 import com.aknown389.dm.databinding.DialogProfileSettingsBinding
 import com.aknown389.dm.db.AppDataBase
-import com.bumptech.glide.Glide
 import com.aknown389.dm.models.logoutmodel.LogOutBodyModel
 import com.aknown389.dm.repository.Repository
 import com.aknown389.dm.utils.DataManager
@@ -97,7 +96,6 @@ class DialogProfileSettings : BottomSheetDialogFragment() {
             passwordManager.setOnClickListener {}
             contactUs.setOnClickListener {}
             userAccountInfo.setOnClickListener {}
-            Language.setOnClickListener {  }
             switchAccount.setOnClickListener {
                 (requireContext() as? AppCompatActivity)?.let {
                     val intent = Intent(it, SwitchAccountActivity::class.java)
@@ -173,7 +171,7 @@ class DialogProfileSettings : BottomSheetDialogFragment() {
                     val res = response.body()!!
                     if (res.status){
                         Toast.makeText(requireContext(), res.message, Toast.LENGTH_SHORT).show()
-                        manager.deleteAlldata()
+                        manager.deleteAllData()
                         requireActivity().let {
                             val intent = Intent(it, LoginActivity::class.java)
                             it.startActivity(intent)

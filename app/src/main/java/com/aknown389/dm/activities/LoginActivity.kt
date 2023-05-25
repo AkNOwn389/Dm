@@ -40,6 +40,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         binding.loginBtn.setOnClickListener() {login()}
+        binding.loginForgotPassword.setOnClickListener {
+            Intent(this, RecoverAccountActivity::class.java).also {
+                startActivity(it)
+                overridePendingTransition(androidx.appcompat.R.anim.abc_slide_in_bottom, androidx.appcompat.R.anim.abc_slide_out_bottom)
+            }
+        }
     }
 
     private fun login(){

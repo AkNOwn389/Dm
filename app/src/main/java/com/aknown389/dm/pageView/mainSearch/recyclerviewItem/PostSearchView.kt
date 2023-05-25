@@ -17,7 +17,7 @@ import androidx.fragment.app.DialogFragment
 import com.aknown389.dm.R
 import com.aknown389.dm.activities.MainFragmentContainerActivity
 import com.aknown389.dm.activities.PostViewActivity
-import com.aknown389.dm.activities.ProfilepageAtivity
+import com.aknown389.dm.activities.ProfilePageActivity
 import com.aknown389.dm.activities.UserViewActivity
 import com.aknown389.dm.dialogs.CommentDialog
 import com.aknown389.dm.models.global.ImageUrl
@@ -211,7 +211,7 @@ class PostSearchView(
         }
         holder.myImage?.setOnClickListener {
             (context as? MainFragmentContainerActivity)?.let {
-                val intent = Intent(it, ProfilepageAtivity::class.java)
+                val intent = Intent(it, ProfilePageActivity::class.java)
                 it.startActivity(intent)
             }
         }

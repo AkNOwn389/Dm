@@ -31,13 +31,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setVal()
-        bahavior()
+        behavior()
         //checkUserData()
         binding.louncherProgressBar.isVisible = true
         binding.appVersion.text = APP_VERSION
     }
 
-    fun bahavior(){
+    private fun behavior(){
         viewModel.bahavior()
         viewModel.loginBahaviorResponse.observe(this){
             Log.d(TAG, "login status code: ${it.status_code}")

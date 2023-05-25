@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:visibility="gone"
         android:layout_height="match_parent">
-        <include layout="@layout/home_feed_placeholder"/>
+        <include layout="@layout/shimmer_home_feed_placeholder"/>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
 

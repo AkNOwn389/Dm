@@ -11,6 +11,7 @@ import com.aknown389.dm.db.mappers.mapListImageDataModelEntityToListImageDataMod
 import com.aknown389.dm.db.mappers.mapListImageDataModelToListImageDataModelEntity
 import com.aknown389.dm.db.mappers.toUserProfileDetailsDataEntities
 import com.aknown389.dm.db.mappers.toUserProfiledata
+import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.models.profileGalleryModels.ImageDataModel
 import com.aknown389.dm.models.profileModel.UserProfileData
 
@@ -18,16 +19,16 @@ import com.aknown389.dm.models.profileModel.UserProfileData
 @Dao
 interface ProfileDao {
     @Transaction
-    fun getImageGallery(): List<ImageDataModel>{
+    suspend fun getImageGallery(): List<ImageUrl>{
         val imageEntities = getImageDataEntities()
         return mapListImageDataModelEntityToListImageDataModel(imageEntities)
     }
 
     @Query("SELECT * FROM profileGallery")
-    fun getImageDataEntities(): List<ImageDataModelEntity>
+    suspend fun getImageDataEntities(): List<ImageDataModelEntity>
 
     @Transaction
-    suspend fun insertImageToDb(input:List<ImageDataModel>){
+    suspend fun insertImageToDb(input:List<ImageUrl>){
         val images:List<ImageDataModelEntity> = mapListImageDataModelToListImageDataModelEntity(input)
         insertImage(images)
     }
@@ -40,7 +41,7 @@ interface ProfileDao {
 
     //profilePageMyDetails
     @Transaction
-    fun getMyProfileDetail(): UserProfileData {
+    suspend fun getMyProfileDetail(): UserProfileData {
         return getUserProfileEntities().toUserProfiledata()
     }
 
@@ -51,7 +52,7 @@ interface ProfileDao {
     }
 
     @Query("SELECT * FROM profileDetail")
-    fun getUserProfileEntities(): UserProfileDetailsDataEntities
+    suspend fun getUserProfileEntities(): UserProfileDetailsDataEntities
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMyDetails(me:UserProfileDetailsDataEntities)

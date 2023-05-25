@@ -30,7 +30,7 @@
             android:id="@+id/appCompatTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/please_verify_your_email_naccount"
+            android:text="@string/please_verify_your_email_account"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout8"

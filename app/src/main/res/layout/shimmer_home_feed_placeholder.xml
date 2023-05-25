@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:backgroundTint="#A7ACAC"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                android:id="@+id/card"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/grey2"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                android:id="@+id/circularRevealCardView4"
+                android:layout_width="100dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="@color/grey2"
+                app:layout_constraintBottom_toBottomOf="@id/card"
+                app:layout_constraintStart_toEndOf="@id/card"
+                app:layout_constraintTop_toTopOf="@+id/card"
+                app:layout_constraintVertical_bias=".2" />
+
+            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                android:layout_width="50dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="@color/grey2"
+                app:layout_constraintBottom_toBottomOf="@id/card"
+                app:layout_constraintStart_toEndOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@+id/circularRevealCardView4"
+                app:layout_constraintVertical_bias=".2" />
+
+            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                android:id="@+id/circularRevealCardView3"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/grey2"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card" />
+
+            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="70dp"
+                android:backgroundTint="@color/grey2"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/circularRevealCardView3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/grey3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/grey3"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/relativeLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#A7ACAC"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/relativeLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/grey3"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout5" />
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/relativeLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/grey3"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout6" />
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:id="@+id/relativeLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#A7ACAC"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout7" />
+</androidx.constraintlayout.widget.ConstraintLayout>

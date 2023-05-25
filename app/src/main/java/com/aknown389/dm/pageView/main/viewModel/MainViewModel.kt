@@ -98,7 +98,7 @@ class MainViewModel @Inject constructor(
         Log.d(TAG, "Profile details deleted")
     }
 
-    fun getProfileDetails(): UserProfileData {
+    private suspend fun getProfileDetails(): UserProfileData {
         return db.profileDao().getMyProfileDetail()
     }
     fun me() {

@@ -1,7 +1,9 @@
 package com.aknown389.dm.pageView.homeFeed.viewModel
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabaseCorruptException
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,10 +18,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import java.net.SocketTimeoutException
 import java.sql.SQLException
 import java.util.ArrayList
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 @HiltViewModel
 class HomeFeedViewModel @Inject constructor(
@@ -33,14 +35,40 @@ class HomeFeedViewModel @Inject constructor(
     var hasMorePage = true
 
     private suspend fun saveInDataBase(response:Response<FeedResponseModelV2>){
-        if (response.body()!!.data.size != 0){
-            dataBase.homeFeedDao().deleteAllFeed()
-            val items = response.body()!!.data.map { it.toHomeFeedDataEntity() }
-            dataBase.homeFeedDao().insertFeed(items)
+        withContext(Dispatchers.IO) {
+            try {
+                if (response.body()!!.data.isNotEmpty()){
+                    dataBase.homeFeedDao().deleteAllFeed()
+                    val items = response.body()!!.data.map { it.toHomeFeedDataEntity() }
+                    dataBase.homeFeedDao().insertFeed(items)
+                }
+            }catch (e:Exception){
+                return@withContext
+            }
+        }
+    }
+    private fun importFeedFromDb(context: Context) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = dataBase.homeFeedDao().getFeed()
+                withContext(Dispatchers.Main) {
+                    val items = response as ArrayList<PostDataModel>
+                    newsfeed.value = items
+                }
+            }catch (e:SQLException){
+                e.printStackTrace()
+                return@launch
+            }catch (e: SQLiteDatabaseCorruptException){
+                e.printStackTrace()
+                return@launch
+            }catch (e:IllegalStateException){
+                Toast.makeText(context, e.stackTraceToString(), Toast.LENGTH_SHORT).show()
+            }
         }
     }
     fun getFeed(context:Context){
         this.isLoading = true
+        importFeedFromDb(context)
         viewModelScope.launch(Dispatchers.IO) {
             this@HomeFeedViewModel.page = 1
             try {
@@ -54,18 +82,11 @@ class HomeFeedViewModel @Inject constructor(
                 if (response.body()!!.status){
                     saveInDataBase(response)
                 }
+
+            }catch (e:IllegalStateException){
+                Toast.makeText(context, e.stackTraceToString(), Toast.LENGTH_SHORT).show()
             }catch (e:Exception){
                 Log.d(TAG, e.stackTraceToString())
-                try {
-                    val response = dataBase.homeFeedDao().getFeed()
-                    withContext(Dispatchers.Main) {
-                        val items = response as ArrayList<PostDataModel>
-                        newsfeed.value = items
-                    }
-                }catch (e:SQLException){
-                    e.printStackTrace()
-                    return@launch
-                }
             }
             this@HomeFeedViewModel.isLoading = false
         }
@@ -75,25 +96,26 @@ class HomeFeedViewModel @Inject constructor(
         this.isLoading = true
         viewModelScope.launch(Dispatchers.IO) {
             this@HomeFeedViewModel.page+=1
-            var isError = false
+            var isError:Boolean
             do {
-            try {
-                val response:Response<FeedResponseModelV2> = repository.newFeed(page = page, context = context.applicationContext)
-                withContext(Dispatchers.Main){
-                    newsfeed.value = response.body()!!.data as ArrayList<PostDataModel>
-                }
-                this@HomeFeedViewModel.hasMorePage = response.body()!!.hasMorePage
-                if (response.body()!!.status){
-                    val item = ArrayList<HomeFeedDataEntity>()
-                    for (i in response.body()!!.data){
-                        item.add(i.toHomeFeedDataEntity())
+                try {
+                    val response:Response<FeedResponseModelV2> = repository.newFeed(page = page, context = context.applicationContext)
+                    withContext(Dispatchers.Main){
+                        newsfeed.value = response.body()!!.data as ArrayList<PostDataModel>
                     }
-                    dataBase.homeFeedDao().insertFeed(item)
+                    this@HomeFeedViewModel.hasMorePage = response.body()!!.hasMorePage
+                    if (response.body()!!.status){
+                        val item = ArrayList<HomeFeedDataEntity>()
+                        for (i in response.body()!!.data){
+                            item.add(i.toHomeFeedDataEntity())
+                        }
+                        dataBase.homeFeedDao().insertFeed(item)
+                    }
+                    isError = false
+                }catch (e:Exception){
+                    Log.d(TAG, e.stackTraceToString().toString())
+                    isError = true
                 }
-                isError = false
-            }catch (e:Exception){
-                isError = true
-            }
             }while (isError)
             this@HomeFeedViewModel.isLoading = false
         }

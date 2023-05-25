@@ -4,16 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    android:background="@drawable/splash_background">
+    android:background="@drawable/splash_background"
+    tools:context=".activities.MainActivity">
 
     <ProgressBar
-        android:id="@+id/louncherProgressBar"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginBottom="70dp"
-        android:visibility="visible"
         android:indeterminateTint="#FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.udevel.widgetlab.TypingIndicatorView
+        android:id="@+id/louncherProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        app:animateFrequency="1000"
+        app:animationOrder="lastOneFirst"
+        app:backgroundColor="@color/transparent"
+        app:dotAnimationDuration="2000"
+        app:dotAnimationType="BouncingSliding"
+        app:dotColor="#DAFFFFFF"
+        app:dotCount="4"
+        app:dotSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -22,11 +38,11 @@
         android:id="@+id/appVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewLouncher"

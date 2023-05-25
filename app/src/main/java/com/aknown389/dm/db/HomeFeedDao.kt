@@ -13,7 +13,7 @@ import com.aknown389.dm.models.homepostmodels.PostDataModel
 @Dao
 interface HomeFeedDao {
     @Transaction
-    fun reportLike(id:String):Boolean{
+    suspend fun reportLike(id:String):Boolean{
         return try {
             updateItemLike(id = String())
             true
@@ -23,7 +23,7 @@ interface HomeFeedDao {
         }
     }
     @Transaction
-    fun reportUnLike(id: String): Boolean {
+    suspend fun reportUnLike(id: String): Boolean {
         return try {
             updateItemUnLike(id = String())
             true
@@ -33,18 +33,18 @@ interface HomeFeedDao {
         }
     }
     @Query("UPDATE homeFeeds SET isLike = 1 WHERE id = :id")
-    fun updateItemLike(id: String)
+    suspend fun updateItemLike(id: String)
     @Query("UPDATE homeFeeds SET isLike = 0 WHERE id = :id")
-    fun updateItemUnLike(id: String)
+    suspend fun updateItemUnLike(id: String)
 
     @Transaction
-    fun getFeed(): List<PostDataModel> {
+    suspend fun getFeed(): List<PostDataModel> {
         val homeFeedDataEntities = getHomeFeedDataEntities()
         return mapHomeFeedDataEntityListToPostDataModelList(homeFeedDataEntities)
     }
 
     @Query("SELECT * FROM homeFeeds")
-    fun getHomeFeedDataEntities(): List<HomeFeedDataEntity>
+    suspend fun getHomeFeedDataEntities(): List<HomeFeedDataEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFeed(feed:List<HomeFeedDataEntity>)

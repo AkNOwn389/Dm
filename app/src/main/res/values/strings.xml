@@ -60,7 +60,7 @@
     <string name="slash">/</string>
     <string name="more">%1$s+ more</string>
     <string name="logout">LogOut</string>
-    <string name="channel_name">com.example.directmessage</string>
+    <string name="channel_name">com.aknown389.directmessage</string>
     <string name="channel_description">com.example.directmessage channel is activating</string>
     <string name="current_name">Current Name:</string>
     <string name="bio">Bio:</string>
@@ -94,10 +94,10 @@
     <string name="email">email</string>
     <string name="name">name</string>
     <string name="password">password</string>
-    <string name="comfirm">comfirm</string>
+    <string name="confirm">confirm</string>
     <string name="register">register</string>
     <string name="already_have_an_account">already have an account?</string>
-    <string name="please_verify_your_email_naccount">Please verify your email\naccount</string>
+    <string name="please_verify_your_email_account">Please verify your email\naccount</string>
     <string name="din_t_receive_code">Didn\'t receive code?</string>
     <string name="verify_email">Verify email</string>
     <string name="forgot_password">Forgot password</string>
@@ -116,5 +116,13 @@
     <string name="remove_account">remove account</string>
     <string name="cancel">Cancel</string>
     <string name="log_in">Log-in</string>
+    <string name="submit_email">Submit email</string>
+    <string name="please_input_email_connected_in_your_account">Please input email \nconnected in your account.</string>
+    <string name="verify_code">verify code</string>
+    <string name="Verify_code">Verify email</string>
+    <string name="attempt">Attempt:</string>
+    <string name="resend_otp">resend otp</string>
+    <string name="loading">Loading...</string>
+    <string name="submit">submit</string>
 
 </resources>

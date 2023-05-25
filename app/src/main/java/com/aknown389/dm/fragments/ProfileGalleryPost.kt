@@ -28,10 +28,7 @@ class ProfileGalleryPost() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setVal(view)
-        if (this.viewModel.imageList.isEmpty()){
-            loadGallery()
-        }
+        setVal()
         setListener()
 
     }
@@ -50,11 +47,16 @@ class ProfileGalleryPost() : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
+        viewModel._mygalleryresponse.observe(viewLifecycleOwner) { response ->
+            if (response.isNotEmpty()) {
+                adapter.setData(response)
+            }
+        }
     }
 
-    private fun setVal(view: View) {
+    private fun setVal() {
         layoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
-        this.adapter = ProfilePageGalleryGridAdapter(viewModel.imageList)
+        this.adapter = ProfilePageGalleryGridAdapter()
         binding?.profileStagerredAdapter?.adapter = adapter
         binding?.profileStagerredAdapter?.layoutManager = this.layoutManager
     }
@@ -88,31 +90,10 @@ class ProfileGalleryPost() : Fragment() {
     }
 
     private fun updateGallery(){
-        viewModel.updategallery()
-        viewModel.mygalleryresponse.observe(viewLifecycleOwner) { response ->
-            if (response.isNotEmpty()) {
-                for (i in response){
-                    var go = true
-                    for (x in viewModel.imageList){
-                        if (i.id == x.id){
-                            go = false
-                        }
-                    }
-                    if (go){
-                        this.viewModel.imageList.add(i)
-                        this.adapter.notifyItemInserted(this.viewModel.imageList.size-1)
-                    }
-                }
-            }
-        }
+        viewModel.updateGallery()
+
     }
     private fun loadGallery() {
-        viewModel.mygallery()
-        viewModel.mygalleryresponse.observe(viewLifecycleOwner) { response ->
-            for (i in response){
-                this.viewModel.imageList.add(i)
-                this.adapter.notifyItemInserted(this.viewModel.imageList.size-1)
-            }
-        }
+        viewModel.myGallery()
     }
 }

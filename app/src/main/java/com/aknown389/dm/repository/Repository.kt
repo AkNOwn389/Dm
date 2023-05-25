@@ -44,8 +44,8 @@ class Repository(){
     suspend fun me(token: String): Response<MeModel>{
         return RetrofitInstance.api.me(token)
     }
-    suspend fun mygallery(page:Int, token:String): Response<MyGalleryResponseModel>{
-        return PostInstance.api.mygallery(page, token)
+    suspend fun myGallery(page:Int, token:String): Response<MyGalleryResponseModel>{
+        return PostInstance.api.myGallery(page, token)
     }
     suspend fun updateProfilePicture(token: String, image: MultipartBody.Part, caption: RequestBody): Response<UploadPostResponseModel>{
         return RetrofitInstance.api.updateProfilePicture(token, image, caption)

@@ -13,7 +13,7 @@ import com.aknown389.dm.db.local.RemoteKey
 interface NewsDao {
 
     @Transaction
-    fun reportUnLike(id:String):Boolean{
+    suspend fun reportUnLike(id:String):Boolean{
         return try {
             updateItemLike(id = id)
             true
@@ -23,9 +23,9 @@ interface NewsDao {
         }
     }
     @Query("UPDATE NewsData SET is_like = 0 WHERE id = :id")
-    fun updateItemUnLike(id: String)
+    suspend fun updateItemUnLike(id: String)
     @Transaction
-    fun reportLike(id:String):Boolean{
+    suspend fun reportLike(id:String):Boolean{
         return try {
             updateItemLike(id = id)
             true
@@ -35,10 +35,10 @@ interface NewsDao {
         }
     }
     @Query("UPDATE NewsData SET is_like = 1 WHERE id = :id")
-    fun updateItemLike(id: String)
+    suspend fun updateItemLike(id: String)
 
     @Query("SELECT * FROM NewsData")
-    fun getAllNewsData():List<NewsDataEntities>
+    suspend fun getAllNewsData():List<NewsDataEntities>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNews(input:List<NewsDataEntities>)
@@ -48,11 +48,11 @@ interface NewsDao {
 
 
     @Query("SELECT * FROM newsRemoteKey")
-    fun getAllRemoteKey():List<RemoteKey>
+    suspend fun getAllRemoteKey():List<RemoteKey>
 
 
     @Query("SELECT * FROM  newsRemoteKey WHERE dataId = :id")
-    fun getRemoteKey(id:String):RemoteKey
+    suspend fun getRemoteKey(id:String):RemoteKey
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

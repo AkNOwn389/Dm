@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_sheet_dialog_background"
+        android:backgroundTint="@color/blue2"
+        android:padding="20dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Verify_code"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/attemptText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attempt"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias=".83"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/attemptNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintVertical_bias=".5"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/attemptText"
+            app:layout_constraintStart_toEndOf="@+id/attemptText"
+            app:layout_constraintTop_toTopOf="@+id/attemptText" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/countDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            app:layout_constraintVertical_bias="1" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:layout_editor_absoluteX="20dp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#C1000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#C1000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code3"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#C1000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code4"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#C1000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code5"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#C1000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/code6"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/verify_otp_custom_background"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#C1000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/resendOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/text_input_bg"
+            android:backgroundTint="@color/transparent"
+            android:text="@string/resend_otp"
+            android:textColor="#F8F8F8"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
+            app:layout_constraintHorizontal_bias=".9"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout8"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/verifyCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/verify_otp_button_background"
+            android:backgroundTint="@color/blue"
+            android:text="@string/verify"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resendOtp"
+            app:layout_constraintVertical_bias="0" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:indeterminateTint="@color/white2"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+        <com.udevel.widgetlab.TypingIndicatorView
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:backgroundColor="@color/transparent"
+            app:dotAnimationDuration="1000"
+            app:dotAnimationType="Wink"
+            app:dotCount="3"
+            app:dotSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
