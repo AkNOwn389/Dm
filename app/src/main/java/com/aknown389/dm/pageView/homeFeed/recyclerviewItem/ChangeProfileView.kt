@@ -14,9 +14,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.aknown389.dm.R
 import com.aknown389.dm.activities.MainFragmentContainerActivity
+import com.aknown389.dm.activities.PhotoViewActivity
 import com.aknown389.dm.activities.PostViewActivity
 import com.aknown389.dm.activities.UserViewActivity
 import com.aknown389.dm.dialogs.CommentDialog
+import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.models.homepostmodels.PostDataModel
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.dialog.ShowFriendDailog
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.dialog.ShowMyDialog
@@ -27,6 +29,7 @@ import com.aknown389.dm.pageView.homeFeed.utility.GlobalSetter
 import com.aknown389.dm.pageView.homeFeed.utility.HomeFeedCardViewAdapter
 import com.aknown389.dm.pageView.homeFeed.utility.HomeFeedRecyclerViewHolder
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.remote.LikePost
+import com.aknown389.dm.pageView.photoView.models.Parcel
 import com.aknown389.dm.reactionTesting.ReactImageButton
 import com.aknown389.dm.reactionTesting.Reaction
 import com.google.gson.Gson
@@ -41,6 +44,7 @@ class ChangeProfileView @Inject constructor(
     private val adapterContext: HomeFeedCardViewAdapter,
     private val token:String
 ) {
+    private val gson = Gson()
     init {
         holder.caption?.text = currentItem.description
         holder.creatorName?.text = currentItem.creator_full_name
@@ -167,6 +171,7 @@ class ChangeProfileView @Inject constructor(
             }
         }
         holder.postImage?.setOnClickListener {
+            /*
             (context as? AppCompatActivity)?.let {
                 val intent = Intent(it, PostViewActivity::class.java)
                 intent.putExtra("postId", currentItem.id)
@@ -176,6 +181,20 @@ class ChangeProfileView @Inject constructor(
                 intent.putExtra("noOfComment", currentItem.NoOfcomment.toString())
                 intent.putExtra("like", currentItem.NoOflike.toString())
                 it.startActivity(intent)
+            }
+
+             */
+            val parcel = Parcel(postId = currentItem.id,
+                userAvatar = currentItem.creator_avatar,
+                username = currentItem.creator,
+                userFullName = currentItem.creator_full_name,
+                images = currentItem.image_url)
+
+            (context as? AppCompatActivity).let {
+                val intent = Intent(it, PhotoViewActivity::class.java)
+                intent.putExtra("parcel", gson.toJson(parcel))
+                it?.startActivity(intent)
+                it?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             }
         }
         holder.commentBtn?.setOnClickListener {

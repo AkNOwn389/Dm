@@ -124,5 +124,7 @@
     <string name="resend_otp">resend otp</string>
     <string name="loading">Loading...</string>
     <string name="submit">submit</string>
+    <string name="gallery">Gallery</string>
+    <string name="login">Login</string>
 
 </resources>

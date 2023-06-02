@@ -16,6 +16,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.aknown389.dm.R
 import com.aknown389.dm.activities.MainFragmentContainerActivity
+import com.aknown389.dm.activities.PhotoViewActivity
 import com.aknown389.dm.activities.PostViewActivity
 import com.aknown389.dm.activities.UserViewActivity
 import com.aknown389.dm.dialogs.CommentDialog
@@ -29,6 +30,7 @@ import com.aknown389.dm.pageView.homeFeed.utility.GlobalSetter
 import com.aknown389.dm.pageView.homeFeed.utility.HomeFeedCardViewAdapter
 import com.aknown389.dm.pageView.homeFeed.utility.HomeFeedRecyclerViewHolder
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.remote.LikePost
+import com.aknown389.dm.pageView.photoView.models.Parcel
 import com.aknown389.dm.reactionTesting.ReactImageButton
 import com.aknown389.dm.reactionTesting.Reaction
 import com.google.gson.Gson
@@ -44,6 +46,8 @@ class PicturePostView @Inject constructor(
     private val adapterContext: HomeFeedCardViewAdapter,
     private val token:String
 ) {
+    private val gson = Gson()
+    private var imageToDisplay:String? = null
     init {
         holder.caption?.text = currentItem.description
         holder.creatorName?.text = currentItem.creator_full_name
@@ -188,15 +192,33 @@ class PicturePostView @Inject constructor(
             }
         }
         holder.postImage?.setOnClickListener {
-            (context as? AppCompatActivity)?.let {
-                val intent = Intent(it, PostViewActivity::class.java)
-                intent.putExtra("postId", currentItem.id)
-                intent.putExtra("userAvatar", currentItem.creator_avatar)
-                intent.putExtra("username", currentItem.creator)
-                intent.putExtra("user_full_name", currentItem.creator_full_name)
-                intent.putExtra("noOfComment", currentItem.NoOfcomment.toString())
-                intent.putExtra("like", currentItem.NoOflike.toString())
-                it.startActivity(intent)
+            if (currentItem.image_url?.size!! > 1){
+                (context as? AppCompatActivity)?.let {
+                    val intent = Intent(it, PostViewActivity::class.java)
+                    intent.putExtra("postId", currentItem.id)
+                    intent.putExtra("userAvatar", currentItem.creator_avatar)
+                    intent.putExtra("username", currentItem.creator)
+                    intent.putExtra("user_full_name", currentItem.creator_full_name)
+                    intent.putExtra("noOfComment", currentItem.NoOfcomment.toString())
+                    intent.putExtra("like", currentItem.NoOflike.toString())
+                    it.startActivity(intent)
+                }
+            }else{
+                val images = ArrayList<ImageUrl>()
+                currentItem.image_url[0]?.let { it1 -> images.add(it1) }
+                val parcel = Parcel(postId = currentItem.id,
+                    userAvatar = currentItem.creator_avatar,
+                    username = currentItem.creator,
+                    userFullName = currentItem.creator_full_name,
+                    images = images)
+                if (images.size != 0){
+                    (context as? AppCompatActivity).let {
+                        val intent = Intent(it, PhotoViewActivity::class.java)
+                        intent.putExtra("parcel", gson.toJson(parcel))
+                        it?.startActivity(intent)
+                        it?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                    }
+                }
             }
         }
         holder.commentBtn?.setOnClickListener {

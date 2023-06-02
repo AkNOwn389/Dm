@@ -62,7 +62,7 @@ class HomeFeedViewModel @Inject constructor(
                 e.printStackTrace()
                 return@launch
             }catch (e:IllegalStateException){
-                Toast.makeText(context, e.stackTraceToString(), Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "IllegalStateException "+e.stackTraceToString())
             }
         }
     }
@@ -84,7 +84,7 @@ class HomeFeedViewModel @Inject constructor(
                 }
 
             }catch (e:IllegalStateException){
-                Toast.makeText(context, e.stackTraceToString(), Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "Error in db ${e.printStackTrace()}")
             }catch (e:Exception){
                 Log.d(TAG, e.stackTraceToString())
             }

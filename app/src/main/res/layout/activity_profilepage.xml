@@ -8,6 +8,60 @@
     android:background="@color/white"
     tools:context=".activities.ProfilePageActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/ProfileBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/floating_buttom_profile_bg"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blackOnDay" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/editTextProfileSearch"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="9dp"
+                android:background="@drawable/ripple_homefeed_create_post"
+                android:drawableStart="@drawable/searchicon"
+                android:drawableTint="@color/blackOnDay"
+                android:hint="@string/search"
+                android:inputType="text"
+                android:paddingStart="10dp"
+                android:drawablePadding="-30dp"
+                android:textColor="@color/blackOnDay"
+                android:textColorHint="@color/blackOnDay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/profileMenuButton"
+                app:layout_constraintStart_toEndOf="@+id/ProfileBackButton"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/profileMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/floating_buttom_profile_bg"
+                android:src="@drawable/ic_3dot_menu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/blackOnDay" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/profilepagenestedswiper"
         android:layout_width="wrap_content"
@@ -42,56 +96,6 @@
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
                         android:src="@color/grey2" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/editTextProfileSearch"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_margin="9dp"
-                            android:background="@drawable/ripple_homefeed_create_post"
-                            android:drawableStart="@drawable/searchicon"
-                            android:hint="@string/search"
-                            android:drawableTint="@color/blackOnDay"
-                            android:inputType="text"
-                            android:paddingStart="10dp"
-                            android:textColor="@color/blackOnDay"
-                            android:textColorHint="@color/blackOnDay"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/profileMenuButton"
-                            app:layout_constraintStart_toEndOf="@+id/ProfileBackButton"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/profileMenuButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginEnd="10dp"
-                            app:tint="@color/blackOnDay"
-                            android:background="@drawable/floating_buttom_profile_bg"
-                            android:src="@drawable/menu_box_alt_flat_icon"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/ProfileBackButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="3dp"
-                            app:tint="@color/blackOnDay"
-                            android:background="@drawable/floating_buttom_profile_bg"
-                            android:src="@drawable/baseline_arrow_back_24"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.cardview.widget.CardView
@@ -100,8 +104,8 @@
                     android:layout_height="150dp"
                     android:layout_marginTop="100dp"
                     android:layout_marginEnd="20dp"
-                    app:cardCornerRadius="75dp"
                     android:backgroundTint="@color/LightBiolet"
+                    app:cardCornerRadius="75dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -164,8 +168,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:textSize="30sp"
                     android:textColor="@color/blackOnDay"
+                    android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtProfileName" />
@@ -174,8 +178,8 @@
                     android:id="@+id/profilepostcount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
                     android:textColor="@color/blackOnDay"
+                    android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="@+id/profilefollowers"
                     app:layout_constraintEnd_toStartOf="@+id/profilefollowers"
                     app:layout_constraintStart_toStartOf="parent"
@@ -185,8 +189,8 @@
                     android:id="@+id/profilefollowing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
                     android:textColor="@color/blackOnDay"
+                    android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="@+id/profilefollowers"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/profilefollowers"
@@ -241,11 +245,11 @@
                         android:layout_weight="1"
                         android:background="@drawable/profile_nav_bg"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center"
                         android:text="@string/images"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:focusable="true" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtActivityTag"
@@ -255,11 +259,11 @@
                         android:layout_weight="1"
                         android:background="@drawable/profile_nav_bg"
                         android:clickable="true"
+                        android:focusable="true"
                         android:gravity="center"
                         android:text="@string/activity"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:focusable="true" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <View

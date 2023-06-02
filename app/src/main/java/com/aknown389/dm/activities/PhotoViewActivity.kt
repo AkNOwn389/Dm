@@ -103,20 +103,29 @@ class PhotoViewActivity : AppCompatActivity() {
         when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_NO -> {
                 // Night mode is not active on device
-                if (item.isLike!!) {
-                    binding?.likePost?.defaultReaction =  (com.aknown389.dm.reactionTesting.FbReactions.defaultReactDay)
-                    setDefaultReaction(binding, item)
-                } else {
-                    binding?.likePost?.defaultReaction =  (com.aknown389.dm.reactionTesting.FbReactions.defaultReactDay)
+                try{
+                    if (item.isLike!!) {
+                        binding?.likePost?.defaultReaction =  (com.aknown389.dm.reactionTesting.FbReactions.defaultReactDay)
+                        setDefaultReaction(binding, item)
+                    } else {
+                        binding?.likePost?.defaultReaction =  (com.aknown389.dm.reactionTesting.FbReactions.defaultReactDay)
+                    }
+                }catch (e:NullPointerException){
+                    e.printStackTrace()
                 }
+
             }
             Configuration.UI_MODE_NIGHT_YES -> {
                 // Night mode is active on device
-                if (item.isLike!!) {
-                    binding?.likePost?.defaultReaction = (com.aknown389.dm.reactionTesting.FbReactions.defaultReactNight)
-                    setDefaultReaction(holder = binding, item)
-                } else {
-                    binding?.likePost?.defaultReaction = (com.aknown389.dm.reactionTesting.FbReactions.defaultReactNight)
+                try {
+                    if (item.isLike!!) {
+                        binding?.likePost?.defaultReaction = (com.aknown389.dm.reactionTesting.FbReactions.defaultReactNight)
+                        setDefaultReaction(holder = binding, item)
+                    } else {
+                        binding?.likePost?.defaultReaction = (com.aknown389.dm.reactionTesting.FbReactions.defaultReactNight)
+                    }
+                }catch (e:NullPointerException){
+                    e.printStackTrace()
                 }
             }
         }

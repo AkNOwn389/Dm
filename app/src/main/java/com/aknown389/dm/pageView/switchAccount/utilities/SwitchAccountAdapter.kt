@@ -2,11 +2,13 @@ package com.aknown389.dm.pageView.switchAccount.utilities
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -187,6 +189,15 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
         }
     }
 
+    private fun removeAllCurrentdataInDatabase(){
+        (parent.context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.IO) {
+            dataBase.homeFeedDao().deleteAllFeed()
+            dataBase.profileDao().deleteAllImageGalery()
+            dataBase.profileDao().deleteProfileData()
+            dataBase.notificationDao().deleteAllNotification()
+        }
+    }
+
     private fun switchAccount(item: UserAccountDataClass){
         (parent.context as? AppCompatActivity)?.lifecycleScope?.launch {
             if (checkCredential(item)){
@@ -196,6 +207,7 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
                 manager.deleteAllData()
                 manager.saveToken(token)
                 manager.saveUserData(item.info)
+                removeAllCurrentdataInDatabase()
                 goToMainActivity()
             }else{
                 val newToken = getNewToken(item)
@@ -215,6 +227,7 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
                         manager.deleteAllData()
                         manager.saveToken(token)
                         manager.saveUserData(item.info)
+                        removeAllCurrentdataInDatabase()
                         goToMainActivity()
                     }catch (e:Exception){
                         Toast.makeText(parent.context, e.message, Toast.LENGTH_LONG).show()
@@ -227,41 +240,34 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
                     }
                     val inflater = LayoutInflater.from(parent.context)
                     val view = inflater.inflate(R.layout.dialog_login, parent, false)
-                    val emailEditText = view.findViewById<EditText>(R.id.email)
                     val passwordEditText = view.findViewById<EditText>(R.id.password)
                     val dialog = AlertDialog.Builder(parent.context)
-                        .setTitle("Login")
                         .setView(view)
-                        .setPositiveButton("Login") { _, _ ->
-                            val email = emailEditText.text.toString()
-                            val password = passwordEditText.text.toString()
-                            // Submit email and password to server
-                            login(email, password, view)
-                        }
-                        .setNegativeButton("Cancel", null)
                         .create()
-                    dialog.show()
+                    if (dialog.window != null){
+                        dialog.window?.setBackgroundDrawable(ColorDrawable(0))
+                        dialog.show()
+                    }
+                    view.findViewById<TextView>(R.id.accountName).text = item.info.name
+                    view.findViewById<Button>(R.id.login).setOnClickListener {
+                        val email = item.info.user
+                        val password = passwordEditText.text.toString()
+                        // Submit email and password to server
+                        login(email, password, view)
+                    }
                 }
             }
         }
     }
 
     private fun login(username: String, password: String, view: View){
-        val emaileditText = view.findViewById<EditText>(R.id.email)
         val passwordEditText = view.findViewById<EditText>(R.id.password)
-        val progress:TypingIndicatorView = view.findViewById(R.id.progress)
-        if (username == "" || username.isBlank()) {
-            Toast.makeText(parent.context, "Please input email", Toast.LENGTH_SHORT).show()
-            emaileditText.error = "Empty"
-            return
-        }
         if (password == "" || password.isBlank()) {
             Toast.makeText(parent.context, "Please input password", Toast.LENGTH_SHORT).show()
             passwordEditText.error = "Empty"
             return
         }
         val body = LoginModel(username, password)
-        progress.isVisible = true
         loadingAlertDialog.start()
         isLoadingShowing = true
         val requestBody = RetrofitInstance.retrofitBuilder.loginC(body)
@@ -274,7 +280,6 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
 
                     val res = response.body()!!
                     if (res.status) {
-                        progress.isVisible = false
                         Toast.makeText(parent.context, res.message, Toast.LENGTH_SHORT)
                             .show()
                         manager.saveToken(value = res.token)
@@ -287,14 +292,18 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
                             tokenType = res.token.tokenType!!
                         )
                         saveAccountInDb(data)
+                        removeAllCurrentdataInDatabase()
                         goToMainActivity()
                     } else {
-                        progress.isVisible = false
                         if (res.status_code == 1) {
                             passwordEditText.error = "invalid"
                         } else {
                             if (res.status_code == 2) {
-                                emaileditText.error = "invalid"
+                                Toast.makeText(
+                                    parent.context,
+                                    "Something went wrong.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                         Toast.makeText(parent.context, res.message, Toast.LENGTH_SHORT)
@@ -302,7 +311,6 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
                     }
 
                 } else {
-                    progress.isVisible = false
                     Toast.makeText(parent.context, "Internet error", Toast.LENGTH_SHORT)
                         .show()
 
@@ -310,7 +318,6 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
             }
 
             override fun onFailure(call: Call<LoginResponseModelV2?>, t: Throwable) {
-                progress.isVisible = false
                 Toast.makeText(parent.context, "Connection Error", Toast.LENGTH_SHORT)
                     .show()
             }
