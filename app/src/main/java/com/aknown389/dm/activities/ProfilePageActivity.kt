@@ -93,6 +93,7 @@ class ProfilePageActivity : AppCompatActivity()
                 binding?.profilefollowers?.text = it.followers.toString()
                 binding?.profileBio?.text = it.bio
                 binding?.txtProfileName?.text = it.name
+                binding?.username?.text = it.username
                 binding?.profilepostcount?.text = it.post_lenght.toString()
             }
         }

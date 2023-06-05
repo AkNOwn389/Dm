@@ -147,11 +147,27 @@
                     android:id="@+id/txtProfileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Darius Gabriel"
                     android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
                     android:textColor="@color/blackOnDay"
                     app:layout_constraintEnd_toEndOf="@+id/cardView"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
                     app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="darius1"
+                    android:textStyle="normal"
+                    android:textSize="13sp"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="@+id/cardView"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/cardView"
+                    app:layout_constraintTop_toBottomOf="@id/txtProfileName" />
 
                 <TextView
                     android:id="@+id/profileBio"
@@ -171,12 +187,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginTop="30dp"
                     android:background="@color/blackOnDay"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtProfileName" />
+                    app:layout_constraintTop_toBottomOf="@+id/username" />
 
 
                 <View
