@@ -12,5 +12,5 @@
         android:layout_height="30dp"
         android:visibility="gone"
         android:layout_gravity="center"
-        android:indeterminateTint="#FFFFFF"/>
+        android:indeterminateTint="@color/blue2"/>
 </FrameLayout>

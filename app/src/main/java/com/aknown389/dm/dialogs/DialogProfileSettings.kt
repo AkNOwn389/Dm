@@ -3,6 +3,7 @@ package com.aknown389.dm.dialogs
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.format.Formatter
 import android.view.LayoutInflater
@@ -18,8 +19,10 @@ import androidx.lifecycle.lifecycleScope
 import com.aknown389.dm.R
 import com.aknown389.dm.activities.EditProfileActivity
 import com.aknown389.dm.activities.LoginActivity
+import com.aknown389.dm.activities.PasswordManagerActivity
 import com.aknown389.dm.activities.SwitchAccountActivity
 import com.aknown389.dm.api.retroInstance.RetrofitInstance
+import com.aknown389.dm.databinding.DialogLogoutBinding
 import com.aknown389.dm.databinding.DialogProfileSettingsBinding
 import com.aknown389.dm.db.AppDataBase
 import com.aknown389.dm.models.logoutmodel.LogOutBodyModel
@@ -93,7 +96,11 @@ class DialogProfileSettings : BottomSheetDialogFragment() {
                 dismiss()
             }
             settingAndPrivacy.setOnClickListener {}
-            passwordManager.setOnClickListener {}
+            passwordManager.setOnClickListener {
+                Intent(requireContext(), PasswordManagerActivity::class.java)
+                .also {
+                    startActivity(it)
+                }}
             contactUs.setOnClickListener {}
             userAccountInfo.setOnClickListener {}
             switchAccount.setOnClickListener {
@@ -154,7 +161,53 @@ class DialogProfileSettings : BottomSheetDialogFragment() {
         username = manager.getUserData()!!.user
     }
 
-    private fun logOut() {
+    private fun logOut(){
+        val binding = DialogLogoutBinding.inflate(LayoutInflater.from(requireContext()), null, false)
+        val builder = AlertDialog.Builder(requireContext())
+            .setView(binding.root)
+            .create()
+        if (builder.window != null){
+            builder.window?.setBackgroundDrawable(ColorDrawable(0))
+            builder.show()
+        }
+        binding.apply {
+            yes.setOnClickListener {
+                val token = manager.getAccessToken()
+                val refresh = manager.getRefreshToken()
+                val body = LogOutBodyModel(refresh!!)
+                requireActivity().lifecycleScope.launch(Dispatchers.Main) {
+                    val response = try {
+                        RetrofitInstance.api.logout(token!!, body)
+                    }catch (e:Exception){
+                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+                        return@launch
+                    }
+                    if (response.isSuccessful && response.body() != null){
+                        val res = response.body()!!
+                        if (res.status){
+                            Toast.makeText(requireContext(), res.message, Toast.LENGTH_SHORT).show()
+                            manager.deleteAllData()
+                            requireActivity().let {
+                                val intent = Intent(it, LoginActivity::class.java)
+                                it.startActivity(intent)
+                                it.finishAffinity()
+                            }
+                            dismiss()
+                        }else if (res.status.equals(false)){
+                            Toast.makeText(requireContext(), res.message, Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }
+                    }else{
+                        root.snackbar("something went wrong")
+                    }
+                }
+            }
+            cansel.setOnClickListener {
+                builder.dismiss()
+            }
+        }
+    }
+    private fun logOutold() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes"){_, _ ->
             val token = manager.getAccessToken()

@@ -73,44 +73,8 @@ class ProfilePageActivity : AppCompatActivity()
                 startActivity(it)
             }
         }
-
-        binding?.profilepostcount?.setOnClickListener {
-            lifecycleScope.launch {
-                supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.flFragmentProfile, activityFragment)
-                    commit()
-                }
-                delay(100)
-                binding?.profilepostcount?.setBackgroundResource(R.drawable.profile_nav_bg_blue)
-                binding?.txtPostTag?.setBackgroundResource(R.drawable.profile_nav_bg)
-            }
-        }
         binding?.profileMenuButton?.setOnClickListener {
             dialog.show(supportFragmentManager, null)
-        }
-
-        binding?.txtActivityTag?.setOnClickListener {
-            lifecycleScope.launch {
-                supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.flFragmentProfile, activityFragment)
-                    commit()
-                }
-                delay(100)
-                binding?.txtActivityTag?.setBackgroundResource(R.drawable.profile_nav_bg_blue)
-                binding?.txtPostTag?.setBackgroundResource(R.drawable.profile_nav_bg)
-            }
-
-        }
-        binding?.txtPostTag?.setOnClickListener {
-            lifecycleScope.launch {
-                supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.flFragmentProfile, stagerredFragment)
-                    commit()
-                }
-                delay(100)
-                binding?.txtPostTag?.setBackgroundResource(R.drawable.profile_nav_bg_blue)
-                binding?.txtActivityTag?.setBackgroundResource(R.drawable.profile_nav_bg)
-            }
         }
         binding?.ProfileBackButton?.setOnClickListener {
             finish()
@@ -157,15 +121,7 @@ class ProfilePageActivity : AppCompatActivity()
     }
 
     private fun loadGallery() {
-        lifecycleScope.launch {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.flFragmentProfile, stagerredFragment)
-                commit()
-            }
-            delay(100)
-            binding?.txtPostTag?.setBackgroundResource(R.drawable.profile_nav_bg_blue)
-            binding?.txtActivityTag?.setBackgroundResource(R.drawable.profile_nav_bg)
-        }
+
     }
 
     private fun loadMe() {

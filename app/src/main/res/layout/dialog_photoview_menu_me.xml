@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        android:layout_margin="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/download"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/baseline_download_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/blackOnDay"
+                    android:padding="10dp"
+                    android:background="@drawable/chat_item_ripple"
+                    android:text="@string/download_image"
+                    android:textColor="@color/blackOnDay"
+                    android:textSize="17sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chat_item_ripple"
+                    android:drawableStart="@drawable/baseline_delete_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/blackOnDay"
+                    android:padding="10dp"
+                    android:text="@string/delete"
+                    android:textColor="@color/blackOnDay"
+                    android:textSize="17sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/report"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chat_item_ripple"
+                    android:drawableStart="@drawable/baseline_report_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/blackOnDay"
+                    android:padding="10dp"
+                    android:text="@string/report"
+                    android:textColor="@color/blackOnDay"
+                    android:textSize="17sp" />
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+
+</FrameLayout>

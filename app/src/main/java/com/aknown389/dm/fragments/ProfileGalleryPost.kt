@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.aknown389.dm.databinding.FragmentProfileGalleryAdapterBinding
 import com.aknown389.dm.db.AppDataBase
+import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.pageView.profile.ProfilePageGalleryGridAdapter
 import com.aknown389.dm.repository.Repository
 import com.aknown389.dm.utils.DataManager
@@ -49,7 +50,9 @@ class ProfileGalleryPost() : Fragment() {
         })
         viewModel._mygalleryresponse.observe(viewLifecycleOwner) { response ->
             if (response.isNotEmpty()) {
-                adapter.setData(response)
+                for (i in response){
+                    adapter.addData(i)
+                }
             }
         }
     }

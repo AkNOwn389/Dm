@@ -157,9 +157,9 @@ class ImagePostView(
         }
         val pos = images.indexOf(item.toImageUrl())
         val parcel = Parcel(postId = item.ImageOrVideoId,
-            userAvatar = item.avatar,
-            username = item.user,
-            userFullName = item.user_full_name,
+            userAvatar = item.creator_avatar,
+            username = item.creator,
+            userFullName = item.creator_full_name,
             images = images,
             myPosition = pos)
 

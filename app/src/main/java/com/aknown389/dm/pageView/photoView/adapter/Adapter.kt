@@ -46,7 +46,6 @@ class Adapter(private val imageUrls: List<ImageUrl>) : RecyclerView.Adapter<Adap
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        holder.progressBar?.visibility = View.GONE
                         return true
                     }
 

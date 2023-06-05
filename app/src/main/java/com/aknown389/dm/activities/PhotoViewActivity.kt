@@ -1,14 +1,19 @@
 package com.aknown389.dm.activities
 
 import android.content.res.Configuration
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.aknown389.dm.R
 import com.aknown389.dm.databinding.ActivityPhotoViewBinding
+import com.aknown389.dm.databinding.DialogPhotoviewMenuBinding
+import com.aknown389.dm.databinding.DialogPhotoviewMenuMeBinding
 import com.aknown389.dm.dialogs.CommentDialog
 import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.PicturePostView
@@ -141,6 +146,23 @@ class PhotoViewActivity : AppCompatActivity() {
         })
         binding?.backbtn?.setOnClickListener {
             finish()
+        }
+        binding?.menu?.setOnClickListener {
+            val dialog = AlertDialog.Builder(this).create()
+            val inflater = LayoutInflater.from(this)
+            val view = if (parcel.username == manager.getUserData()?.user){
+                DialogPhotoviewMenuMeBinding.inflate(inflater, binding?.root, false)
+            }else{
+                DialogPhotoviewMenuBinding.inflate(inflater, binding?.root, false)
+            }
+            dialog.setView(view.root)
+            if (dialog.window != null){
+                dialog.window?.setBackgroundDrawable(ColorDrawable(0))
+                dialog.show()
+                view.apply {
+
+                }
+            }
         }
         binding?.CommentBtn?.setOnClickListener {
             val bundle: Bundle = Bundle()

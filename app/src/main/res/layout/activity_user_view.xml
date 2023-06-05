@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentUserviewRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmentUserviewRoot"
     tools:context=".activities.UserViewActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -43,8 +43,8 @@
                     android:src="@drawable/baseline_menu_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:tint="@color/blackOnDay"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/blackOnDay" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,7 +77,7 @@
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/CardViewUserProfileBg"
@@ -107,17 +107,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/userviewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/blackOnDay"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/blackOnDay"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/CardViewUserProfileBg"
                     app:layout_constraintStart_toStartOf="@+id/CardViewUserProfileBg"
                     app:layout_constraintTop_toBottomOf="@+id/CardViewUserProfileBg" />
@@ -226,123 +226,127 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
+                    android:padding="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/relativeLayout10">
 
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/userviewmessagebtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/verify_otp_button_background"
                         android:backgroundTint="@color/LightBiolet"
                         android:elevation="10dp"
                         android:text="message"
                         android:textAllCaps="false"
-                        android:textColor="@color/white" />
-                    <Button
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/userviewfollowbtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/verify_otp_button_background"
                         android:backgroundTint="#49ACA9"
                         android:elevation="10dp"
                         android:text="follow"
                         android:textAllCaps="false"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:id="@+id/linearLayout11"
+                    android:id="@+id/options"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@id/linearLayout10">
-                    <Button
-                        android:id="@+id/userviewseefollowerbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#AC4949"
-                        android:elevation="10dp"
-                        android:text="see followers"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white" />
-                    <Button
-                        android:id="@+id/userviewfollowingbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#4965AC"
-                        android:elevation="10dp"
-                        android:text="see following"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white" />
 
-                    <Button
-                        android:id="@+id/userviewvideobtn"
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/seeFollowers"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#97933E"
-                        android:elevation="10dp"
-                        android:text="videos"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white" />
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/chatspeople"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="@string/see_followers"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
 
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearLayout12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout11">
-                    <Button
-                        android:id="@+id/userviewaboutbtn"
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/seeFollowing"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#AC9449"
-                        android:elevation="10dp"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/chatspeople"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="@string/followedBigStartLetter"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/videos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/video_alt_flat_icon"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="Videos"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/photos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/ic_add_picture_on_chat"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="Photos"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/call"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/call_log_alt_flat_icon"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="Call"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/about"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/content_marketing_alt_flat_icon"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
                         android:text="About"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white" />
-                    <Button
-                        android:id="@+id/userviewphotosbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#49ACA9"
-                        android:elevation="10dp"
-                        android:text="photos"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white" />
-
-                    <Button
-                        android:id="@+id/userviewcallbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#3E9766"
-                        android:elevation="10dp"
-                        android:text="call"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
@@ -353,7 +357,7 @@
                     android:background="@color/grey3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+                    app:layout_constraintTop_toBottomOf="@+id/options">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -369,24 +373,25 @@
 
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/userviewshimmering"
-                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/relativeLayout11">
-                    <include layout="@layout/shimmer_home_feed_placeholder"/>
+
+                    <include layout="@layout/shimmer_home_feed_placeholder" />
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <com.aknown389.dm.pageView.homeFeed.utility.HomeFeedRecyclerview
                     android:id="@+id/recyClerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="60dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout11"
-                    android:layout_marginBottom="60dp"/>
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout11" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

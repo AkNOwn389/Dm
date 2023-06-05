@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +22,11 @@ import com.aknown389.dm.pageView.homeFeed.utility.HomeFeedCardViewAdapter
 import com.aknown389.dm.api.retroInstance.PostInstance
 import com.aknown389.dm.api.retroInstance.ProfileInstance
 import com.aknown389.dm.api.retroInstance.UsersInstance
+import com.aknown389.dm.db.AppDataBase
 import com.aknown389.dm.models.homepostmodels.PostDataModel
 import com.aknown389.dm.models.userviewModels.Data
+import com.aknown389.dm.pageView.userProfileView.viewModel.UserProfileViewModel
+import com.aknown389.dm.pageView.userProfileView.viewModel.UserViewModelProvider
 import com.aknown389.dm.utils.DataManager
 import com.aknown389.dm.utils.snackbar
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -32,30 +37,17 @@ import kotlinx.coroutines.withContext
 import kotlin.properties.Delegates
 
 class UserViewActivity : AppCompatActivity() {
+    private var isShimmering: Boolean = false
     private var binding: ActivityUserViewBinding? = null
     private lateinit var username: String
-    private lateinit var user_name:TextView
-    private lateinit var userName:TextView
-    private lateinit var userPosts:TextView
-    private lateinit var userFollowing:TextView
-    private lateinit var userFollowers:TextView
-    private lateinit var userImage:ImageView
-    private lateinit var onBack:ImageButton
-    private lateinit var menuBtn:ImageButton
-    private lateinit var userBackgroundImage:ImageView
-    private lateinit var swiper:SwipeRefreshLayout
-    private lateinit var layotroot:ConstraintLayout
-    private lateinit var userBio:TextView
     private lateinit var userData:Data
     private lateinit var manager: DataManager
     private lateinit var token:String
     private lateinit var layOutManager:LinearLayoutManager
     private lateinit var adapter: HomeFeedCardViewAdapter
-    private var postList = ArrayList<PostDataModel>()
     private lateinit var shimmer:ShimmerFrameLayout
-    private var page by Delegates.notNull<Int>()
-    private var isLoading = false
-    private var hasMorePage = true
+    private lateinit var viewModel:UserProfileViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,27 +64,7 @@ class UserViewActivity : AppCompatActivity() {
         binding = null
     }
     private fun updatePost() {
-        this.page+=1
-        lifecycleScope.launch{
-            this@UserViewActivity.isLoading = true
-            val response = try {
-                PostInstance.api.postview(token = token, user = username, page = page)
-            }catch (e:Exception){
-                e.printStackTrace()
-                return@launch
-            }
-            if (response.isSuccessful && response.body() != null){
-                if (!response.body()!!.hasMorePage){
-                    this@UserViewActivity.hasMorePage = false
-                }
-                for (x in response.body()!!.data){
-                    this@UserViewActivity.postList.add(postList.size-1, x)
-                    this@UserViewActivity.adapter.notifyItemInserted(postList.size-1)
-                }
-
-            }
-            this@UserViewActivity.isLoading = false
-        }
+        viewModel.updatePost(token, username)
     }
     private fun initGlide(): RequestManager {
         val options = RequestOptions()
@@ -102,43 +74,67 @@ class UserViewActivity : AppCompatActivity() {
             .setDefaultRequestOptions(options)
     }
     private fun loadPostList() {
-        this.page = 1
-        this.hasMorePage = true
-        this.shimmer.startShimmer()
-        this.shimmer.isVisible = true
+        startShimmer()
+        viewModel.loadPostList(token, username)
+    }
+
+    private fun startShimmer() {
+        shimmer.startShimmer()
+        shimmer.isVisible = true
         binding?.recyClerView?.isVisible = false
-        lifecycleScope.launch {
-            this@UserViewActivity.isLoading = true
-            val response = try {
-                PostInstance.api.postview(token, username, page)
-            }catch (e:java.lang.Exception){
-                e.printStackTrace()
-                return@launch
-            }
-            if (response.isSuccessful){
-                for (i in response.body()!!.data){
-                    this@UserViewActivity.postList.add(i)
-                    adapter.notifyItemInserted(postList.size-1)
-                }
-            }
-            delay(1000)
-            withContext(Dispatchers.Main){
-                this@UserViewActivity.shimmer.stopShimmer()
-                this@UserViewActivity.shimmer.isVisible = false
-                this@UserViewActivity.binding?.recyClerView?.isVisible = true
-            }
-            this@UserViewActivity.isLoading = false
-        }
+        isShimmering = true
+    }
+
+    private fun stopShimmer(){
+        shimmer.stopShimmer()
+        shimmer.isVisible = false
+        binding?.recyClerView?.isVisible = true
+        isShimmering = false
     }
 
     private fun setListener() {
-        swiper.setOnRefreshListener {
+        binding?.userviewswiper?.setOnRefreshListener {
             getUserData()
             loadPostList()
-            swiper.isRefreshing = false
+            binding?.userviewswiper?.isRefreshing = false
         }
-        onBack.setOnClickListener {
+        binding?.userviewbackbtn?.setOnClickListener {
             finish()
+        }
+        viewModel._response.observe(this) {response ->
+            adapter.setData(response as ArrayList<PostDataModel>)
+            if (isShimmering){
+                stopShimmer()
+            }
+        }
+        viewModel._userDataResponse.observe(this){ response ->
+            try {
+                this.userData = response.data
+                binding?.apply {
+                    userviewName.text = userData.name
+                    userviewUsername.text = userData.user
+                    userviewBio.text = userData.bio
+                    userviewfollowers.text = userData.followers.toString()
+                    userviewfollowing.text = userData.following.toString()
+                    userviewuserpostslenght.text = userData.post_lenght.toString()
+                    Glide.with(this@UserViewActivity)
+                        .load(userData.profileimg)
+                        .error(R.mipmap.greybg)
+                        .placeholder(R.drawable.progress_animation)
+                        .into(userviewprofileimageImageview)
+                    Glide.with(this@UserViewActivity)
+                        .load(userData.bgimg)
+                        .error(R.mipmap.greybg)
+                        .placeholder(R.mipmap.greybg)
+                        .into(userviewbackgroundPictureImageview)
+                }
+                if (userData.isFollowing){
+                    binding?.userviewfollowbtn?.text = getString(R.string.followed)
+                }
+            }catch (e:Exception){
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            }
+
         }
         binding?.userviewfollowbtn?.setOnClickListener {
             lifecycleScope.launch {
@@ -164,9 +160,9 @@ class UserViewActivity : AppCompatActivity() {
                 val visibleItemCount: Int = layOutManager.childCount
                 val pastVisibleItem: Int = layOutManager.findFirstCompletelyVisibleItemPosition()
 
-                if (!isLoading){
+                if (!viewModel.isLoading){
                     if (visibleItemCount + pastVisibleItem > adapter.itemCount-1){
-                        if (!isLoading && hasMorePage){
+                        if (!viewModel.isLoading && viewModel.hasMorePage){
                             updatePost()
                         }
                     }
@@ -190,60 +186,17 @@ class UserViewActivity : AppCompatActivity() {
         this.layOutManager = LinearLayoutManager(this)
         this.adapter = HomeFeedCardViewAdapter(initGlide())
         binding?.recyClerView?.adapter = adapter
+        binding?.recyClerView?.setMediaObjects(adapter.postListdata)
         this@UserViewActivity.binding?.recyClerView?.layoutManager = layOutManager
         this.shimmer = findViewById(R.id.userviewshimmering)
         this.manager = DataManager(this)
         this.token = manager.getAccessToken().toString()
-        this.user_name = findViewById(R.id.userviewName)
-        this.userName = findViewById(R.id.userviewUsername)
-        this.userPosts = findViewById(R.id.userviewuserpostslenght)
-        this.userFollowers = findViewById(R.id.userviewfollowers)
-        this.userFollowing = findViewById(R.id.userviewfollowing)
-        this.userBio = findViewById(R.id.userviewBio)
-        this.userImage = findViewById(R.id.userviewprofileimageImageview)
-        this.userBackgroundImage = findViewById(R.id.userviewbackgroundPictureImageview)
-        this.swiper = findViewById(R.id.userviewswiper)
-        this.layotroot = findViewById(R.id.fragmentUserviewRoot)
-        this.onBack = findViewById(R.id.userviewbackbtn)
-        this.menuBtn = findViewById(R.id.userviewmenubtn)
         this.username = intent?.getStringExtra("username").toString()
+        val database = AppDataBase.getDatabase(this)
+        this.viewModel = ViewModelProvider(this, UserViewModelProvider(database))[UserProfileViewModel::class.java]
     }
 
     private fun getUserData() {
-        lifecycleScope.launch {
-            val response = try {
-                ProfileInstance.api.profileview(token, username)
-            }catch (e:Exception){
-                e.printStackTrace()
-                return@launch
-            }
-            if (response.isSuccessful && response.body() != null){
-                this@UserViewActivity.userData = response.body()!!.data
-                withContext(Dispatchers.Main){
-                    user_name.text = userData.name
-                    userName.text = userData.user
-                    userBio.text = userData.bio
-                    userFollowers.text = userData.followers.toString()
-                    userFollowing.text = userData.following.toString()
-                    userPosts.text = userData.post_lenght.toString()
-                    if (userData.isFollowing){
-                        binding?.userviewfollowbtn?.text = getString(R.string.followed)
-                    }
-
-                    Glide.with(this@UserViewActivity)
-                        .load(userData.profileimg)
-                        .error(R.mipmap.greybg)
-                        .placeholder(R.drawable.progress_animation)
-                        .into(userImage)
-                    Glide.with(this@UserViewActivity)
-                        .load(userData.bgimg)
-                        .error(R.mipmap.greybg)
-                        .placeholder(R.mipmap.greybg)
-                        .into(userBackgroundImage)
-                }
-            }else{
-                layotroot.snackbar("Internet Error")
-            }
-        }
+        viewModel.getUserdata(token, username)
     }
 }

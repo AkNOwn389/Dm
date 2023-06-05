@@ -2,7 +2,10 @@ package com.aknown389.dm.activities
 
 import java.util.concurrent.TimeUnit
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import com.aknown389.dm.R
@@ -25,6 +28,7 @@ class MainFragmentContainerActivity : AppCompatActivity() {
     private lateinit var ws:WebSocket
     private var isClose = false
     private var isDestroy = false
+    private var doubleBackToExitPressedOnce = false
     val res:MutableLiveData<String> = MutableLiveData()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +90,22 @@ class MainFragmentContainerActivity : AppCompatActivity() {
         }
 
 
+    }
+
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            doubleBackToExitPressedOnce = false
+        }, 2000)
     }
 
     private fun loadIndex() {

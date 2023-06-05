@@ -16,9 +16,11 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageButton
                 android:id="@+id/ProfileBackButton"
                 android:layout_width="wrap_content"
@@ -30,6 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/blackOnDay" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/editTextProfileSearch"
                 android:layout_width="0dp"
@@ -37,17 +40,18 @@
                 android:layout_margin="9dp"
                 android:background="@drawable/ripple_homefeed_create_post"
                 android:drawableStart="@drawable/searchicon"
+                android:drawablePadding="-30dp"
                 android:drawableTint="@color/blackOnDay"
                 android:hint="@string/search"
                 android:inputType="text"
                 android:paddingStart="10dp"
-                android:drawablePadding="-30dp"
                 android:textColor="@color/blackOnDay"
                 android:textColorHint="@color/blackOnDay"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/profileMenuButton"
                 app:layout_constraintStart_toEndOf="@+id/ProfileBackButton"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <ImageButton
                 android:id="@+id/profileMenuButton"
                 android:layout_width="wrap_content"
@@ -98,6 +102,16 @@
                         android:src="@color/grey2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ImageProfileCover" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="150dp"
@@ -139,8 +153,21 @@
                     app:layout_constraintStart_toStartOf="@+id/cardView"
                     app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-                <RelativeLayout
-                    android:id="@+id/layoutline1"
+                <TextView
+                    android:id="@+id/profileBio"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:maxLength="600"
+                    android:padding="5dp"
+                    android:textColor="@color/blackOnDay"
+                    app:layout_constraintBottom_toTopOf="@+id/view1"
+                    app:layout_constraintEnd_toStartOf="@+id/cardView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                <View
+                    android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginStart="20dp"
@@ -149,35 +176,127 @@
                     android:background="@color/blackOnDay"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profilefollowing" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtProfileName" />
 
-                <RelativeLayout
+
+                <View
+                    android:id="@+id/layoutline1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/blackOnDay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtfollowing" />
+
+                <LinearLayout
+                    android:id="@+id/options"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/layoutline1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/seeFollowers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/chatspeople"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="See your followers"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/seeFollowing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/friends_alt_flat_icon"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="See followed"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/videos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/video_alt_flat_icon"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="Videos"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/photos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/ic_add_picture_on_chat"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="Photos"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/about"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chat_item_ripple"
+                        android:drawableStart="@drawable/content_marketing_alt_flat_icon"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/blackOnDay"
+                        android:padding="10dp"
+                        android:text="@string/about_your_self"
+                        android:textColor="@color/blackOnDay"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <View
                     android:id="@+id/layoutline2"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="20dp"
                     android:background="@color/blackOnDay"
-                    app:layout_constraintEnd_toEndOf="@+id/layoutline1"
-                    app:layout_constraintStart_toStartOf="@+id/layoutline1"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutline1" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/options" />
+
 
                 <TextView
                     android:id="@+id/profilefollowers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="500"
                     android:textColor="@color/blackOnDay"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtProfileName" />
+                    app:layout_constraintTop_toBottomOf="@+id/view1" />
 
                 <TextView
                     android:id="@+id/profilepostcount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="30"
                     android:textColor="@color/blackOnDay"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="@+id/profilefollowers"
@@ -189,6 +308,7 @@
                     android:id="@+id/profilefollowing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="100"
                     android:textColor="@color/blackOnDay"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toBottomOf="@+id/profilefollowers"
@@ -226,88 +346,34 @@
                     app:layout_constraintStart_toStartOf="@+id/profilefollowing"
                     app:layout_constraintTop_toBottomOf="@+id/profilefollowing" />
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/layoutline2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutline1">
-
-                    <TextView
-                        android:id="@+id/txtPostTag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/profile_nav_bg"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:text="@string/images"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtActivityTag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/profile_nav_bg"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:text="@string/activity"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:background="@color/blackOnDay"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ImageProfileCover" />
-
                 <TextView
-                    android:id="@+id/profileBio"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:gravity="center"
-                    android:maxLength="600"
-                    android:padding="5dp"
-                    android:textColor="@color/blackOnDay"
-                    app:layout_constraintBottom_toTopOf="@+id/profilefollowers"
-                    app:layout_constraintEnd_toStartOf="@+id/cardView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view" />
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/txtActivityTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/profile_nav_bg"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/activity"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutline2" />
+
+                <com.aknown389.dm.pageView.homeFeed.utility.HomeFeedRecyclerview
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layoutline2">
-
-                    <FrameLayout
-                        android:id="@+id/flFragmentProfile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@id/txtActivityTag" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -1,4 +1,4 @@
-package com.aknown389.dm.pageView.changePassword.viewModels
+package com.aknown389.dm.pageView.recoveryChangePassword.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

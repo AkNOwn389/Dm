@@ -4,21 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import com.aknown389.dm.R
 import com.aknown389.dm.databinding.ActivityRecoveryAccountChangePasswordBinding
 import com.aknown389.dm.dialogs.LoadingAlertDialog
-import com.aknown389.dm.pageView.changePassword.viewModels.ChangePasswordViewModel
+import com.aknown389.dm.pageView.recoveryChangePassword.viewModels.ChangePasswordViewModel
 import com.aknown389.dm.pageView.recoverAccountView.models.AccountRecoveryChangePasswordBody
 import com.aknown389.dm.pageView.recoverAccountView.models.RecoveryAccountVerifyOtpResponseData
-import com.aknown389.dm.pageView.recoverAccountView.remote.RecoverAccountInstance
-import com.aknown389.dm.pageView.recoverAccountView.repository.RecoverAccountRepository
-import com.aknown389.dm.pageView.recoverAccountView.viewModel.RecoveryAccountViewModel
-import com.aknown389.dm.pageView.switchAccount.remote.repository.SwitchAccountRepository
 import com.aknown389.dm.utils.snackbar
 import com.google.gson.Gson
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class RecoveryAccountChangePasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecoveryAccountChangePasswordBinding

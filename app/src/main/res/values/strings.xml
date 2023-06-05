@@ -126,5 +126,17 @@
     <string name="submit">submit</string>
     <string name="gallery">Gallery</string>
     <string name="login">Login</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">new password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="do_not_forget_your_new_password">Do not forget your new password.</string>
+    <string name="okay">Okay</string>
+    <string name="success">Success</string>
+    <string name="password_manager1">Password manager</string>
+    <string name="download_image">Download image</string>
+    <string name="see_followers">See followers</string>
+    <string name="followedBigStartLetter">Followed</string>
+    <string name="about_your_self">About your self</string>
 
 </resources>
