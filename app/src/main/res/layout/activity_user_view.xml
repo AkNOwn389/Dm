@@ -5,7 +5,8 @@
     android:id="@+id/fragmentUserviewRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UserViewActivity">
+    tools:context=".activities.UserViewActivity"
+    android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout3"
@@ -35,13 +36,33 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/blackOnDay" />
 
-                <ImageButton
-                    android:id="@+id/userviewmenubtn"
-                    android:layout_width="50dp"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/editTextProfileSearch"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:background="@drawable/chat_item_ripple"
-                    android:src="@drawable/baseline_menu_24"
+                    android:layout_margin="9dp"
+                    android:background="@drawable/ripple_homefeed_create_post"
+                    android:drawableStart="@drawable/searchicon"
+                    android:drawablePadding="-30dp"
+                    android:drawableTint="@color/blackOnDay"
+                    android:hint="@string/search"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/blackOnDay"
+                    android:textColorHint="@color/blackOnDay"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/profileMenuButton"
+                    app:layout_constraintStart_toEndOf="@+id/userviewbackbtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/profileMenuButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/floating_buttom_profile_bg"
+                    android:src="@drawable/ic_3dot_menu"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/blackOnDay" />
@@ -384,7 +405,7 @@
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <com.aknown389.dm.pageView.homeFeed.utility.HomeFeedRecyclerview
-                    android:id="@+id/recyClerView"
+                    android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="60dp"

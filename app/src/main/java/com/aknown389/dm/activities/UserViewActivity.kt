@@ -81,14 +81,14 @@ class UserViewActivity : AppCompatActivity() {
     private fun startShimmer() {
         shimmer.startShimmer()
         shimmer.isVisible = true
-        binding?.recyClerView?.isVisible = false
+        binding?.recyclerView?.isVisible = false
         isShimmering = true
     }
 
     private fun stopShimmer(){
         shimmer.stopShimmer()
         shimmer.isVisible = false
-        binding?.recyClerView?.isVisible = true
+        binding?.recyclerView?.isVisible = true
         isShimmering = false
     }
 
@@ -154,7 +154,7 @@ class UserViewActivity : AppCompatActivity() {
                 }
             }
         }
-        binding?.recyClerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding?.recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 val visibleItemCount: Int = layOutManager.childCount
@@ -172,11 +172,11 @@ class UserViewActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        binding?.recyClerView?.onResumePlayer()
+        binding?.recyclerView?.onResumePlayer()
         super.onResume()
     }
     override fun onPause() {
-        binding?.recyClerView?.onPausePlayer()
+        binding?.recyclerView?.onPausePlayer()
         super.onPause()
     }
 
@@ -185,9 +185,9 @@ class UserViewActivity : AppCompatActivity() {
     private fun setVal() {
         this.layOutManager = LinearLayoutManager(this)
         this.adapter = HomeFeedCardViewAdapter(initGlide())
-        binding?.recyClerView?.adapter = adapter
-        binding?.recyClerView?.setMediaObjects(adapter.postListdata)
-        this@UserViewActivity.binding?.recyClerView?.layoutManager = layOutManager
+        binding?.recyclerView?.adapter = adapter
+        binding?.recyclerView?.setMediaObjects(adapter.postListdata)
+        this@UserViewActivity.binding?.recyclerView?.layoutManager = layOutManager
         this.shimmer = findViewById(R.id.userviewshimmering)
         this.manager = DataManager(this)
         this.token = manager.getAccessToken().toString()

@@ -22,6 +22,7 @@ import retrofit2.Response
 
 
 class Repository(){
+
     suspend fun behavior(token: String):Response<LoginBahavior>{
         return RetrofitInstance.api.bahavior(token)
     }
@@ -60,23 +61,7 @@ class Repository(){
         return  RetrofitInstance.api.updateDetails(token, body)
     }
 
-    suspend fun getUserSuggested(token: String, page: Int): Response<UserCardViewResponseModel>{
-        return  RetrofitInstance.api.getSuggestedFriend(token, page)
-    }
-
-    suspend fun getFollowing(token: String, page: Int):Response<UserCardViewResponseModel> {
-        return RetrofitInstance.api.getFollowing(token, page)
-    }
-
     suspend fun getFriends(token: String, page: Int):Response<UserCardViewResponseModel> {
         return RetrofitInstance.api.getFriends(token, page)
-    }
-
-    suspend fun getFollower(token: String, page: Int):Response<UserCardViewResponseModel> {
-        return RetrofitInstance.api.getFollower(token, page)
-    }
-
-    suspend fun getRegCode(body: RegReqCodeModel): Response<RegRequestCodeResponse>{
-        return LoginRegisterInstance.api.getRegCode(body)
     }
 }

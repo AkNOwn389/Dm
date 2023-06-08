@@ -138,5 +138,6 @@
     <string name="see_followers">See followers</string>
     <string name="followedBigStartLetter">Followed</string>
     <string name="about_your_self">About your self</string>
+    <string name="are_you_sure_you_want_to_delete">are you sure you want to delete?</string>
 
 </resources>

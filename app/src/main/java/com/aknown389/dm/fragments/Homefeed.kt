@@ -3,6 +3,8 @@ package com.aknown389.dm.fragments
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +71,7 @@ class Homefeed : Fragment() {
     private lateinit var client: OkHttpClient
     private lateinit var ws:WebSocket
     private lateinit var gson: Gson
+    private var handler: Handler? = null
 
     private var isClose = true
     var isLoading = false
@@ -104,6 +107,7 @@ class Homefeed : Fragment() {
         val itemDecoration = LinearDividerItemDecoration(SPACING, requireContext().applicationContext)
         binding?.recyclerviewhomefeed?.addItemDecoration(LinearDividerItemDecoration(resources.getDimensionPixelSize(R.dimen.spacing_small), requireContext().applicationContext))
         binding?.recyclerviewhomefeed?.addItemDecoration(itemDecoration)
+        handler = Handler(Looper.getMainLooper())
         this.client = OkHttpClient.Builder()
             .addInterceptor(NetInterceptor())
             .readTimeout(0, TimeUnit.SECONDS)
@@ -246,6 +250,10 @@ class Homefeed : Fragment() {
     }
 
     private fun backToTop(){
+        val goToTop = Runnable {
+            // Send a message to the server via WebSocket
+            layoutmanager.scrollToPosition(0)
+        }
         val smoothScroller = object : LinearSmoothScroller(context) {
             override fun getVerticalSnapPreference(): Int {
                 return LinearSmoothScroller.SNAP_TO_START
@@ -253,6 +261,7 @@ class Homefeed : Fragment() {
         }
         smoothScroller.targetPosition = 0
         layoutmanager.startSmoothScroll(smoothScroller)
+        handler?.postDelayed(goToTop, 2000)
     }
 
 

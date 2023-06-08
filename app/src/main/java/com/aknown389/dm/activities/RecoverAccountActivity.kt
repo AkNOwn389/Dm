@@ -23,7 +23,7 @@ import com.google.gson.Gson
 import java.lang.NullPointerException
 import java.util.regex.Pattern
 
-const val TAG = "RecoverAccountActivity"
+
 class RecoverAccountActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecoverAccountBinding
     private lateinit var viewModel:RecoveryAccountViewModel
@@ -34,6 +34,7 @@ class RecoverAccountActivity : AppCompatActivity() {
     private var isWarning = false
     private var isMaxAttempt = false
     private var isAlertDialogLoading = false
+    val TAG = "RecoverAccountActivity"
 
 
 

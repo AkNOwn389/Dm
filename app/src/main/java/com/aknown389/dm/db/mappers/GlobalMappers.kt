@@ -5,23 +5,22 @@ import com.aknown389.dm.db.local.ImageDataModelEntity
 import com.aknown389.dm.db.local.UserProfileDetailsDataEntities
 import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.models.homepostmodels.PostDataModel
-import com.aknown389.dm.models.profileGalleryModels.ImageDataModel
-import com.aknown389.dm.models.profileModel.UserProfileData
+import com.aknown389.dm.db.local.UserProfileData
 
 
-fun UserProfileDetailsDataEntities.toUserProfiledata():UserProfileData{
+fun UserProfileDetailsDataEntities.toUserProfiledata(): UserProfileData {
     return UserProfileData(
-        bgimg = backGroundImage!!,
+        backgroundImage = backGroundImage!!,
         bio = bio!!,
         email = email!!,
-        first_name = firstName!!,
+        firstName = firstName!!,
         followers = followers!!,
         following = following!!,
         id = id,
         last_name = lastName!!,
         location = location!!,
         name = name!!,
-        profileimg = profileImage!!,
+        profileImage = profileImage!!,
         user = username,
         username = username,
         post_lenght = postLength!!
@@ -30,17 +29,17 @@ fun UserProfileDetailsDataEntities.toUserProfiledata():UserProfileData{
 fun UserProfileData.toUserProfileDetailsDataEntities():UserProfileDetailsDataEntities{
     return UserProfileDetailsDataEntities(
         id = id,
-        backGroundImage = bgimg,
+        backGroundImage = backgroundImage,
         bio = bio,
         email = email,
-        firstName = first_name,
+        firstName = firstName,
         followers = followers,
         following = following,
         lastName = last_name,
         location = location,
         name = name,
-        profileImage = profileimg,
-        username = username,
+        profileImage = profileImage,
+        username = username!!,
         postLength = post_lenght,
     )
 }

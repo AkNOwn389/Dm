@@ -19,6 +19,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.MyGalleryVideos"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProfileGalleryPost"
+            android:exported="false" />
+        <activity
             android:name=".activities.PasswordManagerActivity"
             android:exported="false" />
         <activity

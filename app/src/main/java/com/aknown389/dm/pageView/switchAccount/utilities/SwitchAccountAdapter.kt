@@ -18,14 +18,10 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat.finishAffinity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.aknown389.dm.R
 import com.aknown389.dm.activities.MainActivity
-import com.aknown389.dm.activities.MainFragmentContainerActivity
 import com.aknown389.dm.api.retroInstance.RetrofitInstance
 import com.aknown389.dm.databinding.DialogItemSwitchAccountBinding
 import com.aknown389.dm.databinding.DialogSwitchAccountMenuBinding
@@ -39,13 +35,10 @@ import com.aknown389.dm.pageView.switchAccount.models.IsAuthenticatedResponse
 import com.aknown389.dm.pageView.switchAccount.models.RefreshTokenBody
 import com.aknown389.dm.pageView.switchAccount.models.RefreshTokenResponse
 import com.aknown389.dm.pageView.switchAccount.models.UserDetailBody
-import com.aknown389.dm.pageView.switchAccount.remote.instance.SwitchAccountInstance2
 import com.aknown389.dm.pageView.switchAccount.remote.repository.SwitchAccountRepository
 import com.aknown389.dm.utils.DataManager
-import com.aknown389.dm.utils.getStringTime
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.udevel.widgetlab.TypingIndicatorView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -192,7 +185,7 @@ class SwitchAccountAdapter:RecyclerView.Adapter<SwitchAccountAdapter.ViewHolder>
     private fun removeAllCurrentdataInDatabase(){
         (parent.context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.IO) {
             dataBase.homeFeedDao().deleteAllFeed()
-            dataBase.profileDao().deleteAllImageGalery()
+            dataBase.profileDao().deleteAllImageGallery()
             dataBase.profileDao().deleteProfileData()
             dataBase.notificationDao().deleteAllNotification()
         }

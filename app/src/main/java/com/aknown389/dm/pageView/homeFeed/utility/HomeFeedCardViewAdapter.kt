@@ -18,6 +18,7 @@ import com.aknown389.dm.models.homepostmodels.PostDataModel
 import com.aknown389.dm.pageView.homeFeed.diffUtil.HomeFeedDiffUtil
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.ChangeProfileView
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.MultiVideoPostView
+import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.MyProfile
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.PicturePostView
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.SingleVideoPostView
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.TextPostView
@@ -52,6 +53,7 @@ class HomeFeedCardViewAdapter(
             3 -> HomeFeedRecyclerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_home_feed_change_profile_picture, parent, false))
             6 -> HomeFeedRecyclerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_home_card_video, parent, false))
             7 -> HomeFeedRecyclerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_home_card_multi_video, parent, false))
+            8 -> HomeFeedRecyclerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_profile_page_view, parent, false))
             else -> HomeFeedRecyclerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_home_feed_cardview, parent, false))
         }
     }
@@ -140,6 +142,17 @@ class HomeFeedCardViewAdapter(
                 requestManager = requestManager
             )
         }
+            8 -> (context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.Main){
+                MyProfile(
+                    holder = viewGroup,
+                    postListdata = postListdata,
+                    adapterContext = this@HomeFeedCardViewAdapter,
+                    context = context,
+                    token = token,
+                    currentItem = currentItem,
+                    parent = parent,
+                )
+            }
             else -> (context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.Main){
                 PicturePostView(
                     holder = viewGroup,
@@ -184,6 +197,7 @@ class HomeFeedCardViewAdapter(
             }
         }
     }
+
 
     fun setData(newData: ArrayList<PostDataModel>) {
         val diffResult = DiffUtil.calculateDiff(HomeFeedDiffUtil(old = this.postListdata, new = newData))

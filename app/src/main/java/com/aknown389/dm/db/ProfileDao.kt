@@ -12,8 +12,7 @@ import com.aknown389.dm.db.mappers.mapListImageDataModelToListImageDataModelEnti
 import com.aknown389.dm.db.mappers.toUserProfileDetailsDataEntities
 import com.aknown389.dm.db.mappers.toUserProfiledata
 import com.aknown389.dm.models.global.ImageUrl
-import com.aknown389.dm.models.profileGalleryModels.ImageDataModel
-import com.aknown389.dm.models.profileModel.UserProfileData
+import com.aknown389.dm.db.local.UserProfileData
 
 
 @Dao
@@ -36,8 +35,12 @@ interface ProfileDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertImage(images:List<ImageDataModelEntity>)
 
+
+    @Query("DELETE FROM profileGallery WHERE id=:id")
+    suspend fun deleteSpecificImage(id:String)
+
     @Query("DELETE FROM profileGallery")
-    suspend fun deleteAllImageGalery()
+    suspend fun deleteAllImageGallery()
 
     //profilePageMyDetails
     @Transaction
@@ -46,7 +49,7 @@ interface ProfileDao {
     }
 
     @Transaction
-    suspend fun saveUserProfileDetails(input:UserProfileData){
+    suspend fun saveUserProfileDetails(input: UserProfileData){
         val data = input.toUserProfileDetailsDataEntities()
         insertMyDetails(data)
     }

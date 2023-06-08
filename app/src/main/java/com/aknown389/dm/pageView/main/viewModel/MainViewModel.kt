@@ -12,7 +12,7 @@ import com.aknown389.dm.models.postmodel.UploadPostResponseModel
 import com.aknown389.dm.models.profileModel.MeModel
 import com.aknown389.dm.models.profileModel.RequestAvatarResponse
 import com.aknown389.dm.models.profileModel.UpdateDetailsBodyModel
-import com.aknown389.dm.models.profileModel.UserProfileData
+import com.aknown389.dm.db.local.UserProfileData
 import com.aknown389.dm.models.showFriendModels.UserCardViewResponseModel
 import com.aknown389.dm.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel

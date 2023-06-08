@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/profileGalleryPost"
-        android:name="com.aknown389.dm.fragments.ProfileGalleryPost"
+        android:name="com.aknown389.dm.activities.ProfileGalleryPost"
         android:label="fragment_profile_gallery_adapter"
-        tools:layout="@layout/fragment_profile_gallery_adapter" >
+        tools:layout="@layout/activity_profile_gallery" >
         <action
             android:id="@+id/action_profileGalleryPost_to_profileFragmentTagged"
             app:destination="@id/profileFragmentTagged" />

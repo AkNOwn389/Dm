@@ -1,41 +1,42 @@
-package com.aknown389.dm.fragments
+package com.aknown389.dm.activities
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.os.PersistableBundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.aknown389.dm.databinding.FragmentProfileGalleryAdapterBinding
+import com.aknown389.dm.databinding.ActivityProfileGalleryBinding
 import com.aknown389.dm.db.AppDataBase
-import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.pageView.profile.ProfilePageGalleryGridAdapter
 import com.aknown389.dm.repository.Repository
 import com.aknown389.dm.utils.DataManager
 import com.aknown389.dm.pageView.profile.viewModels.ProfileGalleryDisplayViewModel
 import com.aknown389.dm.pageView.profile.viewModels.ProfileGalleryDisplayModelFactory
 
-class ProfileGalleryPost() : Fragment() {
-    private var binding: FragmentProfileGalleryAdapterBinding? = null
+class ProfileGalleryPost() : AppCompatActivity() {
+    private var binding: ActivityProfileGalleryBinding? = null
     private lateinit var viewModel: ProfileGalleryDisplayViewModel
     private lateinit var layoutManager: StaggeredGridLayoutManager
     private lateinit var adapter: ProfilePageGalleryGridAdapter
     private lateinit var token: String
-    private lateinit var context:Context
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityProfileGalleryBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
         setVal()
         setListener()
-
+        loadGallery()
     }
 
     private fun setListener() {
-        binding?.profileStagerredAdapter?.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        binding?.Back?.setOnClickListener {
+            finish()
+        }
+        binding?.recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 val lastVisibleItemPositions = layoutManager.findLastCompletelyVisibleItemPositions(null)
                 if (!viewModel.isLoading){
@@ -48,7 +49,7 @@ class ProfileGalleryPost() : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
-        viewModel._mygalleryresponse.observe(viewLifecycleOwner) { response ->
+        viewModel._mygalleryresponse.observe(this) { response ->
             if (response.isNotEmpty()) {
                 for (i in response){
                     adapter.addData(i)
@@ -58,38 +59,22 @@ class ProfileGalleryPost() : Fragment() {
     }
 
     private fun setVal() {
+        val manager = DataManager(this)
+        token = manager.getAccessToken().toString()
+        val database: AppDataBase = AppDataBase.getDatabase(this)
+        val repository = Repository()
+        val viewModelFactory = ProfileGalleryDisplayModelFactory(repository, token, database)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ProfileGalleryDisplayViewModel::class.java]
         layoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
         this.adapter = ProfilePageGalleryGridAdapter()
-        binding?.profileStagerredAdapter?.adapter = adapter
-        binding?.profileStagerredAdapter?.layoutManager = this.layoutManager
+        binding?.recyclerView?.adapter = adapter
+        binding?.recyclerView?.layoutManager = this.layoutManager
     }
 
 
     override fun onDestroy() {
         binding = null
         super.onDestroy()
-    }
-
-    override fun onResume() {
-        loadGallery()
-        super.onResume()
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        if (container != null) {
-            this.context = requireContext()
-            val manager = DataManager(context)
-            token = manager.getAccessToken().toString()
-            val database: AppDataBase = AppDataBase.getDatabase(requireContext())
-            val repository = Repository()
-            val viewModelFactory = ProfileGalleryDisplayModelFactory(repository, token, database)
-            viewModel = ViewModelProvider(this, viewModelFactory)[ProfileGalleryDisplayViewModel::class.java]
-        }
-        binding = FragmentProfileGalleryAdapterBinding.inflate(layoutInflater, container, false)
-        return binding?.root
     }
 
     private fun updateGallery(){

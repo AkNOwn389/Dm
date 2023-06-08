@@ -9,12 +9,17 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.aknown389.dm.R
 import com.aknown389.dm.databinding.ActivityPhotoViewBinding
+import com.aknown389.dm.databinding.DialogAlertDeleteBinding
 import com.aknown389.dm.databinding.DialogPhotoviewMenuBinding
 import com.aknown389.dm.databinding.DialogPhotoviewMenuMeBinding
+import com.aknown389.dm.db.AppDataBase
 import com.aknown389.dm.dialogs.CommentDialog
+import com.aknown389.dm.dialogs.LoadingAlertDialog
 import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.PicturePostView
 import com.aknown389.dm.pageView.photoView.adapter.Adapter
@@ -22,13 +27,22 @@ import com.aknown389.dm.pageView.photoView.models.Parcel
 import com.aknown389.dm.pageView.photoView.remote.LikeImagePost
 import com.aknown389.dm.pageView.photoView.utilities.Setter.iconSetterBaseOnLike
 import com.aknown389.dm.pageView.photoView.utilities.Setter.setDefaultReaction
+import com.aknown389.dm.pageView.profile.dataClass.DeleteImageDataClass
+import com.aknown389.dm.pageView.profile.viewModels.ProfileGalleryDisplayModelFactory
+import com.aknown389.dm.pageView.profile.viewModels.ProfileGalleryDisplayViewModel
 import com.aknown389.dm.reactionTesting.ReactImageButton
 import com.aknown389.dm.reactionTesting.Reaction
+import com.aknown389.dm.repository.Repository
 import com.aknown389.dm.utils.DataManager
+import com.aknown389.dm.utils.StorageObject
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.NullPointerException
 
 class PhotoViewActivity : AppCompatActivity() {
+    private var isLoadingAlertDialog: Boolean = false
     private var binding: ActivityPhotoViewBinding? = null
     private lateinit var manager:DataManager
     private lateinit var adapter:Adapter
@@ -36,7 +50,9 @@ class PhotoViewActivity : AppCompatActivity() {
     private lateinit var parcel: Parcel
     private lateinit var viewPager:ViewPager2
     private var images:ArrayList<ImageUrl> = ArrayList()
+    private lateinit var viewModel:ProfileGalleryDisplayViewModel
     private lateinit var gson:Gson
+    private lateinit var loadingAlertDialog:LoadingAlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         this.binding = ActivityPhotoViewBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -150,18 +166,138 @@ class PhotoViewActivity : AppCompatActivity() {
         binding?.menu?.setOnClickListener {
             val dialog = AlertDialog.Builder(this).create()
             val inflater = LayoutInflater.from(this)
-            val view = if (parcel.username == manager.getUserData()?.user){
-                DialogPhotoviewMenuMeBinding.inflate(inflater, binding?.root, false)
+            if (parcel.username == manager.getUserData()?.user){
+                val view = DialogPhotoviewMenuMeBinding.inflate(inflater, binding?.root, false)
+                dialog.setView(view.root)
+                view.apply {
+                    try{
+                        download.setOnClickListener {
+                            loadingAlertDialog.start()
+                            lifecycleScope.launch(Dispatchers.IO){
+                                val result = (StorageObject.downloadImage2(
+                                    this@PhotoViewActivity,
+                                    parcel.images?.get(viewPager.currentItem)?.imgW1000!!,
+                                    parcel.username!!))
+                                withContext(Dispatchers.Main){
+                                    if (result){
+                                        Toast.makeText(
+                                            this@PhotoViewActivity,
+                                            "Image save",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                    }else{
+                                        Toast.makeText(
+                                            this@PhotoViewActivity,
+                                            "Download error",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                                dialog.dismiss()
+                                loadingAlertDialog.dismiss()
+                            }
+                        }
+                    }catch (e:Exception){
+                        return@setOnClickListener
+                    }
+                    try {
+                        delete.setOnClickListener {
+                            dialog.dismiss()
+
+                            val deleteDialog = AlertDialog.Builder(this@PhotoViewActivity).create()
+                            val deleteInflater = LayoutInflater.from(this@PhotoViewActivity)
+                            val deleteView = DialogAlertDeleteBinding.inflate(deleteInflater, binding!!.root, false)
+                            deleteDialog.setView(deleteView.root)
+                            if (deleteDialog.window != null){
+                                deleteDialog.window?.setBackgroundDrawable(ColorDrawable(0))
+                                deleteDialog.show()
+                                deleteView.apply {
+                                    yes.setOnClickListener {
+                                        val body = parcel.images?.get(viewPager.currentItem)?.let { it1 -> it1.id?.let { it2 -> DeleteImageDataClass(imageId = it2) } }
+                                        if (body != null){
+                                            viewModel.deleteImage(body, context = this@PhotoViewActivity)
+                                        }
+                                        loadingAlertDialog.start()
+                                        isLoadingAlertDialog = true
+                                        deleteDialog.dismiss()
+                                    }
+                                    cansel.setOnClickListener {
+                                        deleteDialog.dismiss()
+                                    }
+                                }
+                            }
+                            viewModel._normal_response.observe(this@PhotoViewActivity){
+                                if (it.status){
+                                    Toast.makeText(
+                                        this@PhotoViewActivity,
+                                        "Image delete",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
+                                if (isLoadingAlertDialog){
+                                    loadingAlertDialog.dismiss()
+                                    isLoadingAlertDialog = false
+                                }
+                            }
+                        }
+                    }catch (e:Exception){
+                        return@setOnClickListener
+                    }
+                    try {
+                        report.setOnClickListener {  }
+                    }catch (e:Exception){
+                        return@setOnClickListener
+                    }
+
+                }
             }else{
-                DialogPhotoviewMenuBinding.inflate(inflater, binding?.root, false)
+                val view = DialogPhotoviewMenuBinding.inflate(inflater, binding?.root, false)
+                dialog.setView(view.root)
+                view.apply {
+                    try{
+                        download.setOnClickListener {
+                            loadingAlertDialog.start()
+                            lifecycleScope.launch(Dispatchers.IO){
+                                val result = (StorageObject.downloadImage2(
+                                    this@PhotoViewActivity,
+                                    parcel.images?.get(viewPager.currentItem)?.imgW1000!!,
+                                    parcel.username!!))
+                                withContext(Dispatchers.Main){
+                                    if (result){
+                                        Toast.makeText(
+                                            this@PhotoViewActivity,
+                                            "Image save",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                    }else{
+                                        Toast.makeText(
+                                            this@PhotoViewActivity,
+                                            "Download error",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                                dialog.dismiss()
+                                loadingAlertDialog.dismiss()
+                            }
+                        }
+                    }catch (e:Exception){
+                        return@setOnClickListener
+                    }
+                    try {
+                        report.setOnClickListener {  }
+                    }catch (e:Exception){
+                        return@setOnClickListener
+                    }
+
+                }
             }
-            dialog.setView(view.root)
             if (dialog.window != null){
                 dialog.window?.setBackgroundDrawable(ColorDrawable(0))
                 dialog.show()
-                view.apply {
-
-                }
             }
         }
         binding?.CommentBtn?.setOnClickListener {
@@ -193,12 +329,17 @@ class PhotoViewActivity : AppCompatActivity() {
     }
 
     private fun setVal() {
-        this.gson = Gson()
         this.manager = DataManager(this)
         this.token = manager.getAccessToken().toString()
+        val database: AppDataBase = AppDataBase.getDatabase(this)
+        val repository = Repository()
+        val viewModelFactory = ProfileGalleryDisplayModelFactory(repository, token, database)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ProfileGalleryDisplayViewModel::class.java]
+        this.gson = Gson()
         this.viewPager = binding?.viewPager!!
         this.adapter = Adapter(images)
         viewPager.adapter = adapter
+        loadingAlertDialog = LoadingAlertDialog(this)
         try {
             this.parcel = gson.fromJson(intent?.getStringExtra("parcel"), Parcel::class.java)
         }catch (e:NullPointerException){
