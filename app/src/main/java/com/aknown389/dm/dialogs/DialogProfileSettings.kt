@@ -158,7 +158,11 @@ class DialogProfileSettings : BottomSheetDialogFragment() {
         val db:AppDataBase = AppDataBase.getDatabase(requireContext())
         val viewModelFactory = MainViewModelFactory(repository = repository, dataBase = db, token = token)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        username = manager.getUserData()!!.user
+        username = try {
+            manager.getUserData()!!.user
+        }catch (e:Exception){
+            null
+        }
     }
 
     private fun logOut(){

@@ -122,13 +122,15 @@ dependencies {
     //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
     //reaction
 
-    implementation 'com.facebook.keyframes:keyframes:1.0'
+    implementation 'com.facebook.keyframes:keyframes:1.1.0'
 
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     implementation "com.github.pgreze:android-reactions:1.6"
 
     implementation 'com.google.android.gms:play-services-base:18.2.0'
+
+    implementation 'com.airbnb.android:lottie:3.4.0'
 
 
     //otp

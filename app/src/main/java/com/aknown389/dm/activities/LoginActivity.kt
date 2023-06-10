@@ -12,6 +12,8 @@ import com.aknown389.dm.databinding.ActivityLoginBinding
 import com.aknown389.dm.api.retroInstance.RetrofitInstance
 import com.aknown389.dm.db.AppDataBase
 import com.aknown389.dm.db.local.UserAccountDataClass
+import com.aknown389.dm.dialogs.DialogLoginLoading
+import com.aknown389.dm.dialogs.LoadingAlertDialog
 import com.aknown389.dm.models.loginRegModels.LoginModel
 import com.aknown389.dm.models.loginRegModels.LoginResponseModelV2
 import com.aknown389.dm.utils.DataManager
@@ -24,6 +26,7 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var dataBase: AppDataBase
+    private lateinit var loadingAlertDialog: DialogLoginLoading
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,16 +52,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(){
+        loadingAlertDialog.start()
         val username = binding.loginEmail.text.toString()
         val password = binding.loginPassword.text.toString()
         if (username == "" || username.isBlank()) {
             Toast.makeText(this, "Please input email", Toast.LENGTH_SHORT).show()
             binding.loginEmail.error = "Empty"
+            loadingAlertDialog.dismiss()
             return
         }
         if (password == "" || password.isBlank()) {
             Toast.makeText(this, "Please input password", Toast.LENGTH_SHORT).show()
             binding.loginPassword.error = "Empty"
+            loadingAlertDialog.dismiss()
             return
         }
         val body = LoginModel(username, password)
@@ -94,9 +100,11 @@ class LoginActivity : AppCompatActivity() {
                         ).also {
                             startActivity(it)
                             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                            loadingAlertDialog.dismiss()
                             finishAffinity()
                         }
                     } else {
+                        loadingAlertDialog.dismiss()
                         binding.loginProgressBar.isVisible = false
                         if (res.status_code == 1) {
                             binding.loginPassword.error = "invalid"
@@ -110,6 +118,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                 } else {
+                    loadingAlertDialog.dismiss()
                     binding.loginProgressBar.isVisible = false
                     Toast.makeText(this@LoginActivity, "Internet error", Toast.LENGTH_SHORT)
                         .show()
@@ -119,6 +128,7 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<LoginResponseModelV2?>, t: Throwable) {
                 binding.loginProgressBar.isVisible = false
+                loadingAlertDialog.dismiss()
                 Toast.makeText(this@LoginActivity, "Connection Error", Toast.LENGTH_SHORT)
                     .show()
             }
@@ -127,6 +137,7 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun setValue() {
         dataBase = AppDataBase.getDatabase(this)
+        loadingAlertDialog = DialogLoginLoading(this)
     }
 
     private fun saveAccountInDb(account:UserAccountDataClass){

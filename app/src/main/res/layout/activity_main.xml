@@ -28,11 +28,26 @@
         app:dotAnimationDuration="2000"
         app:dotAnimationType="BouncingSliding"
         app:dotColor="#DAFFFFFF"
+        android:visibility="gone"
         app:dotCount="4"
         app:dotSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/appVersion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:scaleType="centerCrop"
+        app:lottie_rawRes="@raw/loading" />
 
     <TextView
         android:id="@+id/appVersion"

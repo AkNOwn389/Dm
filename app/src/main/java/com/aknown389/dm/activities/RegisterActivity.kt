@@ -15,7 +15,9 @@ import com.aknown389.dm.databinding.ActivityRegisterBinding
 import com.aknown389.dm.api.retroInstance.LoginRegisterInstance
 import com.aknown389.dm.db.AppDataBase
 import com.aknown389.dm.db.local.UserAccountDataClass
+import com.aknown389.dm.dialogs.DialogLoginLoading
 import com.aknown389.dm.dialogs.DialogVerifyOtp
+import com.aknown389.dm.dialogs.LoadingAlertDialog
 import com.aknown389.dm.models.loginRegModels.RegReqCodeModel
 import com.aknown389.dm.repository.Repository
 import com.aknown389.dm.utils.snackbar
@@ -27,7 +29,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
-
+    private lateinit var loadingAlertDialog: LoadingAlertDialog
     private var usernameToRegister: String? = null
     private var emailToRegister: String? = null
     private var registerId: String? = null
@@ -141,6 +143,7 @@ class RegisterActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 val body = RegReqCodeModel(email = email, username = username)
+                loadingAlertDialog.start()
                 getRegisterCode(body)
             }
         }
@@ -152,6 +155,7 @@ class RegisterActivity : AppCompatActivity() {
         val viewModelFactory = MainViewModelFactory(repository = repository, dataBase = db, token = "null")
         appDataBase = AppDataBase.getDatabase(this)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        loadingAlertDialog = LoadingAlertDialog(this)
         gson = Gson()
     }
 
@@ -182,6 +186,7 @@ class RegisterActivity : AppCompatActivity() {
                         binding.registerActivityRoot.snackbar(resBody.message)
                     }
                 }
+                loadingAlertDialog.dismiss()
                 binding.registerProgressbar.isVisible = false
             }
         }

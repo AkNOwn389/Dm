@@ -19,6 +19,7 @@ import com.aknown389.dm.databinding.DialogPhotoviewMenuBinding
 import com.aknown389.dm.databinding.DialogPhotoviewMenuMeBinding
 import com.aknown389.dm.db.AppDataBase
 import com.aknown389.dm.dialogs.CommentDialog
+import com.aknown389.dm.dialogs.DownloadingAlertDialog
 import com.aknown389.dm.dialogs.LoadingAlertDialog
 import com.aknown389.dm.models.global.ImageUrl
 import com.aknown389.dm.pageView.homeFeed.recyclerviewItem.PicturePostView
@@ -52,7 +53,7 @@ class PhotoViewActivity : AppCompatActivity() {
     private var images:ArrayList<ImageUrl> = ArrayList()
     private lateinit var viewModel:ProfileGalleryDisplayViewModel
     private lateinit var gson:Gson
-    private lateinit var loadingAlertDialog:LoadingAlertDialog
+    private lateinit var loadingAlertDialog:DownloadingAlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         this.binding = ActivityPhotoViewBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -339,7 +340,7 @@ class PhotoViewActivity : AppCompatActivity() {
         this.viewPager = binding?.viewPager!!
         this.adapter = Adapter(images)
         viewPager.adapter = adapter
-        loadingAlertDialog = LoadingAlertDialog(this)
+        loadingAlertDialog = DownloadingAlertDialog(this)
         try {
             this.parcel = gson.fromJson(intent?.getStringExtra("parcel"), Parcel::class.java)
         }catch (e:NullPointerException){

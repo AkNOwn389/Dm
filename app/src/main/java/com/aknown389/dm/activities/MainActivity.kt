@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setVal()
+        checkUserData()
         behavior()
-        //checkUserData()
-        binding.louncherProgressBar.isVisible = true
+        //binding.louncherProgressBar.isVisible = true
         binding.appVersion.text = APP_VERSION
     }
 
@@ -115,8 +115,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, key.toString())
         if (key == null) {
             goToLogin()
-        }else{
-            goToMain()
         }
     }
 
